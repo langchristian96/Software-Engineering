@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":conference-web" external.linked.project.path="$MODULE_DIR$/../../conference-web" external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="ro.ubb.conference" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../conference-web">
+      <excludeFolder url="file://$MODULE_DIR$/../../conference-web/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../conference-web/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../conference-web/src/main/webapp/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/../../conference-web/src/main/webapp/tmp" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
