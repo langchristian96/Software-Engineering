@@ -6,7 +6,6 @@
         <webroots>
           <root url="file://$MODULE_DIR$/../../../conference-web/src/main/webapp" relative="/" />
         </webroots>
-        <sourceRoots />
       </configuration>
     </facet>
   </component>
