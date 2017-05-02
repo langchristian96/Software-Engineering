@@ -7,8 +7,9 @@
           <root url="file://$MODULE_DIR$/../../../conference-web/src/main/webapp" relative="/" />
         </webroots>
         <sourceRoots>
-          <root url="file://$MODULE_DIR$/../../../conference-web/src/main/java" />
           <root url="file://$MODULE_DIR$/../../../conference-web/src/main/resources" />
+          <root url="file://$MODULE_DIR$/../../../conference-web/src/main/java" />
+          <root url="file://$MODULE_DIR$/../../../conference-web/src/main/webapp" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -19,7 +20,6 @@
     <content url="file://$MODULE_DIR$/../../../conference-web/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../../conference-web/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../../conference-web/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../conference-web/src/main/webapp" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/../../../conference-web/src/main/webapp/dist" />
       <excludeFolder url="file://$MODULE_DIR$/../../../conference-web/src/main/webapp/tmp" />
     </content>

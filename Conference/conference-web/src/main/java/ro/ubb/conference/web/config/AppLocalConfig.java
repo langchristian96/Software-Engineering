@@ -1,4 +1,4 @@
-package ro.ubb.conference.web;
+package ro.ubb.conference.web.config;
 
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
