@@ -17,7 +17,7 @@ public class SessionConverter extends BaseConverter<Session, SessionDto> {
 
     @Override
     public SessionDto convertModelToDto(Session session) {
-        SessionDto sessionDto = new SessionDto(session.getDate(), session.getConferenceId(), session.getSessionChair(), session.getListeners(), session.getPapers());
+        SessionDto sessionDto = new SessionDto(session.getDate(), session.getConferenceId(), session.getSessionChairId(), session.getListeners(), session.getPapers());
         sessionDto.setId(session.getId());
         return sessionDto;
     }

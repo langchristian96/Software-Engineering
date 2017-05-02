@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.ArrayList;
 
 /**
  * Created by Budu.
@@ -28,13 +29,13 @@ public class Session extends BaseEntity<Long> {
     private Long conferenceId;
 
     @Column(name = "session chair", nullable = false)
-    private Person sessionChair;
+    private Long sessionChairId;
 	
 	@Column(name = "session listeners", nullable = false)
-    private ArrayList<Listener> listeners;
+    private ArrayList<Long> listeners;
 	
 	@Column(name = "session papers", nullable = false)
-    private ArrayList<Paper> papers;
+    private ArrayList<Long> papers;
 
 
     @Override
@@ -42,7 +43,7 @@ public class Session extends BaseEntity<Long> {
         return "Session{" +
                 "date='" + date + '\'' +
                 ", conferenceId='" + conferenceId + '\'' +
-                ", sessionChair=" + sessionChair +
+                ", sessionChair=" + sessionChairId +
                 "} " + super.toString();
     }
 }
