@@ -15,6 +15,7 @@ node_modules
 *.iml
 *.ipr
 *.iws
+Conference/.idea/workspace.xml
 .idea
 build
 out
