@@ -9,7 +9,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="conference-web_main" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-context:4.3.6.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-slf4j-impl:2.5" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-core:2.5" level="project" />

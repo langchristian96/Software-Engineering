@@ -5,6 +5,7 @@
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Conference-conference-web_main" target="1.8" />
       <module name="conference-core_main" target="1.8" />
       <module name="conference-core_test" target="1.8" />
       <module name="conference-web_main" target="1.8" />
