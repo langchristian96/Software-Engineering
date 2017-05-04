@@ -14,7 +14,7 @@ public class PersonConverter extends BaseConverter<Person, PersonDto> {
 
     @Override
     public PersonDto convertModelToDto(Person person) {
-        PersonDto personDto= new PersonDto(person.getUser(),person.getPassword(),person.getName(),person.getAffiliation(),person.getEmail());
+        PersonDto personDto= new PersonDto(person.getUsern(),person.getPassword(),person.getName(),person.getAffiliation(),person.getEmail());
         personDto.setId(person.getId());
         return personDto;
     }

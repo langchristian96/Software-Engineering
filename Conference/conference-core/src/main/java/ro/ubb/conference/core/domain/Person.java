@@ -21,8 +21,8 @@ import javax.persistence.Table;
 public class Person extends BaseEntity<Long> {
 
     //username
-    @Column(name = "user", nullable = false)
-    private String user;
+    @Column(name = "usern", nullable = false)
+    private String usern;
 
     //password
     @Column(name="password",nullable = false)
@@ -44,12 +44,12 @@ public class Person extends BaseEntity<Long> {
     @Override
     public String toString() {
         return "Person{" +
-                "user='" + user + '\'' +
+                "user='" + usern + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", affiliation='" + affiliation + '\'' +
                 ", email='" + email + '\'' +
-                '}';
+                '}'+super.toString();
     }
 }
 
