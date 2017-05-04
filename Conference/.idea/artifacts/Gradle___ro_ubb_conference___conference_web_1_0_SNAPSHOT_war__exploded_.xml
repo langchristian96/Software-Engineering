@@ -17,15 +17,15 @@
           <element id="dir-copy" path="$PROJECT_DIR$/conference-web/build/resources/main" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="ro.ubb.conference-conference-core-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="conference-core_main" />
-            <element id="dir-copy" path="$PROJECT_DIR$/conference-core/build/resources/main" />
-          </element>
           <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.3.6.RELEASE" />
           <element id="library" level="project" name="Gradle: org.apache.logging.log4j:log4j-slf4j-impl:2.5" />
           <element id="library" level="project" name="Gradle: org.apache.logging.log4j:log4j-core:2.5" />
           <element id="library" level="project" name="Gradle: org.apache.logging.log4j:log4j-1.2-api:2.5" />
           <element id="library" level="project" name="Gradle: org.projectlombok:lombok:1.16.12" />
+          <element id="archive" name="ro.ubb.conference-conference-core-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="conference-core_main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/conference-core/build/resources/main" />
+          </element>
           <element id="library" level="project" name="Gradle: org.springframework:spring-context-support:4.3.6.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-orm:4.3.6.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.data:spring-data-jpa:1.10.6.RELEASE" />
@@ -89,10 +89,10 @@
           <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-webmvc:4.3.6.RELEASE" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.8.6" />
+          <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.8.6" />
           <element id="library" level="project" name="Gradle: javax.servlet:javax.servlet-api:3.1.0" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-web:4.3.6.RELEASE" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.8.0" />
-          <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.8.6" />
         </element>
       </element>
     </root>

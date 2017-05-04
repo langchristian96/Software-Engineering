@@ -42,7 +42,7 @@ public class PaperServiceImpl implements PaperService {
 
         Paper paper = paperRepository.findOne(paperId);
         paper.setTitle(title);
-        paper.setAuthor(personId);
+        paper.setPersonId(personId);
         paper.setContent(content);
 
         log.trace("updatePaper: paper={}", paper);
