@@ -24,7 +24,7 @@ public class SessionDto extends BaseEntityDto {
         return "SessionDto{" +
                 "date='" + date + '\'' +
                 ", conferenceId='" + conferenceId + '\'' +
-                ", sessionChairId=" + sessionChair +
+                ", sessionChairId=" + sessionChairId +
                 "} " + super.toString();
     }
 }
