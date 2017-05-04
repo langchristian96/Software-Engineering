@@ -1,0 +1,38 @@
+<h3>Add Conference</h3>
+
+<div>
+  <label>Name: </label>
+  <input #conferenceName/>
+</div>
+<div>
+  <label>Edition: </label>
+  <input #conferenceEdition/>
+</div>
+<div>
+  <label>Start date: </label> {{conference.startDate}}
+  <input #conferenceStartDate/>
+</div>
+<div>
+  <label>End date: </label> {{conference.endDate}}
+  <input #conferenceEndDate/>
+</div>
+<div>
+  <label>Call date: </label> {{conference.callDate}}
+  <input #conferenceCallDate/>
+</div>
+<div>
+  <label>Papers deadline: </label> {{conference.papersDeadline}}
+  <input #conferencePapersDeadline/>
+</div>
+<div>
+  <label>Committee: </label> {{conference.committee}}
+  <input #conferenceCommittee/>
+</div>
+<div>
+  <label>Sections: </label> {{conference.sections}}
+  <input #conferenceSections/>
+</div>
+
+  <button (click)="goBack()">Back</button>
+  <button (click)="save(conferenceName.value, conferenceEdition.value, conferenceStartDate.value, conferenceEndDate.value, conferenceCallDate.value, conferencePapersDeadline.value, conferenceCommittee.value, conferenceSections.value)">Save</button>
+</div>

@@ -1,0 +1,37 @@
+<div *ngIf="conference">
+  <h2>Conference {{conference.name}} details</h2>
+  <div>
+    <label>Name: </label> {{conference.name}}
+    <input [(ngModel)]="conference.name" placeholder="name">
+  </div>
+  <div>
+    <label>Edition: </label> {{conference.edition}}
+    <input [(ngModel)]="conference.edition" placeholder="edition">
+  </div>
+  <div>
+    <label>Start date: </label> {{conference.startDate}}
+    <input [(ngModel)]="conference.startDate" placeholder="startDate">
+  </div>
+  <div>
+    <label>End date: </label> {{conference.endDate}}
+    <input [(ngModel)]="conference.endDate" placeholder="endDate">
+  </div>
+  <div>
+    <label>Call date: </label> {{conference.callDate}}
+    <input [(ngModel)]="conference.callDate" placeholder="callDate">
+  </div>
+  <div>
+    <label>Papers deadline: </label> {{conference.papersDeadline}}
+    <input [(ngModel)]="conference.papersDeadline" placeholder="papersDeadline">
+  </div>
+  <div>
+    <label>Committee: </label> {{conference.committee}}
+    <input [(ngModel)]="conference.committee" placeholder="committee">
+  </div>
+  <div>
+    <label>Sections: </label> {{conference.sections}}
+    <input [(ngModel)]="conference.sections" placeholder="sections">
+  </div>
+  <button (click)="goBack()">Back</button>
+  <button (click)="save()">Save</button>
+</div>

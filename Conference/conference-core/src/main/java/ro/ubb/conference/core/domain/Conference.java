@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "conference")
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -54,6 +54,17 @@ public class Conference extends BaseEntity<Long> {
     // Conference sections
     @Column(name = "sections", nullable = false)
     private ArrayList<String> sections;
+
+    public Conference(String name, int edition, String startDate, String endDate, String callDate, String papersDeadline, ArrayList<String> committee, ArrayList<String> sections) {
+        this.name = name;
+        this.edition = edition;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.callDate = callDate;
+        this.papersDeadline = papersDeadline;
+        this.committee = committee;
+        this.sections = sections;
+    }
 
     @Override
     public String toString() {

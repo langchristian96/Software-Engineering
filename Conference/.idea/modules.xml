@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference-core/Conference-conference-core.iml" filepath="$PROJECT_DIR$/.idea/modules/conference-core/Conference-conference-core.iml" group="conference-core" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference-web/Conference-conference-web.iml" filepath="$PROJECT_DIR$/.idea/modules/conference-web/Conference-conference-web.iml" group="conference-web" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference-web/Conference-conference-web_main.iml" filepath="$PROJECT_DIR$/.idea/modules/conference-web/Conference-conference-web_main.iml" group="conference-web" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference.iml" filepath="$PROJECT_DIR$/.idea/modules/conference.iml" />
-      <module fileurl="file://C:\Personal\Facultate\II - 2\Software Engineering\Lab\Software-Engineering\Conference\.idea\modules\conference-core.iml" filepath="C:\Personal\Facultate\II - 2\Software Engineering\Lab\Software-Engineering\Conference\.idea\modules\conference-core.iml" group="conference-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference-core/conference-core.iml" filepath="$PROJECT_DIR$/.idea/modules/conference-core/conference-core.iml" group="conference-core" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference-core/conference-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/conference-core/conference-core_main.iml" group="conference-core" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference-core/conference-core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/conference-core/conference-core_test.iml" group="conference-core" />
-      <module fileurl="file://C:\Personal\Facultate\II - 2\Software Engineering\Lab\Software-Engineering\Conference\.idea\modules\conference-web.iml" filepath="C:\Personal\Facultate\II - 2\Software Engineering\Lab\Software-Engineering\Conference\.idea\modules\conference-web.iml" group="conference-web" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference-web/conference-web.iml" filepath="$PROJECT_DIR$/.idea/modules/conference-web/conference-web.iml" group="conference-web" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference-web/conference-web_main.iml" filepath="$PROJECT_DIR$/.idea/modules/conference-web/conference-web_main.iml" group="conference-web" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference-web/conference-web_test.iml" filepath="$PROJECT_DIR$/.idea/modules/conference-web/conference-web_test.iml" group="conference-web" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference_main.iml" filepath="$PROJECT_DIR$/.idea/modules/conference_main.iml" group="conference" />

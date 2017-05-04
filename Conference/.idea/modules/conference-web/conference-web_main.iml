@@ -6,28 +6,16 @@
         <webroots>
           <root url="file://$MODULE_DIR$/../../../conference-web/src/main/webapp" relative="/" />
         </webroots>
-<<<<<<< HEAD
-=======
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/../../../conference-web/src/main/resources" />
-          <root url="file://$MODULE_DIR$/../../../conference-web/src/main/java" />
-          <root url="file://$MODULE_DIR$/../../../conference-web/src/main/webapp" />
-        </sourceRoots>
->>>>>>> origin/master
+        <sourceRoots />
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/../../../conference-web/build/classes/main" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../conference-web/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../../conference-web/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../../conference-web/src/main/resources" type="java-resource" />
-<<<<<<< HEAD
-=======
-      <excludeFolder url="file://$MODULE_DIR$/../../../conference-web/src/main/webapp/dist" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../conference-web/src/main/webapp/tmp" />
->>>>>>> origin/master
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

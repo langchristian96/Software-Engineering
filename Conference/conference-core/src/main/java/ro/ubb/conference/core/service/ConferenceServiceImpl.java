@@ -59,6 +59,7 @@ public class ConferenceServiceImpl implements ConferenceService {
         Conference conference = new Conference(name, edition, startDate, endDate, callDate, papersDeadline, commitee, sections);
         conference = conferenceRepository.save(conference);
 
+
         log.trace("createConference: conferece={}", conference);
 
         return conference;

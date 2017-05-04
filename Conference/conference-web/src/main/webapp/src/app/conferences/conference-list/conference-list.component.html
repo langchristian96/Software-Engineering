@@ -1,0 +1,17 @@
+<div *ngIf="selectedConference">
+  <h2>
+    {{selectedConference.name | uppercase}} was selected
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
+
+<h2>Conferences</h2>
+<ol class="conferences">
+  <li *ngFor="let conference of conferences "
+      [class.selected]="conference === selectedConference"
+      (click)="onSelect(conference)">
+    {{conference.name}}
+    <button class="delete"
+            (click)="delete(conference); $event.stopPropagation()">x</button>
+  </li>
+</ol>

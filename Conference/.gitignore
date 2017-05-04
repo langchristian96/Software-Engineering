@@ -15,10 +15,7 @@ node_modules
 *.iml
 *.ipr
 *.iws
-<<<<<<< HEAD
-=======
 Conference/.idea/workspace.xml
->>>>>>> origin/master
 .idea
 build
 out
