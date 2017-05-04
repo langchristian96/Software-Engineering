@@ -20,3 +20,4 @@ gradle
 .gradle
 
 /conference-web/src/main/resources/local/db.properties
+/conference-core/src/main/java/ro/ubb/conference/core/JPAConfig.java
