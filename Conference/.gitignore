@@ -1,8 +1,4 @@
 target
-classes
-bin
-*.log
-dist
 node_modules
 
 # Eclipse
@@ -15,15 +11,11 @@ node_modules
 *.iml
 *.ipr
 *.iws
-Conference/.idea/workspace.xml
-.idea
+/.idea/
 build
 out
-MANIFEST.MF
 
 #gradle
 gradle
 .gradle
 
-#angular
-node_modules

@@ -1,0 +1,11 @@
+th{
+  text-align: center;
+}
+a:hover{
+  text-decoration: none;
+}
+
+.btn-fab:hover {
+  background-color: #f55549;
+  opacity: .9;
+}

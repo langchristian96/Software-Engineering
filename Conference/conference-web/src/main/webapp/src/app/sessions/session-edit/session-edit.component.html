@@ -1,0 +1,29 @@
+<div *ngIf="session">
+  <div class="container">
+    <h1>Update {{session.id}}</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+      <div class="form-group label-floating">
+        <label class="control-label"for="inputSessionId">Session id:</label>
+        <input class="form-control" type="text" id="inputSessionId" name="id" [(ngModel)]="session.id" #id readonly/>
+      </div>
+      <div class="form-group label-floating">
+        <label class="control-label" for="inputSessionDate">Session date:</label>
+        <input class="form-control" type="text" id="inputSessionDate" name="date" [(ngModel)]="session.date" #date/>
+      </div>
+      <div class="form-group label-floating">
+        <label class="control-label" for="inputSessionConferenceId">Session Conference Id:</label>
+        <input class="form-control" type="text" id="inputSessionConferenceId" name="conferenceId" [(ngModel)]="session.conferenceId" #conferenceId/>
+      </div>
+      <div class="form-group label-floating">
+        <label class="control-label" for="inputSessionChairId">Session Chair Id:</label>
+        <input class="form-control" type="text" id="inputSessionChairId" name="chairId" [(ngModel)]="session.chairId" #chairId/>
+      </div>
+      <div class="form-group">
+        <a (click)="cancel()" class="btn btn-raised btn-danger">cancel</a>
+
+        <a (click)="updateSessionDetail(id.value, date.value, conferenceId.value, chairId.value)" class="btn btn-raised btn-info">update session</a>
+      </div>
+    </form>
+  </div>
+</div>
