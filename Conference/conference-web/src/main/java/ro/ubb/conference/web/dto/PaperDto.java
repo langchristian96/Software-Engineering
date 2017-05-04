@@ -14,14 +14,14 @@ import java.util.ArrayList;
 @Setter
 public class PaperDto extends BaseEntityDto {
     private String title;
-    private Long personId;
+    private String author;
     private String content;
 
     @Override
     public String toString() {
         return "PapaerDto{" +
                 "title='" + title + '\'' +
-                ", author='" + personId + '\'' +
+                ", author='" + author + '\'' +
                 ", content=" + content +
                 "} " + super.toString();
     }

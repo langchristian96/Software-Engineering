@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "conference")
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -43,28 +43,17 @@ public class Conference extends BaseEntity<Long> {
     @Column(name = "papers_deadline", nullable = false)
     private String papersDeadline;
 
-    // Committee - list of names of people being part of the commitee
-    @Column(name = "committee", nullable = false)
-    private ArrayList<String> committee;
+//    // Committee - list of names of people being part of the commitee
+//    @Column(name = "committee", nullable = false)
+//    private ArrayList<String> committee;
 
 //    // Conference program
 //    @Column(name = "program")
 //    private String program;
 
-    // Conference sections
-    @Column(name = "sections", nullable = false)
-    private ArrayList<String> sections;
-
-    public Conference(String name, int edition, String startDate, String endDate, String callDate, String papersDeadline, ArrayList<String> committee, ArrayList<String> sections) {
-        this.name = name;
-        this.edition = edition;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.callDate = callDate;
-        this.papersDeadline = papersDeadline;
-        this.committee = committee;
-        this.sections = sections;
-    }
+//    Conference sections
+//    @Column(name = "sections", nullable = false)
+//    private ArrayList<String> sections;
 
     @Override
     public String toString() {
@@ -75,8 +64,8 @@ public class Conference extends BaseEntity<Long> {
                 ", endDate='" + endDate + '\'' +
                 ", callDate='" + callDate + '\'' +
                 ", papersDeadline='" + papersDeadline + '\'' +
-                ", committee=" + committee +
-                ", sections=" + sections +
+                /*", committee=" + committee +
+                ", sections=" + sections +*/
                 '}' + super.toString();
     }
 }

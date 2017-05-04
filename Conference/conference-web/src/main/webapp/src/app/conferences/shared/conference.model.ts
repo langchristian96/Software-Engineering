@@ -9,6 +9,6 @@ export class Conference {
   endDate: string;
   callDate: string;
   papersDeadline: string;
-  committee: string;
-  sections: string;
+  // committee: string;
+  // sections: string;
 }

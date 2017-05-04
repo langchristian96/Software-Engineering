@@ -28,14 +28,14 @@ public class Session extends BaseEntity<Long> {
     @Column(name = "conferenceId", nullable = false)
     private Long conferenceId;
 
-    @Column(name = "session chair", nullable = false)
+    @Column(name = "sessionChair", nullable = false)
     private Long sessionChairId;
 	
-	@Column(name = "session listeners", nullable = false)
-    private ArrayList<Long> listeners;
-	
-	@Column(name = "session papers", nullable = false)
-    private ArrayList<Long> papers;
+//	@Column(name = "session listeners", nullable = false)
+//    private ArrayList<Long> listeners;
+//
+//	@Column(name = "session papers", nullable = false)
+//    private ArrayList<Long> papers;
 
 
     @Override

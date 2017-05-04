@@ -10,7 +10,7 @@ public class ConferenceConverter extends BaseConverter<Conference, ConferenceDto
 
     @Override
     public ConferenceDto convertModelToDto(Conference conference) {
-        ConferenceDto conferenceDto = new ConferenceDto(conference.getName(), conference.getEdition(), conference.getStartDate(), conference.getEndDate(), conference.getCallDate(), conference.getPapersDeadline(), conference.getCommittee(), conference.getSections());
+        ConferenceDto conferenceDto = new ConferenceDto(conference.getName(), conference.getEdition(), conference.getStartDate(), conference.getEndDate(), conference.getCallDate(), conference.getPapersDeadline());
         conferenceDto.setId(conference.getId());
         return conferenceDto;
 

@@ -7,6 +7,6 @@ import ro.ubb.conference.core.domain.Paper;
  */
 
 
-public interface PaperRepository extends Repository<Paper, Long> {
+public interface PaperRepository<T> extends Repository<Paper, Long> {
 
 }

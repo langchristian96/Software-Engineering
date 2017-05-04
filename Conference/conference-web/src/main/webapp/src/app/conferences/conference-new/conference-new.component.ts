@@ -25,18 +25,18 @@ export class ConferenceNewComponent  {
   }
 
 
-  save(name, edition, startDate, endDate, callDate, papersDeadline, committee, sections): void {
-    if (!this.isValid(name, edition, startDate, endDate, callDate, papersDeadline, committee, sections)) {
+  save(name, edition, startDate, endDate, callDate, papersDeadline/*, committee, sections*/): void {
+    if (!this.isValid(name, edition, startDate, endDate, callDate, papersDeadline/*, committee, sections*/)) {
       console.log("all fields are required ");
       alert("all fields are required; cnp has to be an int");
       return;
     }
-    this.conferenceService.create(name, edition, startDate, endDate, callDate, papersDeadline, committee, sections)
+    this.conferenceService.create(name, edition, startDate, endDate, callDate, papersDeadline/*, committee, sections*/)
       .subscribe(_ => this.goBack());
   }
 
-  private isValid(name, edition, startDate, endDate, callDate, papersDeadline, committee, sections) {
-    if ( !name || !edition || !startDate || !endDate || !callDate || !papersDeadline || !committee || !sections) {
+  private isValid(name, edition, startDate, endDate, callDate, papersDeadline/*, committee, sections*/) {
+    if ( !name || !edition || !startDate || !endDate || !callDate || !papersDeadline/* || !committee || !sections*/) {
       console.log("all fields are required");
       return false;
     }

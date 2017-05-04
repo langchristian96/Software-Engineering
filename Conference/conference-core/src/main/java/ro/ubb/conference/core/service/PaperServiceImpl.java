@@ -14,7 +14,6 @@ import java.util.ArrayList;
 /**
  * Created by anca.
  */
-
 @Service
 public class PaperServiceImpl implements PaperService {
 
@@ -36,13 +35,13 @@ public class PaperServiceImpl implements PaperService {
 
     @Override
     @Transactional
-    public Paper updatePaper(Long paperId, String title, Long personId, String content ) {
+    public Paper updatePaper(Long paperId, String title, String author, String content ) {
         log.trace("updatePaper: paperId={}, title={}, author={}, content={}",
-                paperId, title, personId, content);
+                paperId, title, author, content);
 
-        Paper paper = paperRepository.findOne(paperId);
+        Paper paper = (Paper) paperRepository.findOne(paperId);
         paper.setTitle(title);
-        paper.setPersonId(personId);
+        paper.setAuthor(author);
         paper.setContent(content);
 
         log.trace("updatePaper: paper={}", paper);
@@ -51,12 +50,12 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
-    public Paper createPaper(String title, Long personId, String content) {
+    public Paper createPaper(String title, String author, String content) {
         log.trace("createPaper: title={}, author={}, content={}",
-               title, personId, content);
+               title, author, content);
 
-        Paper paper = new Paper(title, personId, content);
-        paper = paperRepository.save(paper);
+        Paper paper = new Paper(title, author, content);
+        paper = (Paper) paperRepository.save(paper);
 
         log.trace("createPaper: paper={}", paper);
 

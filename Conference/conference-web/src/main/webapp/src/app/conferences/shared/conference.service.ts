@@ -48,8 +48,8 @@ export class ConferenceService {
       .map(conferences => conferences.find(conference => conference.id === id));
   }
 
-  create(name: string, edition: number, startDate: string, endDate: string, callDate: string, papersDeadline: string, committee: string, sections: string): Observable<Conference> {
-    let conference = {name, edition, startDate, endDate, callDate, papersDeadline, committee, sections};
+  create(name: string, edition: number, startDate: string, endDate: string, callDate: string, papersDeadline: string/*, committee: string, sections: string*/): Observable<Conference> {
+    let conference = {name, edition, startDate, endDate, callDate, papersDeadline/*, committee, sections*/};
     return this.http
       .post(this.conferencesUrl, JSON.stringify({"conference": conference}), {headers: this.headers})
       .map(this.extractData)

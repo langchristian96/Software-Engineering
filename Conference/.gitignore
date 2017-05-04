@@ -19,3 +19,4 @@ out
 gradle
 .gradle
 
+/conference-web/src/main/resources/local/db.properties

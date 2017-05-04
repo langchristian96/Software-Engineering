@@ -36,16 +36,16 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     @Transactional
-    public Session updateSession(Long sessionId, String date, Long conferenceId, Long sessionChairId, ArrayList<Long> listeners, ArrayList<Long> papers ) {
+    public Session updateSession(Long sessionId, String date, Long conferenceId, Long sessionChairId/*, ArrayList<Long> listeners, ArrayList<Long> papers*/ ) {
         log.trace("updateSession: sessionId={}, date={}, conferenceId={}, session chair id={}",
                 sessionId, date, conferenceId, sessionChairId);
 
-        Session session = sessionRepository.findOne(sessionId);
+        Session session = (Session)sessionRepository.findOne(sessionId);
         session.setDate(date);
         session.setConferenceId(conferenceId);
         session.setSessionChairId(sessionChairId);
-        session.setListeners(listeners);
-        session.setPapers(papers);
+//        session.setListeners(listeners);
+//        session.setPapers(papers);
 
         log.trace("updateSession: session={}", session);
 
@@ -53,12 +53,12 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public Session createSession(String date, Long conferenceId, Long sessionChairId, ArrayList<Long> listeners, ArrayList<Long> papers ) {
+    public Session createSession(String date, Long conferenceId, Long sessionChairId/*, ArrayList<Long> listeners, ArrayList<Long> papers*/ ) {
         log.trace("createSession: date={}, conferenceId={}, session chair id={}",
                 date, conferenceId, sessionChairId);
 
-        Session session = new Session(date, conferenceId, sessionChairId, listeners, papers);
-        session = sessionRepository.save(session);
+        Session session = new Session(date, conferenceId, sessionChairId/*, listeners, papers*/);
+        session = (Session) sessionRepository.save(session);
 
         log.trace("createSession: session={}", session);
 

@@ -16,8 +16,8 @@ public class SessionDto extends BaseEntityDto {
     private String date;
     private Long conferenceId;
     private Long sessionChairId;
-	private ArrayList<Long> listeners;
-    private ArrayList<Long> papers;
+//	private ArrayList<Long> listeners;
+//    private ArrayList<Long> papers;
 
     @Override
     public String toString() {

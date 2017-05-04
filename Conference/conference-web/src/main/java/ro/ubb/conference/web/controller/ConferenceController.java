@@ -5,10 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import ro.ubb.conference.core.domain.Conference;
 import ro.ubb.conference.core.service.ConferenceService;
 import ro.ubb.conference.web.converter.ConferenceConverter;
@@ -33,6 +30,7 @@ public class ConferenceController {
     @Autowired
     private ConferenceConverter conferenceConverter;
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/conferences", method = RequestMethod.GET)
     public ConferencesDto getConferences() {
         log.trace("getConferences");
@@ -44,6 +42,7 @@ public class ConferenceController {
         return new ConferencesDto(conferenceConverter.convertModelsToDtos(conferences));
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/conferences/{conferenceId}", method = RequestMethod.PUT)
     public Map<String, ConferenceDto> updateConference(
             @PathVariable final Long id,
@@ -51,7 +50,7 @@ public class ConferenceController {
         log.trace("updateConference: id={}, conferenceDtoMap={}", id, conferenceDtoMap);
 
         ConferenceDto conferenceDto = conferenceDtoMap.get("conference");
-        Conference conference = conferenceService.updateConference(id, conferenceDto.getName(), conferenceDto.getEdition(), conferenceDto.getStartDate(), conferenceDto.getEndDate(), conferenceDto.getCallDate(), conferenceDto.getPapersDeadline(), conferenceDto.getCommittee(), conferenceDto.getSections());
+        Conference conference = conferenceService.updateConference(id, conferenceDto.getName(), conferenceDto.getEdition(), conferenceDto.getStartDate(), conferenceDto.getEndDate(), conferenceDto.getCallDate(), conferenceDto.getPapersDeadline());
 
         Map<String, ConferenceDto> result = new HashMap<>();
         result.put("conference", conferenceConverter.convertModelToDto(conference));
@@ -61,6 +60,7 @@ public class ConferenceController {
         return result;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/conferences", method = RequestMethod.POST)
     public Map<String, ConferenceDto> createConference(
             @RequestBody final Map<String, ConferenceDto> conferenceDtoMap) {
@@ -68,7 +68,7 @@ public class ConferenceController {
 
         ConferenceDto conferenceDto = conferenceDtoMap.get("conference");
         Conference conference = conferenceService.createConference(
-                conferenceDto.getName(), conferenceDto.getEdition(), conferenceDto.getStartDate(), conferenceDto.getEndDate(), conferenceDto.getCallDate(), conferenceDto.getPapersDeadline(), conferenceDto.getCommittee(), conferenceDto.getSections());
+                conferenceDto.getName(), conferenceDto.getEdition(), conferenceDto.getStartDate(), conferenceDto.getEndDate(), conferenceDto.getCallDate(), conferenceDto.getPapersDeadline());
 
         Map<String, ConferenceDto> result = new HashMap<>();
         result.put("conference", conferenceConverter.convertModelToDto(conference));
@@ -78,6 +78,7 @@ public class ConferenceController {
         return result;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "conferences/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteConference(@PathVariable final Long id) {
         log.trace("deleteConference: id={}", id);

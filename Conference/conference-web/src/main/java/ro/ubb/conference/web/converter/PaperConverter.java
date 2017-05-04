@@ -16,8 +16,8 @@ public class PaperConverter extends BaseConverter<Paper, PaperDto> {
 
     @Override
     public PaperDto convertModelToDto(Paper paper) {
-        PaperDto paperDto = new PaperDto(paper.getTitle(), paper.getPaperId, paper.getContent());
+        PaperDto paperDto = new PaperDto(paper.getTitle(), paper.getAuthor(), paper.getContent());
         paperDto.setId(paper.getId());
-        return personDto;
+        return paperDto;
     }
 }

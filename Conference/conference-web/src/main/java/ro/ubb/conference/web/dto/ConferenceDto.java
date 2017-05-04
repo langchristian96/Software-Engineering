@@ -22,8 +22,8 @@ public class ConferenceDto extends BaseEntityDto {
     private String endDate;
     private String callDate;
     private String papersDeadline;
-    private ArrayList<String> committee;
-    private ArrayList<String> sections;
+//    private ArrayList<String> committee;
+//    private ArrayList<String> sections;
 
     @Override
     public String toString() {
@@ -34,8 +34,6 @@ public class ConferenceDto extends BaseEntityDto {
                 ", endDate='" + endDate + '\'' +
                 ", callDate='" + callDate + '\'' +
                 ", papersDeadline='" + papersDeadline + '\'' +
-                ", committee=" + committee +
-                ", sections=" + sections +
                 '}' + super.toString();
     }
 }

@@ -52,7 +52,7 @@ public class PaperController {
 
         PaperDto paperDto = paperDtoMap.get("paper");
         Paper paper = paperService.updatePaper(paperId, paperDto.getTitle(),
-                paperDto.getPersonId(), paperDto.getContent());
+                paperDto.getAuthor(), paperDto.getContent());
 
         Map<String, PaperDto> result = new HashMap<>();
         result.put("paper", paperConverter.convertModelToDto(paper));
@@ -69,7 +69,7 @@ public class PaperController {
 
         PaperDto paperDto = paperDtoMap.get("paper");
         Paper paper = paperService.createPaper(
-                paperDto.getTitle(), paperDto.getPersonId(), paperDto.getContent());
+                paperDto.getTitle(), paperDto.getAuthor(), paperDto.getContent());
 
         Map<String, PaperDto> result = new HashMap<>();
         result.put("paper", paperConverter.convertModelToDto(paper));

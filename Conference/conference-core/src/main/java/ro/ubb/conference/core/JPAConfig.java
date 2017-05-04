@@ -26,15 +26,15 @@ import java.util.concurrent.TimeUnit;
 @EnableTransactionManagement
 @EnableCaching
 public class JPAConfig {
-//    @Value("${db.jdbcURL}")
-//    private String jdbcURL;
+    @Value("${db.jdbcURL}")
+    private String jdbcURL;
 
-    @Value("${db.serverName}")
-    private String serverName;
-
-    @Value("${db.databaseName}")
-    private String databaseName;
-
+//    @Value("${db.serverName}")
+//    private String serverName;
+//
+//    @Value("${db.databaseName}")
+//    private String databaseName;
+//
     @Value("${db.user}")
     private String user;
 
@@ -47,9 +47,9 @@ public class JPAConfig {
     @Bean
     public DataSource dataSource(){
         SQLServerConnectionPoolDataSource dataSource = new SQLServerConnectionPoolDataSource();
-//        dataSource.setURL(jdbcURL);
-        dataSource.setServerName(serverName);
-        dataSource.setDatabaseName(databaseName);
+        dataSource.setURL(jdbcURL);
+//        dataSource.setServerName(serverName);
+//        dataSource.setDatabaseName(databaseName);
         dataSource.setUser(user);
         dataSource.setPassword(password);
         return dataSource;
@@ -64,7 +64,7 @@ public class JPAConfig {
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("ro.ubb.conference.core.model");
+        factory.setPackagesToScan("ro.ubb.conference.core.domain");
         factory.setDataSource(dataSource());
         factory.afterPropertiesSet();
         return factory.getObject();

@@ -33,6 +33,7 @@ public class SessionController {
     @Autowired
     private SessionConverter sessionConverter;
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/sessions", method = RequestMethod.GET)
     public SessionsDto getSessions() {
         log.trace("getSessions");
@@ -44,6 +45,7 @@ public class SessionController {
         return new SessionsDto(sessionConverter.convertModelsToDtos(sessions));
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/sessions/{sessionId}", method = RequestMethod.PUT)
     public Map<String, SessionDto> updateSession(
             @PathVariable final Long sessionId,
@@ -52,7 +54,7 @@ public class SessionController {
 
         SessionDto sessionDto = sessionDtoMap.get("session");
         Session session = sessionService.updateSession(sessionId, sessionDto.getDate(),
-                sessionDto.getConferenceId(), sessionDto.getSessionChairId(), sessionDto.getListeners(), sessionDto.getPapers());
+                sessionDto.getConferenceId(), sessionDto.getSessionChairId());
 
         Map<String, SessionDto> result = new HashMap<>();
         result.put("session", sessionConverter.convertModelToDto(session));
@@ -62,6 +64,7 @@ public class SessionController {
         return result;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/sessions", method = RequestMethod.POST)
     public Map<String, SessionDto> createSession(
             @RequestBody final Map<String, SessionDto> sessionDtoMap) {
@@ -69,7 +72,7 @@ public class SessionController {
 
         SessionDto sessionDto = sessionDtoMap.get("session");
         Session session = sessionService.createSession(
-                sessionDto.getDate(), sessionDto.getConferenceId(), sessionDto.getSessionChairId(), sessionDto.getListeners(), sessionDto.getPapers());
+                sessionDto.getDate(), sessionDto.getConferenceId(), sessionDto.getSessionChairId());
 
         Map<String, SessionDto> result = new HashMap<>();
         result.put("session", sessionConverter.convertModelToDto(session));
@@ -79,6 +82,7 @@ public class SessionController {
         return result;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "sessions/{sessionId}", method = RequestMethod.DELETE)
     public ResponseEntity deleteSession(@PathVariable final Long sessionId) {
         log.trace("deleteSession: sessionId={}", sessionId);

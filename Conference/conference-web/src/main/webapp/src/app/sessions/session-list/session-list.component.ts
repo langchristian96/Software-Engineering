@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
-  selector:'session-list',
+  selector:'app-session-list',
   templateUrl: './session-list.component.html',
   styleUrls: ['./session-list.component.css'],
 })

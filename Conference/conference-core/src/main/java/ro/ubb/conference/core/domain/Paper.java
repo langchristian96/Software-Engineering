@@ -25,7 +25,7 @@ public class Paper extends BaseEntity<Long> {
 
     //author of the paper
     @Column(name = "author", nullable = false)
-    private Long personId;
+    private String author;
 
     //content of the paper
 	@Column(name = "content", nullable = false)
@@ -36,7 +36,7 @@ public class Paper extends BaseEntity<Long> {
     public String toString() {
         return "Paper{" +
                 "title='" + title + '\'' +
-                ", author='" + personId + '\'' +
+                ", author='" + author + '\'' +
                 ", content=" + content +
                 "} " + super.toString();
     }

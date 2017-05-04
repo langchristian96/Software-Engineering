@@ -7,6 +7,6 @@ import ro.ubb.conference.core.domain.Session;
  */
 
 
-public interface SessionRepository extends Repository<Session, Long> {
+public interface SessionRepository<T> extends Repository<Session, Long> {
 
 }

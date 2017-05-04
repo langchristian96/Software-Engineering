@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 
 @Component({
   moduleId: module.id,
-  selector: 'sessions',
+  selector: 'app-sessions',
   templateUrl: './sessions.component.html',
   styleUrls: ['./sessions.component.css'],
 })

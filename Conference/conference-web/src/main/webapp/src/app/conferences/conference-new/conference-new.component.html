@@ -24,15 +24,15 @@
   <label>Papers deadline: </label> {{conference.papersDeadline}}
   <input #conferencePapersDeadline/>
 </div>
+<!--<div>-->
+  <!--<label>Committee: </label> {{conference.committee}}-->
+  <!--<input #conferenceCommittee/>-->
+<!--</div>-->
+<!--<div>-->
+  <!--<label>Sections: </label> {{conference.sections}}-->
+  <!--<input #conferenceSections/>-->
+<!--</div>-->
 <div>
-  <label>Committee: </label> {{conference.committee}}
-  <input #conferenceCommittee/>
-</div>
-<div>
-  <label>Sections: </label> {{conference.sections}}
-  <input #conferenceSections/>
-</div>
-
   <button (click)="goBack()">Back</button>
-  <button (click)="save(conferenceName.value, conferenceEdition.value, conferenceStartDate.value, conferenceEndDate.value, conferenceCallDate.value, conferencePapersDeadline.value, conferenceCommittee.value, conferenceSections.value)">Save</button>
+  <button (click)="save(conferenceName.value, conferenceEdition.value, conferenceStartDate.value, conferenceEndDate.value, conferenceCallDate.value, conferencePapersDeadline.value)">Save</button>
 </div>
