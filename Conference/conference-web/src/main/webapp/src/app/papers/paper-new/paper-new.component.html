@@ -1,0 +1,20 @@
+<h3>Add Paper</h3>
+
+<div>
+  <label>Title: </label>
+  <input #paperTitle/>
+</div>
+<div>
+  <label>Author: </label>
+  <input #paperAuthor/>
+</div>
+<div>
+  <label>Content: </label>
+  <input #paperContent/>
+</div>
+
+
+
+<button (click)="goBack()">Back</button>
+<button (click)="save(paperTitle.value, paperAuthor.value, paperContent.value)">Save</button>
+</div>
