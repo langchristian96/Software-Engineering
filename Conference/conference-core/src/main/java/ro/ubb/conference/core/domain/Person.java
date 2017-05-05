@@ -44,7 +44,7 @@ public class Person extends BaseEntity<Long> {
     @Override
     public String toString() {
         return "Person{" +
-                "user='" + usern + '\'' +
+                "usern='" + usern + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", affiliation='" + affiliation + '\'' +

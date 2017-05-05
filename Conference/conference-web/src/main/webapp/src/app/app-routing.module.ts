@@ -10,6 +10,8 @@ import {ConferenceNewComponent} from "./conferences/conference-new/conference-ne
 import {SessionsComponent} from "./sessions/sessions.component";
 import {SessionEditComponent} from "./sessions/session-edit/session-edit.component";
 import {SessionNewComponent} from "./sessions/session-new/session-new.component";
+import {PersonsComponent} from "./persons/persons.component";
+import {PersonDetailComponent} from "./persons/person-detail/person-detail.component";
 
 
 const routes: Routes = [
@@ -20,7 +22,11 @@ const routes: Routes = [
   {path: 'session/new', component: SessionNewComponent},
   { path: 'conferences', component: ConferencesComponent },
   { path: 'conference/detail/:id', component: ConferenceDetailComponent},
-  { path: 'conference/new', component: ConferenceNewComponent}
+  { path: 'conference/new', component: ConferenceNewComponent},
+  { path: 'persons', component: PersonsComponent },
+
+  { path: 'person/detail/:id', component: PersonDetailComponent},
+  { path: 'conference/detail/:id', component: ConferenceDetailComponent},
 ];
 
 @NgModule({

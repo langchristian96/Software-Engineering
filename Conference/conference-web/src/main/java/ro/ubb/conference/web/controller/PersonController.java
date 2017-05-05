@@ -36,6 +36,7 @@ public class PersonController {
     private PersonConverter personConverter;
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:4200")
     public PersonsDto getPersons() {
         log.trace("getPersons");
 
@@ -47,6 +48,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "persons/{personId}", method = RequestMethod.PUT)
+    @CrossOrigin(origins = "http://localhost:4200")
     public Map<String, PersonDto> updatePerson(
             @PathVariable final Long personId,
             @RequestBody final Map<String, PersonDto> personDtoMap) {
@@ -64,12 +66,13 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/person", method = RequestMethod.POST)
+    @CrossOrigin(origins = "http://localhost:4200")
     public Map<String, PersonDto> createPerson(
             @RequestBody final Map<String, PersonDto> personDtoMap) {
         log.trace("createPerson: personDtoMap={}", personDtoMap);
 
         PersonDto personDto = personDtoMap.get("person");
-        Person person = personService.createPerson(personDto.getUser(),personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
+        Person person = personService.createPerson(personDto.getUsern(),personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
 
         Map<String, PersonDto> result = new HashMap<>();
         result.put("person", personConverter.convertModelToDto(person));
@@ -80,6 +83,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "person/{personId}", method = RequestMethod.DELETE)
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity deletePerson(@PathVariable final Long personId) {
         log.trace("deletePerson: personId={}", personId);
 

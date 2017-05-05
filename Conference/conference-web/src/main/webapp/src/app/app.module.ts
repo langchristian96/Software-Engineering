@@ -15,6 +15,10 @@ import {ConferenceListComponent} from "./conferences/conference-list/conference-
 import {SessionService} from "./sessions/shared/session.service";
 import {ConferenceService} from "./conferences/shared/conference.service";
 import {AppRoutingModule} from "./app-routing.module";
+import {PersonDetailComponent} from "./persons/person-detail/person-detail.component";
+import {PersonListComponent} from "./persons/person-list/person-list.component";
+import {PersonService} from "./persons/shared/person.service";
+import {PersonsComponent} from "./persons/persons.component";
 
 @NgModule({
   declarations: [
@@ -23,6 +27,9 @@ import {AppRoutingModule} from "./app-routing.module";
     SessionNewComponent,
     SessionsComponent,
     SessionListComponent,
+    PersonDetailComponent,
+    PersonListComponent,
+    PersonsComponent,
     ConferenceDetailComponent,
     ConferenceNewComponent,
     ConferencesComponent,
@@ -34,7 +41,7 @@ import {AppRoutingModule} from "./app-routing.module";
     HttpModule,
     AppRoutingModule,
   ],
-  providers: [SessionService, ConferenceService],
+  providers: [SessionService, ConferenceService, PersonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

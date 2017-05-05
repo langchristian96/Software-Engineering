@@ -15,7 +15,7 @@ import lombok.Setter;
 public class PersonDto extends BaseEntityDto {
 
     //username
-    private String user;
+    private String usern;
 
     //password
     private String password;
@@ -34,7 +34,7 @@ public class PersonDto extends BaseEntityDto {
     @Override
     public String toString() {
         return "PersonDto{" +
-                "user='" + user + '\'' +
+                "user='" + usern + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", affiliation='" + affiliation + '\'' +
