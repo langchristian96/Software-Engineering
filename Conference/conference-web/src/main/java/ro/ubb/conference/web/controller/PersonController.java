@@ -47,7 +47,7 @@ public class PersonController {
         return new PersonsDto(personConverter.convertModelsToDtos(persons));
     }
 
-    @RequestMapping(value = "persons/{personId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/persons/{personId}", method = RequestMethod.PUT)
     @CrossOrigin(origins = "http://localhost:4200")
     public Map<String, PersonDto> updatePerson(
             @PathVariable final Long personId,
@@ -82,7 +82,7 @@ public class PersonController {
         return result;
     }
 
-    @RequestMapping(value = "person/{personId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/persons/{personId}", method = RequestMethod.DELETE)
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity deletePerson(@PathVariable final Long personId) {
         log.trace("deletePerson: personId={}", personId);
