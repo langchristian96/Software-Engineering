@@ -2,10 +2,10 @@ export class Session{
   id: number;
   date: string;
   conferenceId: number;
-  chairId: number;
-  constructor(date: string, conferenceId: number, chairId: number){
+  sessionChairId: number;
+  constructor(date: string, conferenceId: number, sessionChairId: number){
     this.date = date;
     this.conferenceId = conferenceId;
-    this.chairId = chairId;
+    this.sessionChairId = sessionChairId;
   }
 }

@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 
 export class SessionListComponent implements OnInit{
   errorMessage: string;
-  session: Session[];
+  sessions: Session[];
   // selectedClient: Client;
 
   constructor(private sessionService: SessionService,
@@ -26,9 +26,10 @@ export class SessionListComponent implements OnInit{
   getSessions(){
     this.sessionService.getSessions()
       .subscribe(
-        session => this.session = session,
+        session => this.sessions = session,
         error => this.errorMessage = <any>error
       );
+
   }
 
   editSession (sessionId): void {
