@@ -19,6 +19,10 @@ import {PersonDetailComponent} from "./persons/person-detail/person-detail.compo
 import {PersonListComponent} from "./persons/person-list/person-list.component";
 import {PersonService} from "./persons/shared/person.service";
 import {PersonsComponent} from "./persons/persons.component";
+import {PaperDetailComponent} from "./papers/paper-detail/paper-detail.component";
+import {PaperListComponent} from "./papers/paper-list/paper-list.component";
+import {PaperService} from "./papers/shared/paper.service";
+import {PapersComponent} from "./papers/papers.component";
 
 @NgModule({
   declarations: [
@@ -30,10 +34,13 @@ import {PersonsComponent} from "./persons/persons.component";
     PersonDetailComponent,
     PersonListComponent,
     PersonsComponent,
+    PaperDetailComponent,
+    PaperListComponent,
+    PapersComponent,
     ConferenceDetailComponent,
     ConferenceNewComponent,
     ConferencesComponent,
-    ConferenceListComponent
+    ConferenceListComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +48,7 @@ import {PersonsComponent} from "./persons/persons.component";
     HttpModule,
     AppRoutingModule,
   ],
-  providers: [SessionService, ConferenceService, PersonService],
+  providers: [SessionService, ConferenceService, PersonService, PaperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

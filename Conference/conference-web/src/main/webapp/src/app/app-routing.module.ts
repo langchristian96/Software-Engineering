@@ -12,6 +12,8 @@ import {SessionEditComponent} from "./sessions/session-edit/session-edit.compone
 import {SessionNewComponent} from "./sessions/session-new/session-new.component";
 import {PersonsComponent} from "./persons/persons.component";
 import {PersonDetailComponent} from "./persons/person-detail/person-detail.component";
+import {PapersComponent} from "./papers/papers.component";
+import {PaperDetailComponent} from "./papers/paper-detail/paper-detail.component";
 
 
 const routes: Routes = [
@@ -24,8 +26,9 @@ const routes: Routes = [
   { path: 'conference/detail/:id', component: ConferenceDetailComponent},
   { path: 'conference/new', component: ConferenceNewComponent},
   { path: 'persons', component: PersonsComponent },
-
   { path: 'person/detail/:id', component: PersonDetailComponent},
+  { path: 'papers', component: PapersComponent },
+  { path: 'paper/detail/:id', component: PaperDetailComponent},
   { path: 'conference/detail/:id', component: ConferenceDetailComponent},
 ];
 
