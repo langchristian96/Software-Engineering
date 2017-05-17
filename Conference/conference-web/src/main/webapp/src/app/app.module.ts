@@ -24,6 +24,10 @@ import {PaperListComponent} from "./papers/paper-list/paper-list.component";
 import {PaperService} from "./papers/shared/paper.service";
 import {PapersComponent} from "./papers/papers.component";
 import {PaperNewComponent} from "./papers/paper-new/paper-new.component";
+import {LoginComponent} from "./login/login.component";
+import {RegisterComponent} from "./register/register.component";
+import {AlertService} from "./alert/alert.service";
+import {AlertComponent} from "./alert/alert.component";
 
 @NgModule({
   declarations: [
@@ -43,6 +47,9 @@ import {PaperNewComponent} from "./papers/paper-new/paper-new.component";
     ConferenceNewComponent,
     ConferencesComponent,
     ConferenceListComponent,
+    LoginComponent,
+    RegisterComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +57,7 @@ import {PaperNewComponent} from "./papers/paper-new/paper-new.component";
     HttpModule,
     AppRoutingModule,
   ],
-  providers: [SessionService, ConferenceService, PersonService, PaperService],
+  providers: [SessionService, ConferenceService, PersonService, PaperService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

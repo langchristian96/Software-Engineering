@@ -45,8 +45,8 @@ export class PersonService {
       .map(persons => persons.find(person => person.id === id));
   }
 
-  create(usern: string, password: string, name: string, affiliate: string, email: string): Observable<Person> {
-    let person = {usern, password, name, affiliate, email};
+  create(username: string, password: string, name: string, affiliate: string, email: string): Observable<Person> {
+    let person = {username, password, name, affiliate, email};
     return this.http
       .post(this.personsUrl, JSON.stringify({"person": person}), {headers: this.headers})
       .map(this.extractData)

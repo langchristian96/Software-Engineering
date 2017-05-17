@@ -1,6 +1,6 @@
 export class Person {
   id: number;
-  usern: string;
+  username: string;
   password: string;
   name: string;
   affiliation: string;

@@ -15,6 +15,8 @@ import {PersonDetailComponent} from "./persons/person-detail/person-detail.compo
 import {PapersComponent} from "./papers/papers.component";
 import {PaperDetailComponent} from "./papers/paper-detail/paper-detail.component";
 import {PaperNewComponent} from "./papers/paper-new/paper-new.component";
+import {LoginComponent} from "./login/login.component";
+import {RegisterComponent} from "./register/register.component";
 
 
 const routes: Routes = [
@@ -31,7 +33,9 @@ const routes: Routes = [
   { path: 'papers', component: PapersComponent },
   { path: 'paper/detail/:id', component: PaperDetailComponent},
   { path: 'paper/new', component: PaperNewComponent},
-
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  // { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
