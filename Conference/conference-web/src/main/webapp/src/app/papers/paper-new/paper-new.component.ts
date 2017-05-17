@@ -19,19 +19,13 @@ export class PaperNewComponent  {
               private location: Location) {
   }
 
-  goBack(): void {
+  cancel(): void {
     this.location.back();
-  }
+  };
 
-
-  save(title, author, content): void {
-    if (!this.isValid(title, author, content)) {
-      console.log("all fields are required ");
-      alert("all fields are required");
-      return;
-    }
-    this.paperService.create(title, author, content)
-      .subscribe(_ => this.goBack());
+  addPaper(title, author, content): void{
+    this.paper = new Paper(title, author, content);
+    this.paperService.createPaper(this.paper).subscribe(_ => this.cancel());
   }
 
   private isValid(title, author, content) {

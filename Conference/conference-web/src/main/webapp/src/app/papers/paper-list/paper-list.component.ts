@@ -16,7 +16,7 @@ import {PaperService} from "../shared/paper.service";
 export class PaperListComponent implements OnInit {
   errorMessage: string;
   papers: Paper[];
-  selectedPaper: Paper;
+  // selectedPaper: Paper;
 
   constructor(private paperService: PaperService,
               private router: Router) {
@@ -34,22 +34,15 @@ export class PaperListComponent implements OnInit {
       );
   }
 
-  onSelect(paper: Paper): void {
-    this.selectedPaper= paper;
+  editPaper (paperId): void {
+    this.router.navigate(['/paper/detail', paperId]);
+  }
+  erasePaper(paperId): void{
+    this.paperService.deletePaper(paperId).subscribe(_ => this.getPapers());
   }
 
-  gotoDetail(): void {
-    this.router.navigate(['/paper/detail/', this.selectedPaper.id]);
-  }
-
-  delete(paper: Paper): void {
-    this.paperService.delete(paper.id)
-      .subscribe(() => {
-        this.papers = this.papers.filter(c => c !== paper);
-        if (this.selectedPaper === paper) {
-          this.selectedPaper = null;
-        }
-      });
+  addNewPaper(): void{
+    this.router.navigate(['/paper/new']);
   }
 
 }

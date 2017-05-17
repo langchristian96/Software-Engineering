@@ -34,6 +34,17 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     @Override
+    public Conference findOne(Long id) {
+        log.trace("findOne");
+
+        Conference conference = (Conference) conferenceRepository.findOne(id);
+
+        log.trace("findOne: conference={}", conference);
+
+        return conference;
+    }
+
+    @Override
     @Transactional
     public Conference updateConference(Long id, String name, int edition, String startDate, String endDate, String callDate, String papersDeadline) {
         log.trace("updateConference: id={}, name={}, edition={}, startDate={}, endDate={}, callDate={}, papersDeadline={}, committee={}, sections={}", id, name, edition, startDate, endDate, callDate, papersDeadline);

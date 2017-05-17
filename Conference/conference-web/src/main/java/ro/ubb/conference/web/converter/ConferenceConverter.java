@@ -1,11 +1,13 @@
 package ro.ubb.conference.web.converter;
 
+import org.springframework.stereotype.Component;
 import ro.ubb.conference.core.domain.Conference;
 import ro.ubb.conference.web.dto.ConferenceDto;
 
 /**
  * Created by user on 5/4/2017.
  */
+@Component
 public class ConferenceConverter extends BaseConverter<Conference, ConferenceDto> {
 
     @Override

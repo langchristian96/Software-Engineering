@@ -32,14 +32,13 @@ export class PaperDetailComponent implements OnInit {
       .subscribe(paper => this.paper = paper);
   }
 
-  goBack(): void {
-    this.location.back();
+  updatePaperDetail(): void {
+    this.paperService.updatePaper(this.paper).subscribe(_ => this.cancel());
   }
 
-  save(): void {
-    this.paperService.update(this.paper)
-      .subscribe(_ => this.goBack());
-  }
+  cancel(): void {
+    this.location.back();
+  };
 
 }
 

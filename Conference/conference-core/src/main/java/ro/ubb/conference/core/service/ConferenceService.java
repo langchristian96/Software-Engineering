@@ -13,6 +13,8 @@ import java.util.List;
 public interface ConferenceService {
     List<Conference> findAll();
 
+    Conference findOne(Long id);
+
 //    Conference updateConference(Long id, String name, int edition, String startDate, String endDate, String callDate, String papersDeadline, ArrayList<String> commitee, ArrayList<String> sections);
 
 //    Conference createConference(String name, int edition, String startDate, String endDate, String callDate, String papersDeadline, ArrayList<String> commitee, ArrayList<String> sections);

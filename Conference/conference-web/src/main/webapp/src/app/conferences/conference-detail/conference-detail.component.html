@@ -24,14 +24,6 @@
     <label>Papers deadline: </label> {{conference.papersDeadline}}
     <input [(ngModel)]="conference.papersDeadline" placeholder="papersDeadline">
   </div>
-  <div>
-    <label>Committee: </label> {{conference.committee}}
-    <input [(ngModel)]="conference.committee" placeholder="committee">
-  </div>
-  <div>
-    <label>Sections: </label> {{conference.sections}}
-    <input [(ngModel)]="conference.sections" placeholder="sections">
-  </div>
   <button (click)="goBack()">Back</button>
   <button (click)="save()">Save</button>
 </div>

@@ -1,20 +1,23 @@
-<h3>Add Paper</h3>
+<div class="container">
+  <h1>Add new Paper</h1>
 
-<div>
-  <label>Title: </label>
-  <input #paperTitle/>
-</div>
-<div>
-  <label>Author: </label>
-  <input #paperAuthor/>
-</div>
-<div>
-  <label>Content: </label>
-  <input #paperContent/>
-</div>
+  <form novalidate="novalidate" class="form-horizontal">
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputPaperTitle">Paper Title:</label>
+      <input class="form-control" type="text" id="inputPaperTitle" name="title" #title/>
+    </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputPaperAuthor">Paper Author:</label>
+      <input class="form-control" type="text" id="inputPaperAuthor" name="author" #author/>
+    </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputPaperContent">Paper Content:</label>
+      <input class="form-control" type="text" id="inputPaperContent" name="content" #content/>
+    </div>
+    <div class="form-group">
+      <a (click)="cancel()" class="btn btn-raised btn-danger">cancel</a>
 
-
-
-<button (click)="goBack()">Back</button>
-<button (click)="save(paperTitle.value, paperAuthor.value, paperContent.value)">Save</button>
+      <a (click)="addPaper(title.value, author.value, content.value)" class="btn btn-raised btn-info">create new paper</a>
+    </div>
+  </form>
 </div>

@@ -1,17 +1,29 @@
 <div *ngIf="paper">
-  <h2>Paper {{paper.title}} details</h2>
-  <div>
-    <label>Title: </label> {{paper.title}}
-    <input [(ngModel)]="paper.title" placeholder="title">
+  <div class="container">
+    <h1>Update {{paper.id}}</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+      <div class="form-group label-floating">
+        <label class="control-label"for="inputPaperId">Paper id:</label>
+        <input class="form-control" type="text" id="inputPaperId" name="id" [(ngModel)]="paper.id" #id readonly/>
+      </div>
+      <div class="form-group label-floating">
+        <label class="control-label" for="inputPaperTitle">Paper Title:</label>
+        <input class="form-control" type="text" id="inputPaperTitle" name="date" [(ngModel)]="paper.title" #title/>
+      </div>
+      <div class="form-group label-floating">
+        <label class="control-label" for="inputPaperAuthor">Paper Author:</label>
+        <input class="form-control" type="text" id="inputPaperAuthor" name="conferenceId" [(ngModel)]="paper.author" #author/>
+      </div>
+      <div class="form-group label-floating">
+        <label class="control-label" for="inputPaperContent">Paper Content:</label>
+        <input class="form-control" type="text" id="inputPaperContent" name="chairId" [(ngModel)]="paper.content" #content/>
+      </div>
+      <div class="form-group">
+        <a (click)="cancel()" class="btn btn-raised btn-danger">cancel</a>
+
+        <a (click)="updatePaperDetail()" class="btn btn-raised btn-info">update paper</a>
+      </div>
+    </form>
   </div>
-  <div>
-    <label>Author: </label> {{paper.author}}
-    <input [(ngModel)]="paper.author" placeholder="author">
-  </div>
-  <div>
-    <label>Content: </label> {{paper.content}}
-    <input [(ngModel)]="paper.content" placeholder="content">
-  </div>
-  <button (click)="goBack()">Back</button>
-  <button (click)="save()">Save</button>
 </div>

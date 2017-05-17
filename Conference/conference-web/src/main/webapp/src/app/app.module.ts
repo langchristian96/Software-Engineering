@@ -23,6 +23,7 @@ import {PaperDetailComponent} from "./papers/paper-detail/paper-detail.component
 import {PaperListComponent} from "./papers/paper-list/paper-list.component";
 import {PaperService} from "./papers/shared/paper.service";
 import {PapersComponent} from "./papers/papers.component";
+import {PaperNewComponent} from "./papers/paper-new/paper-new.component";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {PapersComponent} from "./papers/papers.component";
     PaperDetailComponent,
     PaperListComponent,
     PapersComponent,
+    PaperNewComponent,
     ConferenceDetailComponent,
     ConferenceNewComponent,
     ConferencesComponent,

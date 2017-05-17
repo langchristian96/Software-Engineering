@@ -47,8 +47,7 @@ export class PaperService {
       .map(papers => papers.find(paper => paper.id === id));
   }
 
-  create(title: string, author: string, content: string): Observable<Paper> {
-    let paper = {title, author, content};
+  createPaper(paper): Observable<Paper> {
     return this.http
       .post(this.papersUrl, JSON.stringify({"paper": paper}), {headers: this.headers})
       .map(this.extractData)
@@ -56,7 +55,7 @@ export class PaperService {
   }
 
 
-  update(paper): Observable<Paper> {
+  updatePaper(paper): Observable<Paper> {
     const url = `${this.papersUrl}/${paper.id}`;
     return this.http
       .put(url, JSON.stringify({"paper": paper}), {headers: this.headers})
@@ -64,7 +63,7 @@ export class PaperService {
       .catch(this.handleError);
   }
 
-  delete(id: number): Observable<void> {
+  deletePaper(id: number): Observable<void> {
     const url = `${this.papersUrl}/${id}`;
     return this.http
       .delete(url, {headers: this.headers})

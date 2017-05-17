@@ -14,6 +14,7 @@ import {PersonsComponent} from "./persons/persons.component";
 import {PersonDetailComponent} from "./persons/person-detail/person-detail.component";
 import {PapersComponent} from "./papers/papers.component";
 import {PaperDetailComponent} from "./papers/paper-detail/paper-detail.component";
+import {PaperNewComponent} from "./papers/paper-new/paper-new.component";
 
 
 const routes: Routes = [
@@ -29,7 +30,8 @@ const routes: Routes = [
   { path: 'person/detail/:id', component: PersonDetailComponent},
   { path: 'papers', component: PapersComponent },
   { path: 'paper/detail/:id', component: PaperDetailComponent},
-  { path: 'conference/detail/:id', component: ConferenceDetailComponent},
+  { path: 'paper/new', component: PaperNewComponent},
+
 ];
 
 @NgModule({
