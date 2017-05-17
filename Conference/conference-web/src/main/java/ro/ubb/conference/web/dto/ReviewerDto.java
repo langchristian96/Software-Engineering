@@ -1,48 +1,40 @@
-package ro.ubb.conference.core.domain;
+package ro.ubb.conference.web.dto;
 
-import lombok.*;
-
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
- * Created by langchristian96 on 5/5/2017.
+ * Created by langchristian96 on 5/18/2017.
  */
-
-@Entity
-@Table(name = "person")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Person extends BaseEntity<Long> {
+public class ReviewerDto extends BaseEntityDto {
 
     //username
-    @Column(name = "usern", nullable = false)
     private String usern;
 
     //password
-    @Column(name="password",nullable = false)
     private String password;
 
 
     //name
-    @Column(name="name",nullable = false)
     private String name;
 
     //affiliation
-    @Column(name="affiliation",nullable=false)
     private String affiliation;
 
     //email
-    @Column(name="email",nullable = false)
     private String email;
+
 
     @Override
     public String toString() {
-        return "Person{" +
-                "usern='" + usern + '\'' +
+        return "ReviewerDto{" +
+                "user='" + usern + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", affiliation='" + affiliation + '\'' +
