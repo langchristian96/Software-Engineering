@@ -29,11 +29,17 @@
 }
 
 .navbtn {
-  margin:40px;
+  margin:50px;
   margin-left: 10px;
   margin-right: 15px;
+  margin-top: 15px;
 }
 
 .container {
   margin-left: 30%;
+}
+
+.hdr {
+  height: 60px;
+  background-color: white;
 }
