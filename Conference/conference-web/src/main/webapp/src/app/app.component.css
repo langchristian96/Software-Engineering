@@ -42,4 +42,8 @@
 .hdr {
   height: 60px;
   background-color: white;
+
+  padding: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px ;
 }
