@@ -40,7 +40,7 @@ public class Conference extends BaseEntity<Long> {
     @Column(name = "PapersDeadline", nullable = false)
     private String papersDeadline;
 
-    @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "conference")
     private Set<Session> sessions = new HashSet<>();
 
     public Set<Session> getSessions() {
