@@ -54,7 +54,7 @@ public class SessionController {
 
         SessionDto sessionDto = sessionDtoMap.get("session");
         Session session = sessionService.updateSession(sessionId, sessionDto.getDate(),
-                sessionDto.getConferenceId(), sessionDto.getSessionChairId());
+                 sessionDto.getSessionChairId(), sessionDto.getConferenceId());
 
         Map<String, SessionDto> result = new HashMap<>();
         result.put("session", sessionConverter.convertModelToDto(session));
@@ -72,7 +72,7 @@ public class SessionController {
 
         SessionDto sessionDto = sessionDtoMap.get("session");
         Session session = sessionService.createSession(
-                sessionDto.getDate(), sessionDto.getConferenceId(), sessionDto.getSessionChairId());
+                sessionDto.getDate(), sessionDto.getSessionChairId(), sessionDto.getConferenceId());
 
         Map<String, SessionDto> result = new HashMap<>();
         result.put("session", sessionConverter.convertModelToDto(session));

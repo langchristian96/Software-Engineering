@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ro.ubb.conference.core.domain.Conference;
 import ro.ubb.conference.core.domain.Session;
+import ro.ubb.conference.core.repository.ConferenceRepository;
 import ro.ubb.conference.core.repository.SessionRepository;
 
 import java.util.List;
@@ -23,6 +25,9 @@ public class SessionServiceImpl implements SessionService {
     @Autowired
     private SessionRepository sessionRepository;
 
+    @Autowired
+    private ConferenceRepository conferenceRepository;
+
     @Override
     public List<Session> findAll() {
         log.trace("findAll");
@@ -36,13 +41,13 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     @Transactional
-    public Session updateSession(Long sessionId, String date, Long conferenceId, Long sessionChairId/*, ArrayList<Long> listeners, ArrayList<Long> papers*/ ) {
+    public Session updateSession(Long sessionId, String date, Long sessionChairId, Long conferenceId/*, ArrayList<Long> listeners, ArrayList<Long> papers*/ ) {
         log.trace("updateSession: sessionId={}, date={}, conferenceId={}, session chair id={}",
                 sessionId, date, conferenceId, sessionChairId);
 
         Session session = (Session)sessionRepository.findOne(sessionId);
         session.setDate(date);
-        session.setConferenceId(conferenceId);
+        session.setConference((Conference)conferenceRepository.findOne(conferenceId));
         session.setSessionChairId(sessionChairId);
 //        session.setListeners(listeners);
 //        session.setPapers(papers);
@@ -53,11 +58,11 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public Session createSession(String date, Long conferenceId, Long sessionChairId/*, ArrayList<Long> listeners, ArrayList<Long> papers*/ ) {
+    public Session createSession(String date, Long sessionChairId, Long conferenceId/*, ArrayList<Long> listeners, ArrayList<Long> papers*/ ) {
         log.trace("createSession: date={}, conferenceId={}, session chair id={}",
                 date, conferenceId, sessionChairId);
 
-        Session session = new Session(date, conferenceId, sessionChairId/*, listeners, papers*/);
+        Session session = new Session(date, sessionChairId, (Conference) conferenceRepository.findOne(conferenceId)/*, listeners, papers*/);
         session = (Session) sessionRepository.save(session);
 
         log.trace("createSession: session={}", session);

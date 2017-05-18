@@ -1,6 +1,7 @@
 package ro.ubb.conference.web.dto;
 
 import lombok.*;
+import ro.ubb.conference.core.domain.Conference;
 
 import java.util.ArrayList;
 
@@ -14,8 +15,8 @@ import java.util.ArrayList;
 @Setter
 public class SessionDto extends BaseEntityDto {
     private String date;
-    private Long conferenceId;
     private Long sessionChairId;
+    private Long conferenceId;
 //	private ArrayList<Long> listeners;
 //    private ArrayList<Long> papers;
 

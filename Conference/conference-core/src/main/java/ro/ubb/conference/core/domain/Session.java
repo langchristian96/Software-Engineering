@@ -2,9 +2,7 @@ package ro.ubb.conference.core.domain;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 
 /**
@@ -22,14 +20,26 @@ public class Session extends BaseEntity<Long> {
 
     private static final int SERIAL_NUMBER_LENGTH = 16;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "Date", nullable = false)
     private String date;
 
-    @Column(name = "conferenceId", nullable = false)
-    private Long conferenceId;
+//    @Column(name = "conferenceId", nullable = false)
+//    private Long conferenceId;
 
-    @Column(name = "sessionChair", nullable = false)
+    @Column(name = "SessionChair", nullable = false)
     private Long sessionChairId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ConferenceId", nullable = false)
+    private Conference conference;
+
+    public Conference getConference() {
+        return this.conference;
+    }
+
+    public void setConference(Conference conference) {
+        this.conference = conference;
+    }
 	
 //	@Column(name = "session listeners", nullable = false)
 //    private ArrayList<Long> listeners;
@@ -42,8 +52,8 @@ public class Session extends BaseEntity<Long> {
     public String toString() {
         return "Session{" +
                 "date='" + date + '\'' +
-                ", conferenceId='" + conferenceId + '\'' +
-                ", sessionChair=" + sessionChairId +
-                "} " + super.toString();
+                ", sessionChairId=" + sessionChairId +
+                ", conference=" + conference +
+                '}';
     }
 }

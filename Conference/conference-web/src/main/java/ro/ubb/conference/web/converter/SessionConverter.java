@@ -12,7 +12,7 @@ import ro.ubb.conference.web.dto.SessionDto;
 public class SessionConverter extends BaseConverter<Session, SessionDto> {
     @Override
     public SessionDto convertModelToDto(Session session) {
-        SessionDto sessionDto = new SessionDto(session.getDate(), session.getConferenceId(), session.getSessionChairId());
+        SessionDto sessionDto = new SessionDto(session.getDate(), session.getSessionChairId(), session.getConference().getId());
         sessionDto.setId(session.getId());
         return sessionDto;
     }

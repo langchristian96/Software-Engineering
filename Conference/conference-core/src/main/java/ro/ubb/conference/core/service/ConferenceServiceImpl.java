@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubb.conference.core.domain.Conference;
+import ro.ubb.conference.core.domain.Session;
 import ro.ubb.conference.core.repository.ConferenceRepository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -69,7 +71,7 @@ public class ConferenceServiceImpl implements ConferenceService {
     public Conference createConference(String name, int edition, String startDate, String endDate, String callDate, String papersDeadline) {
         log.trace("createConference: name={}, edition={}, startDate={}, endDate={}, callDate={}, papersDeadline={}, committee={}, sections={}");
 
-        Conference conference = new Conference(name, edition, startDate, endDate, callDate, papersDeadline);
+        Conference conference = new Conference(name, edition, startDate, endDate, callDate, papersDeadline, new HashSet<>());
         conference = (Conference) conferenceRepository.save(conference);
 
 
