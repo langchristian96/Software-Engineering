@@ -28,8 +28,8 @@ public class Session extends BaseEntity<Long> {
     @Column(name = "SessionChair", nullable = false)
     private Long sessionChairId;
 
-    @ManyToOne
-    @JoinColumn(name = "ConferenceId", nullable = false)
+    @ManyToOne(optional = false, fetch=FetchType.EAGER)
+    @JoinColumn(name="ConferenceId", nullable = false)
     private Conference conference;
 
     public Conference getConference() {
