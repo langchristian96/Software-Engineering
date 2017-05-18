@@ -23,7 +23,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Table(name="reviewer")
-public class Reviewer extends Author {
+public class Reviewer extends Person {
 
     @Override
     public String toString() {
