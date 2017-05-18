@@ -178,7 +178,7 @@ body .container-fluid .jumbotron-danger {
   border-radius: 2px;
   position: relative;
   padding: 8px 30px;
-  margin: 10px 1px;
+  /*margin: 10px 1px;*/
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
