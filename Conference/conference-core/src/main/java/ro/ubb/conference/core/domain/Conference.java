@@ -16,7 +16,6 @@ import java.util.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = false)
 public class Conference extends BaseEntity<Long> {
     @Column(name = "Name", nullable = false)
     private String name;
@@ -63,6 +62,33 @@ public class Conference extends BaseEntity<Long> {
 //    Conference sections
 //    @Column(name = "sections", nullable = false)
 //    private ArrayList<String> sections;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Conference that = (Conference) o;
+
+        if (edition != that.edition) return false;
+        if (!name.equals(that.name)) return false;
+        if (!startDate.equals(that.startDate)) return false;
+        if (!endDate.equals(that.endDate)) return false;
+        if (!callDate.equals(that.callDate)) return false;
+        if (!papersDeadline.equals(that.papersDeadline)) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + edition;
+        result = 31 * result + startDate.hashCode();
+        result = 31 * result + endDate.hashCode();
+        result = 31 * result + callDate.hashCode();
+        result = 31 * result + papersDeadline.hashCode();
+        return result;
+    }
 
     @Override
     public String toString() {

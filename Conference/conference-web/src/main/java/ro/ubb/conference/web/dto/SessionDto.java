@@ -13,6 +13,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class SessionDto extends BaseEntityDto {
     private String date;
     private Long sessionChairId;

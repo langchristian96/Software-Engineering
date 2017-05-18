@@ -1,11 +1,9 @@
 package ro.ubb.conference.web.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Created by user on 5/4/2017.
@@ -15,6 +13,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class ConferenceDto extends BaseEntityDto {
     private String name;
     private int edition;
@@ -22,6 +21,7 @@ public class ConferenceDto extends BaseEntityDto {
     private String endDate;
     private String callDate;
     private String papersDeadline;
+    private Set<Long> sessions;
 //    private ArrayList<String> committee;
 //    private ArrayList<String> sections;
 

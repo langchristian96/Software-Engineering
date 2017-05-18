@@ -15,7 +15,6 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Session extends BaseEntity<Long> {
 
     private static final int SERIAL_NUMBER_LENGTH = 16;
@@ -53,7 +52,26 @@ public class Session extends BaseEntity<Long> {
         return "Session{" +
                 "date='" + date + '\'' +
                 ", sessionChairId=" + sessionChairId +
-                ", conference=" + conference +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Session session = (Session) o;
+
+        if (!date.equals(session.date)) return false;
+        if (!sessionChairId.equals(session.sessionChairId)) return false;
+        return conference.equals(session.conference);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = date.hashCode();
+        result = 31 * result + sessionChairId.hashCode();
+        result = 31 * result + conference.hashCode();
+        return result;
     }
 }
