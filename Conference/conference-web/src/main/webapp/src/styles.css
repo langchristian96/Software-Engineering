@@ -25,6 +25,8 @@
   /*padding-top: 100px;*/
   width: 10%;
   display: table-cell;
+  background-color: white;
+  height: inherit;
 }
 
 .pagecontainer {
@@ -37,4 +39,5 @@
 .navbtn {
   margin:40px;
   margin-left: 10px;
+  margin-right: 15px;
 }
