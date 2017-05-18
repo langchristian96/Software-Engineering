@@ -9,7 +9,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/../../../conference-web/build/classes/main" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../conference-web/src/main">
@@ -38,6 +38,7 @@
     <orderEntry type="library" name="Gradle: org.springframework:spring-context-support:4.3.6.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-orm:4.3.6.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.data:spring-data-jpa:1.10.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-test:4.3.6.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.2.6.Final" level="project" />
     <orderEntry type="library" name="Gradle: com.microsoft.sqlserver:mssql-jdbc:6.1.0.jre8" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:21.0" level="project" />

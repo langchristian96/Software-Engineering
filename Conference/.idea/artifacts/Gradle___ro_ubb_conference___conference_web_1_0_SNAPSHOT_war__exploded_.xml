@@ -29,6 +29,7 @@
           <element id="library" level="project" name="Gradle: org.springframework:spring-context-support:4.3.6.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-orm:4.3.6.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.data:spring-data-jpa:1.10.6.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-test:4.3.6.RELEASE" />
           <element id="library" level="project" name="Gradle: org.hibernate:hibernate-core:5.2.6.Final" />
           <element id="library" level="project" name="Gradle: com.microsoft.sqlserver:mssql-jdbc:6.1.0.jre8" />
           <element id="library" level="project" name="Gradle: com.google.guava:guava:21.0" />
