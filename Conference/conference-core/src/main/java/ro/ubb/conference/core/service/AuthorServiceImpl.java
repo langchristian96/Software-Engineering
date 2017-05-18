@@ -7,10 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubb.conference.core.domain.Author;
 import ro.ubb.conference.core.domain.Listener;
+import ro.ubb.conference.core.domain.Paper;
 import ro.ubb.conference.core.repository.AuthorRepository;
 import ro.ubb.conference.core.repository.ListenerRepository;
+import ro.ubb.conference.core.repository.PaperRepository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by langchristian96 on 5/18/2017.
@@ -24,6 +27,9 @@ public class AuthorServiceImpl implements AuthorService {
     @Autowired
     private AuthorRepository personRepository;
 
+    @Autowired
+    private PaperRepository paperRepository;
+
     @Override
     public List<Author> findAll() {
         log.trace("findAll");
@@ -36,8 +42,17 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    public Author findAuthor(Long clientId){
+        log.trace("findAuthor: AuthorId={}",clientId);
+
+        Author client=(Author)personRepository.findOne(clientId);
+
+        log.trace("findAuthor: Author={}",client);
+        return client;
+    }
+    @Override
     @Transactional
-    public Author updateAuthor(Long personId, String password, String name, String affiliation, String email) {
+    public Author updateAuthor(Long personId, String password, String name, String affiliation, String email, Set<Long> papers) {
         log.trace("updateAuthor: personId={}, password={}, name={}, affiliation={}, email={}",
                 personId, password, name, affiliation, email);
 
@@ -47,7 +62,19 @@ public class AuthorServiceImpl implements AuthorService {
         person.setAffiliation(affiliation);
         person.setEmail(email);
 
-        log.trace("updateListener: Listener={}", person);
+        person.getPapers().stream()
+                .map(d->d.getId())
+                .forEach(i->
+                {
+                    if(papers.contains(i)){
+                        papers.remove(i);
+                    }
+                });
+        List<Paper> bookList=paperRepository.findAll(papers);
+        bookList.stream().forEach(b->person.addPaper(b));
+
+
+        log.trace("updateAuthor: Author={}", person);
 
         return person;
     }

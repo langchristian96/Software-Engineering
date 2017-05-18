@@ -53,7 +53,7 @@ public class AuthorController {
         log.trace("updateAuthor: personId={}, personDtoMap={}", personId, personDtoMap);
 
         AuthorDto personDto = personDtoMap.get("author");
-        Author person = personService.updateAuthor(personId,personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
+        Author person = personService.updateAuthor(personId,personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail(),personDto.getPapers());
 
         Map<String, AuthorDto> result = new HashMap<>();
         result.put("author", personConverter.convertModelToDto(person));
