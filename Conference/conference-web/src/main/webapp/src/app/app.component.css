@@ -2,6 +2,7 @@
 .wrapper {
   width: 100%;
   /*height: 100%;*/
+  position: fixed;
 }
 
 .subcontainer {
@@ -23,11 +24,16 @@
   padding-top: 10px;
   /*align:right;*/
   display: table-cell;
-  position: fixed;
+  /*align-content: inherit;*/
+  /*position: absolute;*/
 }
 
 .navbtn {
   margin:40px;
   margin-left: 10px;
   margin-right: 15px;
+}
+
+.container {
+  margin-left: 30%;
 }
