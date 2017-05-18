@@ -1,29 +1,29 @@
-<h3>Add Conference</h3>
+<!--<h3>Add Conference</h3>-->
 
-<div>
-  <label>Name: </label>
-  <input #conferenceName/>
-</div>
-<div>
-  <label>Edition: </label>
-  <input #conferenceEdition/>
-</div>
-<div>
-  <label>Start date: </label>
-  <input #conferenceStartDate/>
-</div>
-<div>
-  <label>End date: </label>
-  <input #conferenceEndDate/>
-</div>
-<div>
-  <label>Call date: </label>
-  <input #conferenceCallDate/>
-</div>
-<div>
-  <label>Papers deadline: </label>
-  <input #conferencePapersDeadline/>
-</div>
+<!--<div>-->
+  <!--<label>Name: </label>-->
+  <!--<input #conferenceName/>-->
+<!--</div>-->
+<!--<div>-->
+  <!--<label>Edition: </label>-->
+  <!--<input #conferenceEdition/>-->
+<!--</div>-->
+<!--<div>-->
+  <!--<label>Start date: </label>-->
+  <!--<input #conferenceStartDate/>-->
+<!--</div>-->
+<!--<div>-->
+  <!--<label>End date: </label>-->
+  <!--<input #conferenceEndDate/>-->
+<!--</div>-->
+<!--<div>-->
+  <!--<label>Call date: </label>-->
+  <!--<input #conferenceCallDate/>-->
+<!--</div>-->
+<!--<div>-->
+  <!--<label>Papers deadline: </label>-->
+  <!--<input #conferencePapersDeadline/>-->
+<!--</div>-->
 <!--<div>-->
   <!--<label>Committee: </label> {{conference.committee}}-->
   <!--<input #conferenceCommittee/>-->
@@ -32,7 +32,44 @@
   <!--<label>Sections: </label> {{conference.sections}}-->
   <!--<input #conferenceSections/>-->
 <!--</div>-->
-<div>
-  <button (click)="goBack()">Back</button>
-  <button (click)="save(conferenceName.value, conferenceEdition.value, conferenceStartDate.value, conferenceEndDate.value, conferenceCallDate.value, conferencePapersDeadline.value)">Save</button>
+<!--<div>-->
+  <!--<button (click)="goBack()">Back</button>-->
+  <!--<button (click)="save(conferenceName.value, conferenceEdition.value, conferenceStartDate.value, conferenceEndDate.value, conferenceCallDate.value, conferencePapersDeadline.value)">Save</button>-->
+<!--</div>-->
+
+
+<div class="container">
+  <h1>Add new Conference</h1>
+
+  <form novalidate="novalidate" class="form-horizontal">
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputConferenceName">Conference name:</label>
+      <input class="form-control" type="text" id="inputConferenceName" name="name" #name/>
+    </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputConferenceName">Conference Edition:</label>
+      <input class="form-control" type="text" id="inputConferenceEdition" name="edition" #edition/>
+    </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputConferenceName">Conference Start date:</label>
+      <input class="form-control" type="text" id="inputConferenceStartDate" name="startDate" #startDate/>
+    </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputConferenceName">Conference End date:</label>
+      <input class="form-control" type="text" id="inputConferenceEndDate" name="endDate" #endDate/>
+    </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputConferenceName">Conference Call date:</label>
+      <input class="form-control" type="text" id="inputConferenceCallDate" name="callDate" #callDate/>
+    </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputConferenceName">Conference Papers deadline:</label>
+      <input class="form-control" type="text" id="inputConferencePapersDeadline" name="papersDeadline" #papersDeadline/>
+    </div>
+    <div class="form-group">
+      <a (click)="goBack()" class="btn btn-raised btn-danger">cancel</a>
+
+      <a (click)="addConference(name.value, edition.value, startDate.value, endDate.value, callDate.value, papersDeadline.value)" class="btn btn-raised btn-info">create new conference</a>
+    </div>
+  </form>
 </div>

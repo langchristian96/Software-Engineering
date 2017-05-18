@@ -1,17 +1,53 @@
-<div *ngIf="selectedConference">
-  <h2>
-    {{selectedConference.name | uppercase}} was selected
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
-</div>
+<!--<div *ngIf="selectedConference">-->
+  <!--<h2>-->
+    <!--{{selectedConference.name | uppercase}} was selected-->
+  <!--</h2>-->
+  <!--<button (click)="gotoDetail()">View Details</button>-->
+<!--</div>-->
 
-<h2>Conferences</h2>
-<ol class="conferences">
-  <li *ngFor="let conference of conferences "
-      [class.selected]="conference === selectedConference"
-      (click)="onSelect(conference)">
-    {{conference.name}}
-    <button class="delete"
-            (click)="delete(conference); $event.stopPropagation()">x</button>
-  </li>
-</ol>
+<!--<h2>Conferences</h2>-->
+<!--<ol class="conferences">-->
+  <!--<li *ngFor="let conference of conferences "-->
+      <!--[class.selected]="conference === selectedConference"-->
+      <!--(click)="onSelect(conference)">-->
+    <!--{{conference.name}}-->
+    <!--<button class="delete"-->
+            <!--(click)="delete(conference); $event.stopPropagation()">x</button>-->
+  <!--</li>-->
+<!--</ol>-->
+<h2 style="text-align:center;">Conferences</h2>
+<div style="text-align: center;">
+  <div class="tabel">
+    <table class="table table-striped table-hover">
+      <thead>
+      <tr>
+        <th style="min-width: 80px;">Id</th>
+        <th style="min-width: 80px;">Name</th>
+        <th style="min-width: 80px;">Edition</th>
+        <th style="min-width: 80px;">Start Date</th>
+        <th style="min-width: 80px;">End Date</th>
+        <th style="min-width: 80px;">Call Date</th>
+        <th style="min-width: 80px;">Papers Deadline</th>
+        <th style="width:20px;"> </th>
+        <th style="width:20px;"> </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let conference of conferences">
+        <td>{{ conference.id }}</td>
+        <td>{{ conference.name }}</td>
+        <td>{{ conference.edition }}</td>
+        <td>{{ conference.startDate }}</td>
+        <td>{{ conference.endDate }}</td>
+        <td>{{ conference.callDate }}</td>
+        <td>{{ conference.papersDeadline }}</td>
+        <td><a (click)="delete(conference.id)" class="btn btn-raised btn-danger">Delete</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <a (click)="addNewConference()" class="btn btn-fab btn-danger">
+    <i class="material-icons">add</i>
+    <div class="ripple-container"></div>
+  </a>
+</div>

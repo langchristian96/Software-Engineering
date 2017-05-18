@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>Add new Person</h1>
+
+  <form novalidate="novalidate" class="form-horizontal">
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputPersonUsername">Person Username:</label>
+      <input class="form-control" type="text" id="inputPersonUsername" name="username" #username/>
+    </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputPersonPassword">Person Password:</label>
+      <input class="form-control" type="text" id="inputPersonPassword" name="password" #password/>
+    </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputPersonName">Person Name:</label>
+      <input class="form-control" type="text" id="inputPersonName" name="name" #name/>
+    </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputPersonAffiliation">Person Affiliation:</label>
+      <input class="form-control" type="text" id="inputPersonAffiliation" name="affiliation" #affiliation/>
+    </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputPersonEmail">Person Email:</label>
+      <input class="form-control" type="text" id="inputPersonEmail" name="email" #email/>
+    </div>
+    <div class="form-group">
+      <a (click)="cancel()" class="btn btn-raised btn-danger">cancel</a>
+
+      <a (click)="addPerson(username.value, password.value, name.value, affiliation.value, email.value)" class="btn btn-raised btn-info">create new session</a>
+    </div>
+  </form>
+</div>
