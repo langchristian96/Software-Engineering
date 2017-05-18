@@ -1,0 +1,33 @@
+
+.wrapper {
+  width: 100%;
+  /*height: 100%;*/
+}
+
+.subcontainer {
+  display: table;
+}
+
+.sidebar {
+  /*padding-top: 100px;*/
+  width: 15%;
+  display: table-cell;
+  background-color: white;
+  height: 100%;
+  position: fixed;
+  overflow-x: hidden;
+}
+
+.pagecontainer {
+  width: 85%;
+  padding-top: 10px;
+  /*align:right;*/
+  display: table-cell;
+  position: fixed;
+}
+
+.navbtn {
+  margin:40px;
+  margin-left: 10px;
+  margin-right: 15px;
+}
