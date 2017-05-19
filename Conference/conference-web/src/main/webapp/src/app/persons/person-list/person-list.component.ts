@@ -39,7 +39,7 @@ export class PersonListComponent implements OnInit {
     this.router.navigate(['/person/detail/', this.selectedPerson.id]);
   }
 
-  delete(person: Person): void {
+  deletePerson(person: Person): void {
     this.personService.delete(person.id)
       .subscribe(() => {
         this.persons = this.persons.filter(c => c !== person);
@@ -47,6 +47,9 @@ export class PersonListComponent implements OnInit {
           this.selectedPerson = null;
         }
       });
+  }
+  addNewPerson(): void{
+    this.router.navigate(['/person/new']);
   }
 
 }

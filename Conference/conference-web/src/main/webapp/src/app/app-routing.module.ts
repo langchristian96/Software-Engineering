@@ -17,6 +17,7 @@ import {PaperDetailComponent} from "./papers/paper-detail/paper-detail.component
 import {PaperNewComponent} from "./papers/paper-new/paper-new.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
+import {PersonNewComponent} from "./persons/person-new/person-new.component";
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'conference/new', component: ConferenceNewComponent},
   { path: 'persons', component: PersonsComponent },
   { path: 'person/detail/:id', component: PersonDetailComponent},
+  { path: 'person/new', component: PersonNewComponent},
   { path: 'papers', component: PapersComponent },
   { path: 'paper/detail/:id', component: PaperDetailComponent},
   { path: 'paper/new', component: PaperNewComponent},

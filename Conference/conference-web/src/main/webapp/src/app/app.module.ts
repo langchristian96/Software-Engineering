@@ -28,6 +28,7 @@ import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {AlertService} from "./alert/alert.service";
 import {AlertComponent} from "./alert/alert.component";
+import {PersonNewComponent} from "./persons/person-new/person-new.component";
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {AlertComponent} from "./alert/alert.component";
     PersonDetailComponent,
     PersonListComponent,
     PersonsComponent,
+    PersonNewComponent,
     PaperDetailComponent,
     PaperListComponent,
     PapersComponent,
