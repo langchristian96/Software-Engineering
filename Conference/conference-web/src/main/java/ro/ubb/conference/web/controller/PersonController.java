@@ -14,6 +14,7 @@ import ro.ubb.conference.web.converter.PaperConverter;
 import ro.ubb.conference.web.converter.PersonConverter;
 import ro.ubb.conference.web.dto.*;
 
+import javax.annotation.security.PermitAll;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,9 +67,9 @@ public class PersonController {
         return result;
     }
 
-    @RequestMapping(value = "/person", method = RequestMethod.POST)
+    @RequestMapping(value = "/persons", method = RequestMethod.POST)
     @CrossOrigin(origins = "http://localhost:4200")
-
+    @PermitAll
     public Map<String, PersonDto> createPerson(
             @RequestBody final Map<String, PersonDto> personDtoMap) {
         log.trace("createPerson: personDtoMap={}", personDtoMap);
