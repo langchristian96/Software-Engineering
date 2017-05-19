@@ -7,10 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubb.conference.core.domain.Listener;
 import ro.ubb.conference.core.domain.Person;
+import ro.ubb.conference.core.domain.Session;
 import ro.ubb.conference.core.repository.ListenerRepository;
 import ro.ubb.conference.core.repository.PersonRepository;
+import ro.ubb.conference.core.repository.SessionRepository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by langchristian96 on 5/17/2017.
@@ -26,6 +29,9 @@ public class ListenerServiceImpl implements ListenerService {
     @Autowired
     private ListenerRepository personRepository;
 
+    @Autowired
+    private SessionRepository sessionRepository;
+
     @Override
     public List<Listener> findAll() {
         log.trace("findAll");
@@ -38,8 +44,18 @@ public class ListenerServiceImpl implements ListenerService {
     }
 
     @Override
+    public Session findSession(Long sessionId){
+        log.trace("findSession: SessionId={}",sessionId);
+
+        Session session = (Session)sessionRepository.findOne(sessionId);
+
+        log.trace("findSession: Session={}",session);
+        return session;
+    }
+
+    @Override
     @Transactional
-    public Listener updateListener(Long personId, String password, String name, String affiliation, String email) {
+    public Listener updateListener(Long personId, String password, String name, String affiliation, String email, Set<Long> sessions) {
         log.trace("updatePerson: personId={}, password={}, name={}, affiliation={}, email={}",
                 personId, password, name, affiliation, email);
 
@@ -48,6 +64,17 @@ public class ListenerServiceImpl implements ListenerService {
         person.setName(name);
         person.setAffiliation(affiliation);
         person.setEmail(email);
+
+        person.getSessions().stream()
+                .map(d->d.getId())
+                .forEach(i->
+                {
+                    if(sessions.contains(i)){
+                        sessions.remove(i);
+                    }
+                });
+        List<Session> sessionList = sessionRepository.findAll(sessions);
+        sessionList.forEach(person::addSession);
 
         log.trace("updateListener: Listener={}", person);
 

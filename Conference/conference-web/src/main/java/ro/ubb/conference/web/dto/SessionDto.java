@@ -4,6 +4,7 @@ import lombok.*;
 import ro.ubb.conference.core.domain.Conference;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Created by Budu.
@@ -18,6 +19,8 @@ public class SessionDto extends BaseEntityDto {
     private String date;
     private Long sessionChairId;
     private Long conferenceId;
+    private Set<Long> papers;
+    private Set<Long> listeners;
 //	private ArrayList<Long> listeners;
 //    private ArrayList<Long> papers;
 

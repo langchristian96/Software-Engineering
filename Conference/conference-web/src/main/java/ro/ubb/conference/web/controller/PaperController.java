@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.ubb.conference.core.domain.Paper;
 import ro.ubb.conference.core.service.PaperService;
+import ro.ubb.conference.core.service.SessionService;
 import ro.ubb.conference.web.converter.PaperConverter;
 import ro.ubb.conference.web.dto.EmptyJsonResponse;
 import ro.ubb.conference.web.dto.PaperDto;
@@ -29,6 +30,9 @@ public class PaperController {
 
     @Autowired
     private PaperService paperService;
+
+    @Autowired
+    private SessionService sessionService;
 
     @Autowired
     private PaperConverter paperConverter;
@@ -54,7 +58,7 @@ public class PaperController {
 
         PaperDto paperDto = paperDtoMap.get("paper");
         Paper paper = paperService.updatePaper(paperId, paperDto.getTitle(),
-                paperDto.getAuthor(), paperDto.getContent());
+                paperDto.getContent(), paperDto.getAuthors(), paperDto.getReviewers(), sessionService.findOne(paperDto.getSessionId()));
 
         Map<String, PaperDto> result = new HashMap<>();
         result.put("paper", paperConverter.convertModelToDto(paper));
@@ -72,7 +76,7 @@ public class PaperController {
 
         PaperDto paperDto = paperDtoMap.get("paper");
         Paper paper = paperService.createPaper(
-                paperDto.getTitle(), paperDto.getAuthor(), paperDto.getContent());
+                paperDto.getTitle(), paperDto.getContent());
 
         Map<String, PaperDto> result = new HashMap<>();
         result.put("paper", paperConverter.convertModelToDto(paper));

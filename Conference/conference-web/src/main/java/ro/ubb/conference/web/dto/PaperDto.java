@@ -3,6 +3,7 @@ package ro.ubb.conference.web.dto;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Created by anca.
@@ -12,17 +13,22 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class PaperDto extends BaseEntityDto {
     private String title;
-    private String author;
     private String content;
+    private Set<Long> authors;
+    private Set<Long> reviewers;
+    private Long sessionId;
 
     @Override
     public String toString() {
-        return "PapaerDto{" +
+        return "PaperDto{" +
                 "title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", content=" + content +
-                "} " + super.toString();
+                ", content='" + content + '\'' +
+                ", authors=" + authors +
+                ", reviewers=" + reviewers +
+                ", sessionIs=" + sessionId +
+                '}';
     }
 }

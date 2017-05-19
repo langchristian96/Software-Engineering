@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.ubb.conference.core.domain.Session;
+import ro.ubb.conference.core.service.PaperService;
 import ro.ubb.conference.core.service.SessionService;
 import ro.ubb.conference.web.converter.SessionConverter;
 import ro.ubb.conference.web.dto.EmptyJsonResponse;
@@ -31,6 +32,9 @@ public class SessionController {
     private SessionService sessionService;
 
     @Autowired
+    private PaperService paperService;
+
+    @Autowired
     private SessionConverter sessionConverter;
 
     @CrossOrigin(origins = "*")
@@ -45,6 +49,18 @@ public class SessionController {
         return new SessionsDto(sessionConverter.convertModelsToDtos(sessions));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "/sessions/{id}", method = RequestMethod.GET)
+    public SessionDto getOneSession(@PathVariable final Long id) {
+        log.trace("getOneSession");
+
+        Session session = sessionService.findOne(id);
+
+        log.trace("getOneSession: session={}", session);
+
+        return sessionConverter.convertModelToDto(session);
+    }
+
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/sessions/{sessionId}", method = RequestMethod.PUT)
     public Map<String, SessionDto> updateSession(
@@ -54,7 +70,7 @@ public class SessionController {
 
         SessionDto sessionDto = sessionDtoMap.get("session");
         Session session = sessionService.updateSession(sessionId, sessionDto.getDate(),
-                 sessionDto.getSessionChairId(), sessionDto.getConferenceId());
+                 sessionDto.getSessionChairId(), sessionDto.getConferenceId(), paperService.findAll(sessionDto.getPapers()), sessionDto.getListeners());
 
         Map<String, SessionDto> result = new HashMap<>();
         result.put("session", sessionConverter.convertModelToDto(session));

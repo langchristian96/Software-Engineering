@@ -20,9 +20,6 @@ import java.util.Set;
  * Created by langchristian96 on 5/18/2017.
  */
 
-
-
-
 @RestController
 public class AuthorPaperController {
     private static final Logger log = LoggerFactory.getLogger(AuthorPaperController.class);
@@ -47,10 +44,5 @@ public class AuthorPaperController {
 
         log.trace("getAuthorPapers: result={}",clientBooksDto);
         return clientBooksDto;
-
-
     }
-
-
-
 }

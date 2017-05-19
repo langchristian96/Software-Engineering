@@ -4,13 +4,17 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Budu.
  */
 
 @Entity
-@Table(name = "session")
+@Table(name = "Session")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -32,6 +36,9 @@ public class Session extends BaseEntity<Long> {
     @JoinColumn(name="ConferenceId", nullable = false)
     private Conference conference;
 
+    @OneToMany(mappedBy = "paperSession", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    Set<Paper> papers = new HashSet<>();
+
     public Conference getConference() {
         return this.conference;
     }
@@ -39,13 +46,32 @@ public class Session extends BaseEntity<Long> {
     public void setConference(Conference conference) {
         this.conference = conference;
     }
-	
-//	@Column(name = "session listeners", nullable = false)
-//    private ArrayList<Long> listeners;
-//
-//	@Column(name = "session papers", nullable = false)
-//    private ArrayList<Long> papers;
 
+    public Set<Paper> getPapers(){
+        return this.papers;
+    }
+
+    public void setPapers(){
+        this.papers = papers;
+    }
+
+    @OneToMany(mappedBy = "listenerSession", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<SessionListener> sessionListeners = new HashSet<>();
+
+    public Set<Listener> getListeners(){
+        return Collections.unmodifiableSet(this.sessionListeners.stream().map(SessionListener::getListener).collect(Collectors.toSet()));
+    }
+
+    public void addListener(Listener listener){
+        SessionListener sessionListener = new SessionListener();
+        sessionListener.setListenerSession(this);
+        sessionListener.setListener(listener);
+        sessionListeners.add(sessionListener);
+    }
+
+    public void addListeners(Set<Listener> listeners){
+        listeners.forEach(this::addListener);
+    }
 
     @Override
     public String toString() {
@@ -55,6 +81,7 @@ public class Session extends BaseEntity<Long> {
                 '}';
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,16 +89,14 @@ public class Session extends BaseEntity<Long> {
 
         Session session = (Session) o;
 
-        if (!date.equals(session.date)) return false;
-        if (!sessionChairId.equals(session.sessionChairId)) return false;
-        return conference.equals(session.conference);
+        if (date != null ? !date.equals(session.date) : session.date != null) return false;
+        return sessionChairId != null ? sessionChairId.equals(session.sessionChairId) : session.sessionChairId == null;
     }
 
     @Override
     public int hashCode() {
-        int result = date.hashCode();
-        result = 31 * result + sessionChairId.hashCode();
-        result = 31 * result + conference.hashCode();
+        int result = date != null ? date.hashCode() : 0;
+        result = 31 * result + (sessionChairId != null ? sessionChairId.hashCode() : 0);
         return result;
     }
 }

@@ -10,8 +10,6 @@ import ro.ubb.conference.web.dto.PersonDto;
 
 @Component
 public class PersonConverter extends BaseConverter<Person, PersonDto> {
-
-
     @Override
     public PersonDto convertModelToDto(Person person) {
         PersonDto personDto= new PersonDto(person.getUsern(),person.getPassword(),person.getName(),person.getAffiliation(),person.getEmail());

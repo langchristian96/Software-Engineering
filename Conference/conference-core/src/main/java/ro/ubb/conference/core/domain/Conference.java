@@ -10,8 +10,8 @@ import java.util.*;
  */
 
 @Entity
-@Table(name = "conference", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "name")})
+@Table(name = "Conference", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "Name")})
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -63,6 +63,7 @@ public class Conference extends BaseEntity<Long> {
 //    @Column(name = "sections", nullable = false)
 //    private ArrayList<String> sections;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -99,7 +100,6 @@ public class Conference extends BaseEntity<Long> {
                 ", endDate='" + endDate + '\'' +
                 ", callDate='" + callDate + '\'' +
                 ", papersDeadline='" + papersDeadline + '\'' +
-                ", sessions=" + sessions +
                 '}';
     }
 }

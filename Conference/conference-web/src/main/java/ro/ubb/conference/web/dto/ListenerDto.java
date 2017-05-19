@@ -1,9 +1,8 @@
 package ro.ubb.conference.web.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.Set;
 
 /**
  * Created by langchristian96 on 5/18/2017.
@@ -17,6 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class ListenerDto extends BaseEntityDto {
 
     //username
@@ -34,6 +34,8 @@ public class ListenerDto extends BaseEntityDto {
 
     //email
     private String email;
+
+    private Set<Long> sessions;
 
 
     @Override

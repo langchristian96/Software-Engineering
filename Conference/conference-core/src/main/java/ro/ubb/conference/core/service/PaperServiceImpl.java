@@ -5,11 +5,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ro.ubb.conference.core.domain.Author;
 import ro.ubb.conference.core.domain.Paper;
+import ro.ubb.conference.core.domain.Reviewer;
+import ro.ubb.conference.core.domain.Session;
 import ro.ubb.conference.core.repository.PaperRepository;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Created by anca.
@@ -34,15 +38,48 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
+    public Set<Paper> findAll(Set<Long> papers) {
+        log.trace("findAll");
+
+        Set<Paper> paperSet = (Set<Paper>) paperRepository.findAll(papers);
+
+        log.trace("findAll: papers={}", paperSet);
+
+        return paperSet;
+    }
+
+    @Override
     @Transactional
-    public Paper updatePaper(Long paperId, String title, String author, String content ) {
+    public Paper updatePaper(Long paperId, String title, String content, Set<Long> authors, Set<Long> reviewers, Session sessionId ) {
         log.trace("updatePaper: paperId={}, title={}, author={}, content={}",
-                paperId, title, author, content);
+                paperId, title, authors, content);
 
         Paper paper = (Paper) paperRepository.findOne(paperId);
         paper.setTitle(title);
-        paper.setAuthor(author);
         paper.setContent(content);
+        paper.setSession(sessionId);
+
+        paper.getAuthors().stream()
+                .map(d->d.getId())
+                .forEach(i->
+                {
+                    if(authors.contains(i)){
+                        authors.remove(i);
+                    }
+                });
+        List<Author> authorList=paperRepository.findAll(authors);
+        authorList.forEach(paper::addAuthor);
+
+        paper.getReviewers().stream()
+                .map(d->d.getId())
+                .forEach(i->
+                {
+                    if(reviewers.contains(i)){
+                        reviewers.remove(i);
+                    }
+                });
+        List<Reviewer> reviewerList=paperRepository.findAll(reviewers);
+        reviewerList.forEach(paper::addReviewer);
 
         log.trace("updatePaper: paper={}", paper);
 
@@ -50,11 +87,11 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
-    public Paper createPaper(String title, String author, String content) {
+    public Paper createPaper(String title, String content) {
         log.trace("createPaper: title={}, author={}, content={}",
-               title, author, content);
+               title, content);
 
-        Paper paper = new Paper(title, author, content);
+        Paper paper = new Paper(title, content);
         paper = (Paper) paperRepository.save(paper);
 
         log.trace("createPaper: paper={}", paper);

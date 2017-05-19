@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubb.conference.core.domain.Author;
+import ro.ubb.conference.core.domain.Paper;
 import ro.ubb.conference.core.domain.Reviewer;
 import ro.ubb.conference.core.repository.AuthorRepository;
+import ro.ubb.conference.core.repository.PaperRepository;
 import ro.ubb.conference.core.repository.ReviewerRepository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by langchristian96 on 5/18/2017.
@@ -27,6 +30,9 @@ public class ReviewerServiceImpl implements ReviewerService {
     @Autowired
     private ReviewerRepository personRepository;
 
+    @Autowired
+    private PaperRepository paperRepository;
+
     @Override
     public List<Reviewer> findAll() {
         log.trace("findAll");
@@ -39,8 +45,18 @@ public class ReviewerServiceImpl implements ReviewerService {
     }
 
     @Override
+    public Reviewer findReviewer(Long reviewerId){
+        log.trace("findReviewer: ReviewerId={}",reviewerId);
+
+        Reviewer reviewer=(Reviewer) personRepository.findOne(reviewerId);
+
+        log.trace("findReviewer: ReviewerId={}",reviewer);
+        return reviewer;
+    }
+
+    @Override
     @Transactional
-    public Reviewer updateReviewer(Long personId, String password, String name, String affiliation, String email) {
+    public Reviewer updateReviewer(Long personId, String password, String name, String affiliation, String email, Set<Long> papers) {
         log.trace("updateAuthor: personId={}, password={}, name={}, affiliation={}, email={}",
                 personId, password, name, affiliation, email);
 
@@ -49,6 +65,18 @@ public class ReviewerServiceImpl implements ReviewerService {
         person.setName(name);
         person.setAffiliation(affiliation);
         person.setEmail(email);
+
+        person.getPapers().stream()
+                .map(d->d.getId())
+                .forEach(i->
+                {
+                    if(papers.contains(i)){
+                        papers.remove(i);
+                    }
+                });
+
+        List<Paper> paperList = paperRepository.findAll(papers);
+        paperList.forEach(person::addPaper);
 
         log.trace("updateReviewer: Reviewer={}", person);
 

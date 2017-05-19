@@ -42,14 +42,15 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Author findAuthor(Long clientId){
-        log.trace("findAuthor: AuthorId={}",clientId);
+    public Author findAuthor(Long authorId){
+        log.trace("findAuthor: AuthorId={}",authorId);
 
-        Author client=(Author)personRepository.findOne(clientId);
+        Author client=(Author)personRepository.findOne(authorId);
 
         log.trace("findAuthor: Author={}",client);
         return client;
     }
+
     @Override
     @Transactional
     public Author updateAuthor(Long personId, String password, String name, String affiliation, String email, Set<Long> papers) {
@@ -70,8 +71,8 @@ public class AuthorServiceImpl implements AuthorService {
                         papers.remove(i);
                     }
                 });
-        List<Paper> bookList=paperRepository.findAll(papers);
-        bookList.stream().forEach(b->person.addPaper(b));
+        List<Paper> paperList=paperRepository.findAll(papers);
+        paperList.forEach(person::addPaper);
 
 
         log.trace("updateAuthor: Author={}", person);

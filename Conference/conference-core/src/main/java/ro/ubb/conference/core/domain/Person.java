@@ -9,9 +9,8 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "person")
+@Table(name = "Person")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -19,25 +18,33 @@ import javax.persistence.*;
 public class Person extends BaseEntity<Long> {
 
     //username
-    @Column(name = "usern", nullable = false)
+    @Column(name = "Username", nullable = false)
     private String usern;
 
     //password
-    @Column(name="password",nullable = false)
+    @Column(name="Password",nullable = false)
     private String password;
 
 
     //name
-    @Column(name="name",nullable = false)
+    @Column(name="Name",nullable = false)
     private String name;
 
     //affiliation
-    @Column(name="affiliation",nullable=false)
+    @Column(name="Affiliation",nullable=false)
     private String affiliation;
 
     //email
-    @Column(name="email",nullable = false)
+    @Column(name="Email",nullable = false)
     private String email;
+
+    public Person(String usern, String password, String name, String affiliation, String email) {
+        this.usern = usern;
+        this.password = password;
+        this.name = name;
+        this.affiliation = affiliation;
+        this.email = email;
+    }
 
     @Override
     public String toString() {

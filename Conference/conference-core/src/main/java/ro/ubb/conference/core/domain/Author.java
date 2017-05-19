@@ -21,31 +21,25 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="author")
+@Table(name="Author")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Author extends Person {
-
-
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<AuthorPaper> authorPapers = new HashSet<>();
 
-
     public Set<Paper> getPapers(){
-        return Collections.unmodifiableSet(this.authorPapers.stream().map(cb->cb.getPaper()).collect(Collectors.toSet()));
+        return Collections.unmodifiableSet(this.authorPapers.stream().map(AuthorPaper::getAuthorPaper).collect(Collectors.toSet()));
     }
 
-
-
-    public void addPaper(Paper book){
-        AuthorPaper cb=new AuthorPaper();
-        cb.setPaper(book);
-        cb.setAuthor(this);
-        authorPapers.add(cb);
-
+    public void addPaper(Paper paper){
+        AuthorPaper authorPaper = new AuthorPaper();
+        authorPaper.setAuthorPaper(paper);
+        authorPaper.setAuthor(this);
+        authorPapers.add(authorPaper);
     }
 
-    public void addPapers(Set<Paper> books){
-        books.stream().forEach(b->addPaper(b));
+    public void addPapers(Set<Paper> papers){
+        papers.forEach(this::addPaper);
     }
 
     public Author(String usern, String password, String name, String affiliation, String email){

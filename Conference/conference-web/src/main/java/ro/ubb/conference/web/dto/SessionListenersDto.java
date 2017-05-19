@@ -8,16 +8,12 @@ import lombok.Setter;
 import java.util.Set;
 
 /**
- * Created by langchristian96 on 5/18/2017.
+ * Created by CristianCosmin on 19.05.2017.
  */
-
-
-
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class ListenersDto {
-    private Set<ListenerDto> listeners;
+public class SessionListenersDto {
+    private Set<SessionListenerDto> sessionListeners;
 }

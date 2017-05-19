@@ -18,13 +18,10 @@ public class AuthorPaperConverter extends BaseConverterGeneric<AuthorPaper, Auth
     }
 
     @Override
-    public AuthorPaperDto convertModelToDto(AuthorPaper clientBook){
+    public AuthorPaperDto convertModelToDto(AuthorPaper authorPaper){
 
-        AuthorPaperDto clientBookDt=AuthorPaperDto.builder().paperId(clientBook.getPaper().getId())
-                .authorId(clientBook.getAuthor().getId()).paperTitle(clientBook.getPaper().getTitle()).build();
-        return clientBookDt;
-
+        AuthorPaperDto authorPaperDto=AuthorPaperDto.builder().paperId(authorPaper.getAuthorPaper().getId())
+                .authorId(authorPaper.getAuthor().getId()).paperTitle(authorPaper.getAuthorPaper().getTitle()).build();
+        return authorPaperDto;
     }
-
-
 }

@@ -15,8 +15,7 @@ import java.util.Set;
 public interface AuthorService {
     List<Author> findAll();
 
-
-    Author findAuthor(Long clientId);
+    Author findAuthor(Long authorId);
 
     Author updateAuthor(Long personId, String password, String name, String affiliation, String email, Set<Long> papers);
 

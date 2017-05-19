@@ -41,11 +41,11 @@ public class ListenerController {
     public ListenersDto getListeners() {
         log.trace("getListeners");
 
-        List<Listener> persons = personService.findAll();
+        List<Listener> listeners = personService.findAll();
 
-        log.trace("getListeners: persons={}", persons);
+        log.trace("getListeners: listeners={}", listeners);
 
-        return new ListenersDto(personConverter.convertModelsToDtos(persons));
+        return new ListenersDto(personConverter.convertModelsToDtos(listeners));
     }
 
     @RequestMapping(value = "/listeners/{personId}", method = RequestMethod.PUT)
@@ -56,7 +56,7 @@ public class ListenerController {
         log.trace("updateListener: personId={}, personDtoMap={}", personId, personDtoMap);
 
         ListenerDto personDto = personDtoMap.get("listener");
-        Listener person = personService.updateListener(personId,personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
+        Listener person = personService.updateListener(personId,personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail(), personDto.getSessions());
 
         Map<String, ListenerDto> result = new HashMap<>();
         result.put("listener", personConverter.convertModelToDto(person));
