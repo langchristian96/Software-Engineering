@@ -26,7 +26,7 @@ const routes: Routes = [
   {path: 'sessions', component: SessionsComponent, canActivate: [AuthGuard]},
   {path: 'session/edit/:id', component: SessionEditComponent, canActivate: [AuthGuard]},
   {path: 'session/new', component: SessionNewComponent, canActivate: [AuthGuard]},
-  { path: 'conferences', component: ConferencesComponent },
+  { path: 'conferences', component: ConferencesComponent, canActivate: [AuthGuard] },
   { path: 'conference/detail/:id', component: ConferenceDetailComponent, canActivate: [AuthGuard]},
   { path: 'conference/new', component: ConferenceNewComponent, canActivate: [AuthGuard]},
   { path: 'persons', component: PersonsComponent, canActivate: [AuthGuard] },
