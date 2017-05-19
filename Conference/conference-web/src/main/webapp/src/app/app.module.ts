@@ -29,6 +29,7 @@ import {RegisterComponent} from "./register/register.component";
 import {AlertService} from "./alert/alert.service";
 import {AlertComponent} from "./alert/alert.component";
 import { AuthGuard } from './guards/index';
+import {AuthenticationService} from "./login/authentication.service";
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { AuthGuard } from './guards/index';
     HttpModule,
     AppRoutingModule,
   ],
-  providers: [SessionService, ConferenceService, PersonService, PaperService, AlertService, AuthGuard],
+  providers: [SessionService, ConferenceService, PersonService, PaperService, AlertService, AuthGuard, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

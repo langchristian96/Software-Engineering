@@ -31,7 +31,7 @@ public class ConferenceController {
     @Autowired
     private ConferenceConverter conferenceConverter;
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @RequestMapping(value = "/conferences", method = RequestMethod.GET)
     public ConferencesDto getConferences() {
         log.trace("getConferences");
@@ -43,7 +43,6 @@ public class ConferenceController {
         return new ConferencesDto(conferenceConverter.convertModelsToDtos(conferences));
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/conferences/{id}", method = RequestMethod.GET)
     public ConferenceDto getOneConference(@PathVariable final Long id) {
         log.trace("getOneConference");
@@ -55,7 +54,7 @@ public class ConferenceController {
         return conferenceConverter.convertModelToDto(conference);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @RequestMapping(value = "/conferences/{conferenceId}", method = RequestMethod.PUT)
     public Map<String, ConferenceDto> updateConference(
             @PathVariable final Long conferenceId,
@@ -73,7 +72,7 @@ public class ConferenceController {
         return result;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @RequestMapping(value = "/conferences", method = RequestMethod.POST)
     public Map<String, ConferenceDto> createConference(
             @RequestBody final Map<String, ConferenceDto> conferenceDtoMap) {
@@ -91,7 +90,7 @@ public class ConferenceController {
         return result;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @RequestMapping(value = "conferences/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteConference(@PathVariable final Long id) {
         log.trace("deleteConference: id={}", id);

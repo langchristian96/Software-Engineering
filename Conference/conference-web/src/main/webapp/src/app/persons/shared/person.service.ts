@@ -17,8 +17,10 @@ export class PersonService {
   constructor(private http: Http) {
   }
 
+  private heads2=new Headers({'Access-Control-Allow-Origin':'http://localhost:8080'});
+
   getPersons(): Observable<Person[]> {
-    return this.http.get(this.personsUrl)
+    return this.http.get(this.personsUrl,{withCredentials: true})
       .map(this.extractData)
       .catch(this.handleError);
   }

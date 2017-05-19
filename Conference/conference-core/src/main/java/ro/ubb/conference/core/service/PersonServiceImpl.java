@@ -9,6 +9,8 @@ import ro.ubb.conference.core.domain.Person;
 import ro.ubb.conference.core.repository.PersonRepository;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by langchristian96 on 5/5/2017.
@@ -33,6 +35,16 @@ public class PersonServiceImpl implements PersonService {
         log.trace("findAll: persons={}", persons);
 
         return persons;
+    }
+
+    @Override
+    public Person findPersonByUser(String usern) {
+        System.out.println(usern);
+        List<Person> set=personRepository.findAll().stream().filter(p->p.getUsern().equals(usern)).collect(Collectors.toList());
+        if(set.size()==0)
+            return null;
+        return set.get(0);
+
     }
 
     @Override
