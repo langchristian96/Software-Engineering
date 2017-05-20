@@ -3,8 +3,11 @@ package ro.ubb.conference.core.service;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.test.context.web.WebAppConfiguration;
 import ro.ubb.conference.core.domain.Author;
 
 import java.util.List;
@@ -16,8 +19,9 @@ import static org.junit.Assert.assertEquals;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration()
+@ContextConfiguration(classes = {ServiceConfig.class})
 public class AuthorServiceTest {
+
 
     @Autowired
     private AuthorServiceImpl authorService;
