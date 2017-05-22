@@ -29,6 +29,7 @@ import {RegisterComponent} from "./register/register.component";
 import {AlertService} from "./alert/alert.service";
 import {AlertComponent} from "./alert/alert.component";
 import {PersonNewComponent} from "./persons/person-new/person-new.component";
+import {MdlModule} from "@angular-mdl/core";
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import {PersonNewComponent} from "./persons/person-new/person-new.component";
     FormsModule,
     HttpModule,
     AppRoutingModule,
+    MdlModule,
   ],
   providers: [SessionService, ConferenceService, PersonService, PaperService, AlertService],
   bootstrap: [AppComponent]
