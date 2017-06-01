@@ -18,9 +18,10 @@ export class RegisterComponent {
     private personService: PersonService,
     private alertService: AlertService) { }
 
-  register(username, password, name, affiliate, email) {
+  register(newUrl: string,username, password, name, affiliate, email) {
     this.loading = true;
-    this.personService.create(username, password, name, affiliate, email)
+    let person = {username, password, name, affiliate, email};
+    this.personService.createPerson(newUrl, person)
       .subscribe(
         data => {
           this.alertService.success('Registration successful', true);

@@ -8,15 +8,17 @@ import {PersonService} from "../shared/person.service";
   moduleId: module.id,
   selector: 'app-person-list',
   templateUrl: './person-list.component.html',
-  styleUrls: ['./person-list.component.css']
+  styleUrls: ['./person-list.component.css'],
 })
 export class PersonListComponent implements OnInit {
   errorMessage: string;
   persons: Person[];
   selectedPerson: Person;
+  newUrl: string;
 
   constructor(private personService: PersonService,
               private router: Router) {
+    this.newUrl = router.url
   }
 
   ngOnInit(): void {
@@ -24,7 +26,7 @@ export class PersonListComponent implements OnInit {
   }
 
   getPersons() {
-    this.personService.getPersons()
+    this.personService.getPersons(this.newUrl)
       .subscribe(
         persons => this.persons = persons,
         error => this.errorMessage = <any>error
@@ -35,21 +37,15 @@ export class PersonListComponent implements OnInit {
     this.selectedPerson= person;
   }
 
-  gotoDetail(): void {
-    this.router.navigate(['/person/detail/', this.selectedPerson.id]);
+  editPerson(personId: number): void {
+    this.router.navigate([this.newUrl.substring(0, this.newUrl.length - 1) + '/detail/', personId]);
   }
 
-  deletePerson(person: Person): void {
-    this.personService.delete(person.id)
-      .subscribe(() => {
-        this.persons = this.persons.filter(c => c !== person);
-        if (this.selectedPerson === person) {
-          this.selectedPerson = null;
-        }
-      });
+  deletePerson(personId): void {
+      this.personService.deletePerson(this.newUrl, personId).subscribe(_ => this.getPersons());
   }
   addNewPerson(): void{
-    this.router.navigate(['/person/new']);
+    this.router.navigate([this.newUrl.substring(0, this.newUrl.length - 1)+'/new']);
   }
 
 }

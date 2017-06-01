@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubb.conference.core.domain.Author;
-import ro.ubb.conference.core.domain.Listener;
 import ro.ubb.conference.core.domain.Paper;
 import ro.ubb.conference.core.repository.AuthorRepository;
-import ro.ubb.conference.core.repository.ListenerRepository;
 import ro.ubb.conference.core.repository.PaperRepository;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by langchristian96 on 5/18/2017.
@@ -25,7 +25,7 @@ public class AuthorServiceImpl implements AuthorService {
     private static final Logger log = LoggerFactory.getLogger(AuthorServiceImpl.class);
 
     @Autowired
-    private AuthorRepository personRepository;
+    private AuthorRepository authorRepository;
 
     @Autowired
     private PaperRepository paperRepository;
@@ -34,7 +34,7 @@ public class AuthorServiceImpl implements AuthorService {
     public List<Author> findAll() {
         log.trace("findAll");
 
-        List<Author> persons = personRepository.findAll();
+        List<Author> persons = authorRepository.findAll();
 
         log.trace("findAll: Authors={}", persons);
 
@@ -42,10 +42,25 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    public Set<Author> findAllAuthorsByUsernames(Set<String> authorsUsername) {
+        log.trace("findAllAuthorsByUsername");
+
+        List<Author> authors = authorRepository.findAll();
+
+        Set<Author> authorSet = authors.stream()
+                        .filter(e -> authorsUsername.contains(e.getUsern()))
+                        .collect(Collectors.toSet());
+
+        log.trace("findAllAuthorsByUsername: Authors={}", authors);
+
+        return authorSet;
+    }
+
+    @Override
     public Author findAuthor(Long authorId){
         log.trace("findAuthor: AuthorId={}",authorId);
 
-        Author client=(Author)personRepository.findOne(authorId);
+        Author client=(Author) authorRepository.findOne(authorId);
 
         log.trace("findAuthor: Author={}",client);
         return client;
@@ -53,26 +68,29 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     @Transactional
-    public Author updateAuthor(Long personId, String password, String name, String affiliation, String email, Set<Long> papers) {
+    public Author updateAuthor(Long personId, String password, String name, String affiliation, String email, Set<Paper> papers) {
         log.trace("updateAuthor: personId={}, password={}, name={}, affiliation={}, email={}",
                 personId, password, name, affiliation, email);
 
-        Author person = (Author) personRepository.findOne(personId);
+        Author person = (Author) authorRepository.findOne(personId);
         person.setPassword(password);
         person.setName(name);
         person.setAffiliation(affiliation);
         person.setEmail(email);
+//        person.getPapers().stream()
+//                .map(d->d.getId())
+//                .forEach(i->
+//                {
+//                    if(papers.contains(i)){
+//                        papers.remove(i);
+//                    }
+//                });
+        List<Paper> paperList = paperRepository.findAll(papers.stream().map(paper -> paper.getId()).collect(Collectors.toSet()));
+        paperList.forEach(paper -> person.addPaper(paper));
 
-        person.getPapers().stream()
-                .map(d->d.getId())
-                .forEach(i->
-                {
-                    if(papers.contains(i)){
-                        papers.remove(i);
-                    }
-                });
-        List<Paper> paperList=paperRepository.findAll(papers);
-        paperList.forEach(person::addPaper);
+
+//        List<Paper> paperList=paperRepository.findAll(papers);
+//        paperList.forEach(person::addPaper);
 
 
         log.trace("updateAuthor: Author={}", person);
@@ -92,7 +110,7 @@ public class AuthorServiceImpl implements AuthorService {
         person.setPassword(password);
         person.setName(name);
 
-        person = (Author) personRepository.save(person);
+        person = (Author) authorRepository.save(person);
 
         log.trace("createAuthor: Author={}", person);
 
@@ -100,10 +118,19 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    @Transactional
+    public Author updateAuthorPapers(Long authorId, Set<Paper> papers){
+        Author author = (Author) authorRepository.findOne(authorId);
+        List<Paper> paperList = paperRepository.findAll(papers.stream().map(paper -> paper.getId()).collect(Collectors.toSet()));
+        paperList.forEach(paper -> author.addPaper(paper));
+        return author;
+    }
+
+    @Override
     public void deleteAuthor(Long personId) {
         log.trace("deleteAuthor: personId={}", personId);
 
-        personRepository.delete(personId);
+        authorRepository.delete(personId);
 
         log.trace("deleteAuthor - method end");
     }

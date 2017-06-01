@@ -2,7 +2,7 @@
  * Created by Adriana on 5/4/2017.
  */
 import {Injectable} from '@angular/core';
-import {Http, Response, Headers} from "@angular/http";
+import {Http, Response, Headers, RequestOptions} from "@angular/http";
 
 import {Observable} from "rxjs";
 import 'rxjs/add/operator/catch';
@@ -17,12 +17,30 @@ export class PaperService {
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) {
+    // this.headers.append('Content-Type', 'multipart/form-data');
+    // this.headers.append('Accept', 'application/json');
   }
 
   getPapers(): Observable<Paper[]> {
     return this.http.get(this.papersUrl)
       .map(this.extractData)
       .catch(this.handleError);
+  }
+
+  addPaperWithFile(formData): void{
+    let headers = new Headers();
+    headers.append('Accept', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    this.http.post('http://localhost:8080/api/papers/file',formData, options)
+    /*.map((res: Response) => res.json())*/
+      .catch(error => Observable.throw(error))
+      .subscribe(
+        data =>{
+          console.log(data);
+        }
+        ,
+        error => console.log(error)
+      )
   }
 
   private extractData(res: Response) {
@@ -48,8 +66,9 @@ export class PaperService {
   }
 
   createPaper(paper): Observable<Paper> {
+    let json = JSON.stringify({"paper": paper});
     return this.http
-      .post(this.papersUrl, JSON.stringify({"paper": paper}), {headers: this.headers})
+      .post(this.papersUrl, json, {headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }

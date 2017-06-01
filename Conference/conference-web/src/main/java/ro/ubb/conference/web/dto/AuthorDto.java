@@ -14,36 +14,26 @@ import java.util.Set;
 @Builder
 @Setter
 public class AuthorDto extends BaseEntityDto {
-
-    //username
     private String usern;
-
-    //password
     private String password;
-
-
-    //name
     private String name;
-
-    //affiliation
     private String affiliation;
-
-    //email
     private String email;
-
-
-    private Set<Long> papers;
+    private Set<String> papers;
 
     @Override
     public String toString() {
         return "AuthorDto{" +
-                "user='" + usern + '\'' +
+                "usern='" + usern + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", affiliation='" + affiliation + '\'' +
                 ", email='" + email + '\'' +
-                '}'+super.toString();
+                ", papers=" + papers +
+                '}';
     }
+
+
 }
 
 

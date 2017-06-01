@@ -10,6 +10,8 @@ import java.util.List;
 public interface PersonService {
     List<Person> findAll();
 
+    Person findOne(Long personId);
+
     Person updatePerson(Long personId, String password, String name, String affiliation, String email);
 
     Person createPerson(String user, String password, String name, String affiliation, String email);

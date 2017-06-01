@@ -2,7 +2,6 @@ package ro.ubb.conference.web.dto;
 
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -16,8 +15,11 @@ import java.util.Set;
 @Builder
 public class PaperDto extends BaseEntityDto {
     private String title;
-    private String content;
-    private Set<Long> authors;
+    private String abstractText;
+    private String contentPath;
+    private String keywords;
+    private String topics;
+    private Set<String> authorsUsername;
     private Set<Long> reviewers;
     private Long sessionId;
 
@@ -25,10 +27,13 @@ public class PaperDto extends BaseEntityDto {
     public String toString() {
         return "PaperDto{" +
                 "title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", authors=" + authors +
+                ", abstractText='" + abstractText + '\'' +
+                ", contentPath='" + contentPath + '\'' +
+                ", keywords='" + keywords + '\'' +
+                ", topics='" + topics + '\'' +
+                ", authorsUsername=" + authorsUsername +
                 ", reviewers=" + reviewers +
-                ", sessionIs=" + sessionId +
+                ", sessionId=" + sessionId +
                 '}';
     }
 }

@@ -25,6 +25,17 @@ public class PersonServiceImpl implements PersonService {
     private PersonRepository personRepository;
 
     @Override
+    public Person findOne(Long personId) {
+        log.trace("findOne");
+
+        Person person = (Person) personRepository.findOne(personId);
+
+        log.trace("findOne: person={}", person);
+
+        return person;
+    }
+
+    @Override
     public List<Person> findAll() {
         log.trace("findAll");
 

@@ -47,6 +47,18 @@ public class PersonController {
         return new PersonsDto(personConverter.convertModelsToDtos(persons));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "/persons/{id}", method = RequestMethod.GET)
+    public PersonDto getPerson(@PathVariable final Long id) {
+        log.trace("getPerson");
+
+        Person person = personService.findOne(id);
+
+        log.trace("getPerson: person={}", person);
+
+        return personConverter.convertModelToDto(person);
+    }
+
     @RequestMapping(value = "/persons/{personId}", method = RequestMethod.PUT)
     @CrossOrigin(origins = "http://localhost:4200")
     public Map<String, PersonDto> updatePerson(

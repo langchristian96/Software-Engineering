@@ -3,8 +3,11 @@ package ro.ubb.conference.core.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +23,8 @@ import java.util.stream.Collectors;
 @Setter
 @Table(name="Reviewer")
 public class Reviewer extends Person {
-    @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "reviewer", orphanRemoval = true, fetch = FetchType.EAGER)
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<ReviewerPaper> reviewerPapers = new HashSet<>();
 
     public Set<Paper> getPapers(){
