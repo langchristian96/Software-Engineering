@@ -9,11 +9,12 @@ import ro.ubb.conference.core.domain.Author;
 import ro.ubb.conference.core.domain.Paper;
 import ro.ubb.conference.core.domain.Reviewer;
 import ro.ubb.conference.core.domain.Session;
+import ro.ubb.conference.core.repository.AuthorRepository;
 import ro.ubb.conference.core.repository.PaperRepository;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by anca.
@@ -25,6 +26,9 @@ public class PaperServiceImpl implements PaperService {
 
     @Autowired
     private PaperRepository paperRepository;
+
+    @Autowired
+    private AuthorRepository authorRepository;
 
     @Override
     public List<Paper> findAll() {
@@ -49,37 +53,46 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
+    public Set<Paper> findAllPapersByTitle(Set<String> papersTitle) {
+        log.trace("findAllPapersByTitle");
+
+        List<Paper> papers = paperRepository.findAll();
+
+        Set<Paper> paperSet = papers.stream()
+                .filter(e -> papersTitle.contains(e.getTitle()))
+                .collect(Collectors.toSet());
+
+        log.trace("findAllPapersByTitle: Papers={}", paperSet);
+
+        return paperSet;
+    }
+
+    @Override
     @Transactional
-    public Paper updatePaper(Long paperId, String title, String content, Set<Long> authors, Set<Long> reviewers, Session sessionId ) {
-        log.trace("updatePaper: paperId={}, title={}, author={}, content={}",
-                paperId, title, authors, content);
+    public Paper updatePaper(Long paperId, String title, String abstractText,String contentPath, String keywords, String topics, Set<Author> authors/*, Set<Long> reviewers*/, Session sessionId) {
+        log.trace("updatePaper: paperId={}, title={}, author={}, contentPath={}",
+                paperId, title, keywords, topics, authors, contentPath);
 
         Paper paper = (Paper) paperRepository.findOne(paperId);
         paper.setTitle(title);
-        paper.setContent(content);
+        paper.setAbstractText(abstractText);
+        paper.setContentPath(contentPath);
+        paper.setKeywords(keywords);
+        paper.setTopics(topics);
         paper.setSession(sessionId);
+        List<Author> authorList = authorRepository.findAll(authors.stream().map(author -> author.getId()).collect(Collectors.toSet()));
+        authorList.forEach(author -> paper.addAuthor(author));
 
-        paper.getAuthors().stream()
-                .map(d->d.getId())
-                .forEach(i->
-                {
-                    if(authors.contains(i)){
-                        authors.remove(i);
-                    }
-                });
-        List<Author> authorList=paperRepository.findAll(authors);
-        authorList.forEach(paper::addAuthor);
-
-        paper.getReviewers().stream()
-                .map(d->d.getId())
-                .forEach(i->
-                {
-                    if(reviewers.contains(i)){
-                        reviewers.remove(i);
-                    }
-                });
-        List<Reviewer> reviewerList=paperRepository.findAll(reviewers);
-        reviewerList.forEach(paper::addReviewer);
+//        paper.getReviewers().stream()
+//                .map(d->d.getId())
+//                .forEach(i->
+//                {
+//                    if(reviewers.contains(i)){
+//                        reviewers.remove(i);
+//                    }
+//                });
+//        List<Reviewer> reviewerList=paperRepository.findAll(reviewers);
+//        reviewerList.forEach(paper::addReviewer);
 
         log.trace("updatePaper: paper={}", paper);
 
@@ -87,15 +100,22 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
-    public Paper createPaper(String title, String content) {
-        log.trace("createPaper: title={}, author={}, content={}",
-               title, content);
-
-        Paper paper = new Paper(title, content);
+    public Paper createPaper(String title, String abstractText,String contentPath, String keywords, String topics) {
+        log.trace("createPaper: title={}, author={}, contentPath={}",
+               title, contentPath, keywords, topics);
+        Paper paper = new Paper(title, abstractText,contentPath, keywords, topics);
         paper = (Paper) paperRepository.save(paper);
-
         log.trace("createPaper: paper={}", paper);
 
+        return paper;
+    }
+
+    @Override
+    @Transactional
+    public Paper updatePaperAuthors(Long paperId, Set<Author> authors){
+        Paper paper = (Paper) paperRepository.findOne(paperId);
+        List<Author> authorList = authorRepository.findAll(authors.stream().map(author -> author.getId()).collect(Collectors.toSet()));
+        authorList.forEach(author -> paper.addAuthor(author));
         return paper;
     }
 

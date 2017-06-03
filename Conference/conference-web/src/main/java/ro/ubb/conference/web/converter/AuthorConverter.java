@@ -17,18 +17,18 @@ public class AuthorConverter extends BaseConverter<Author, AuthorDto> {
 
     @Override
     public AuthorDto convertModelToDto(Author client){
-        AuthorDto clientDto=AuthorDto.builder()
+        AuthorDto authorDto = AuthorDto.builder()
                 .usern(client.getUsern())
                 .name(client.getName())
                 .password(client.getPassword())
                 .email(client.getEmail())
                 .affiliation(client.getAffiliation())
                 .build();
-        clientDto.setId(client.getId());
-        clientDto.setPapers(client.getPapers().stream()
-                .map(b->b.getId()).collect(Collectors.toSet())
+        authorDto.setId(client.getId());
+        authorDto.setPapers(client.getPapers().stream()
+                .map(b->b.getTitle()).collect(Collectors.toSet())
         );
-        return clientDto;
+        return authorDto;
 
     }
 }

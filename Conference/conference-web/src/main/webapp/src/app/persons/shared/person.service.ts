@@ -1,5 +1,5 @@
 
-import {Injectable} from '@angular/core';
+import {Inject, Injectable, Optional} from '@angular/core';
 import {Http, Response, Headers} from "@angular/http";
 
 import {Observable} from "rxjs";
@@ -11,14 +11,17 @@ import {Person} from "./person.model";
 
 @Injectable()
 export class PersonService {
-  private personsUrl = 'http://localhost:8080/api/persons';
+  private personsUrl = 'http://localhost:8080/api';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) {
   }
 
-  getPersons(): Observable<Person[]> {
-    return this.http.get(this.personsUrl)
+  getPersons(urlNew: string): Observable<Person[]> {
+    console.log(this.http.get(this.personsUrl + urlNew)
+      .map(this.extractData)
+      .catch(this.handleError));
+    return this.http.get(this.personsUrl + urlNew)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -40,30 +43,43 @@ export class PersonService {
     return Observable.throw(errMsg);
   }
 
-  getPerson(id: number): Observable<Person> {
-    return this.getPersons()
+  getPerson(id: number, urlNew): Observable<Person> {
+    return this.getPersons(urlNew)
       .map(persons => persons.find(person => person.id === id));
   }
 
-  create(username: string, password: string, name: string, affiliate: string, email: string): Observable<Person> {
-    let person = {username, password, name, affiliate, email};
+  createPerson(urlNew: string, person): Observable<Person> {
+    let m = "";
+    if(urlNew.includes("person")){
+      m = JSON.stringify({"person": person});
+    }
+    else if(urlNew.includes("author")){
+      m = JSON.stringify({"author": person});
+    }
     return this.http
-      .post(this.personsUrl, JSON.stringify({"person": person}), {headers: this.headers})
+      .post(this.personsUrl + urlNew, m, {headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
 
 
-  update(person): Observable<Person> {
-    const url = `${this.personsUrl}/${person.id}`;
+  updatePerson(urlNew: string, person): Observable<Person> {
+    let m = "";
+    if(urlNew.includes("person")){
+      m = JSON.stringify({"person": person});
+    }
+    else if(urlNew.includes("author")){
+      m = JSON.stringify({"author": person});
+    }
+    const url = `${this.personsUrl+urlNew}/${person.id}`;
     return this.http
-      .put(url, JSON.stringify({"person": person}), {headers: this.headers})
+      .put(url, m, {headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  delete(id: number): Observable<void> {
-    const url = `${this.personsUrl}/${id}`;
+  deletePerson(urlNew: string, id: number): Observable<void> {
+    const url = `${this.personsUrl+ urlNew}/${id}`;
     return this.http
       .delete(url, {headers: this.headers})
       .map(() => null)

@@ -1,10 +1,15 @@
 package ro.ubb.conference.core.domain;
 
 import lombok.*;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,25 +23,30 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Getter
 @Setter
-
 public class Paper extends BaseEntity<Long> {
-
-    //title of the paper
     @Column(name = "Title", nullable = false)
     private String title;
 
-    //content of the paper
-	@Column(name = "Content", nullable = false)
-    private String content;
+    @Column(name = "AbstractText", nullable = true)
+    private String abstractText;
 
-    @OneToMany(mappedBy = "authorPaper", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Column(name = "ContentPath", nullable = false)
+    private String contentPath;
+
+	@Column(name = "Keywords", nullable = false)
+    private String keywords;
+
+	@Column(name = "Topics", nullable = false)
+    private String topics;
+
+    @OneToMany(mappedBy = "authorPaper",cascade = CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
     private Set<AuthorPaper> authors=new HashSet<>();
 
-    @OneToMany(mappedBy = "reviewerPaper", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "reviewerPaper",cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<ReviewerPaper> reviewers=new HashSet<>();
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "SessionId", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "SessionId")
     private Session paperSession;
 
     public Session getSession() {
@@ -63,30 +73,56 @@ public class Paper extends BaseEntity<Long> {
     }
 
     public Set<Author> getAuthors(){
-        return Collections.unmodifiableSet(authors.stream().map(AuthorPaper::getAuthor).collect(Collectors.toSet()));
+        Set<Author> a = authors.stream().map(AuthorPaper::getAuthor).collect(Collectors.toSet());
+        return authors.stream().map(AuthorPaper::getAuthor).collect(Collectors.toSet());
+    }
+
+    public void setAuthor(Author author){
+        for (AuthorPaper ap: authors) {
+            if(Objects.equals(ap.getAuthor().getId(), author.getId())){
+                authors.remove(ap);
+                this.addAuthor(author);
+                break;
+            }
+        }
     }
 
     public void addAuthor(Author author){
-        AuthorPaper authorPaper=new AuthorPaper();
-        authorPaper.setAuthorPaper(this);
-        authorPaper.setAuthor(author);
-        authors.add(authorPaper);
+        boolean isAdded = false;
+        for(AuthorPaper authorPaper: authors){
+            if(authorPaper.getAuthor().getId().equals(author.getId())){
+                isAdded = true;
+                break;
+            }
+        }
+        if(!isAdded) {
+            AuthorPaper authorPaper=new AuthorPaper();
+            authorPaper.setAuthorPaper(this);
+            authorPaper.setAuthor(author);
+            authors.add(authorPaper);
+        }
     }
 
     public void addAuthors(Set<Author> authors){
         authors.forEach(this::addAuthor);
     }
 
-    public Paper(String title, String content){
-        this.title=title;
-        this.content=content;
+    public void setAuthors(Set<Author> authors) { authors.forEach(this::setAuthor);}
+
+    public Paper(String title, String abstractText, String contentPath, String keywords, String topics){
+        this.title = title;
+        this.abstractText = abstractText;
+        this.contentPath = contentPath;
+        this.keywords = keywords;
+        this.topics = topics;
+        this.authors = new HashSet<>();
     }
 
     @Override
     public String toString() {
         return "Paper{" +
                 "title='" + title + '\'' +
-                ", content=" + content +
+                ", contentPath=" + contentPath +
                 "} " + super.toString();
     }
 
@@ -98,13 +134,13 @@ public class Paper extends BaseEntity<Long> {
         Paper paper = (Paper) o;
 
         if (title != null ? !title.equals(paper.title) : paper.title != null) return false;
-        return (content != null ? !content.equals(paper.content) : paper.content != null);
+        return (contentPath != null ? !contentPath.equals(paper.contentPath) : paper.contentPath != null);
     }
 
     @Override
     public int hashCode() {
         int result = title != null ? title.hashCode() : 0;
-        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (contentPath != null ? contentPath.hashCode() : 0);
         return result;
     }
 }

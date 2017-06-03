@@ -2,6 +2,7 @@ package ro.ubb.conference.core.service;
 
 import ro.ubb.conference.core.domain.Author;
 import ro.ubb.conference.core.domain.Listener;
+import ro.ubb.conference.core.domain.Paper;
 
 import java.util.List;
 import java.util.Set;
@@ -17,7 +18,11 @@ public interface AuthorService {
 
     Author findAuthor(Long authorId);
 
-    Author updateAuthor(Long personId, String password, String name, String affiliation, String email, Set<Long> papers);
+    Set<Author> findAllAuthorsByUsernames(Set<String> authorsUsername);
+
+    Author updateAuthor(Long personId, String password, String name, String affiliation, String email, Set<Paper> papers);
+
+    Author updateAuthorPapers(Long authorId, Set<Paper> papers);
 
     Author createAuthor(String user, String password, String name, String affiliation, String email);
 

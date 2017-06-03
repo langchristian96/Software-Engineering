@@ -1,5 +1,6 @@
 package ro.ubb.conference.core.service;
 import org.springframework.stereotype.Service;
+import ro.ubb.conference.core.domain.Author;
 import ro.ubb.conference.core.domain.Paper;
 import ro.ubb.conference.core.domain.Session;
 
@@ -16,9 +17,13 @@ public interface PaperService {
 
     Set<Paper> findAll(Set<Long> papers);
 
-    Paper updatePaper(Long paperId, String title, String content, Set<Long> authors, Set<Long> reviewers, Session sessionId );
+    Set<Paper> findAllPapersByTitle(Set<String> papersTitle);
 
-    Paper createPaper(String title, String content);
+    Paper updatePaper(Long paperId, String title, String abstractText, String contentPath, String keywords, String topics, Set<Author> authors/*, Set<Long> reviewers*/, Session sessionId);
+
+    Paper createPaper(String title, String abstractText, String contentPath, String keywords, String topics);
+
+    Paper updatePaperAuthors(Long paperId, Set<Author> authors);
 
     void deletePaper(Long paperId);
 }
