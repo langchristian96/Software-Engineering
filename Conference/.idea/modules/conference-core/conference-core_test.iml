@@ -3,8 +3,8 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output-test url="file://$MODULE_DIR$/../../../conference-core/build/classes/test" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../../conference-core/src/main/java/ro/ubb/conference/core/test">
-      <sourceFolder url="file://$MODULE_DIR$/../../../conference-core/src/main/java/ro/ubb/conference/core/test/java" isTestSource="true" />
+    <content url="file://$MODULE_DIR$/../../../conference-core/src/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../../conference-core/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../conference-core/src/test/resources" type="java-test-resource" />
     </content>
     <orderEntry type="inheritedJdk" />

@@ -1,0 +1,6 @@
+<dataset>
+    <paper id="11"  Title="asd" AbstractText="Asdf" ContentPath="2" Keywords="aaa" Topics="alandala"/>
+    <paper id="2"   Title="asd" AbstractText="asdf" ContentPath="2" Keywords="aa" Topics="alandala"/>
+    <paper id="3"   Title="aaaaaaaaaa" AbstractText="ferfg" ContentPath="2" Keywords="aaaa" Topics="alandala"/>
+    <paper id="4"   Title="aaaaaaaaaaaaa" AbstractText="sadf" ContentPath="2" Keywords="aaaaa" Topics="alandala"/>
+</dataset>
