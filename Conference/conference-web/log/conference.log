@@ -1,0 +1,83 @@
+2017-06-04T01:52:20,847 WARN  [main]: PageNotFound                         - No mapping found for HTTP request with URI [/update/2] in DispatcherServlet with name '' 
+2017-06-04T01:52:20,887 WARN  [main]: PageNotFound                         - No mapping found for HTTP request with URI [/delete/2] in DispatcherServlet with name '' 
+2017-06-04T01:52:21,156 TRACE [main]: PersonController                     - getPersons 
+2017-06-04T01:52:21,172 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-04T01:52:21,303 WARN  [main]: PageNotFound                         - No mapping found for HTTP request with URI [] in DispatcherServlet with name '' 
+2017-06-04T02:08:13,487 WARN  [main]: PageNotFound                         - No mapping found for HTTP request with URI [/update/2] in DispatcherServlet with name '' 
+2017-06-04T02:08:13,514 WARN  [main]: PageNotFound                         - No mapping found for HTTP request with URI [/delete/2] in DispatcherServlet with name '' 
+2017-06-04T02:08:13,541 TRACE [main]: PersonController                     - getPersons 
+2017-06-04T02:08:13,543 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-04T02:08:13,622 WARN  [main]: PageNotFound                         - No mapping found for HTTP request with URI [] in DispatcherServlet with name '' 
+2017-06-04T02:08:53,650 WARN  [main]: PageNotFound                         - No mapping found for HTTP request with URI [/update/2] in DispatcherServlet with name '' 
+2017-06-04T02:08:53,679 WARN  [main]: PageNotFound                         - No mapping found for HTTP request with URI [/delete/2] in DispatcherServlet with name '' 
+2017-06-04T02:08:53,718 TRACE [main]: PersonController                     - getPersons 
+2017-06-04T02:08:53,720 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-04T02:08:53,792 WARN  [main]: PageNotFound                         - No mapping found for HTTP request with URI [] in DispatcherServlet with name '' 
+2017-06-04T02:09:17,773 WARN  [main]: PageNotFound                         - No mapping found for HTTP request with URI [/update/2] in DispatcherServlet with name '' 
+2017-06-04T02:09:17,800 WARN  [main]: PageNotFound                         - No mapping found for HTTP request with URI [/delete/2] in DispatcherServlet with name '' 
+2017-06-04T02:09:17,825 TRACE [main]: PersonController                     - getPersons 
+2017-06-04T02:09:17,828 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-04T02:09:17,900 WARN  [main]: PageNotFound                         - No mapping found for HTTP request with URI [] in DispatcherServlet with name '' 
+2017-06-04T02:17:40,988 TRACE [main]: PersonController                     - updatePerson: personId=2, personDtoMap={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:17:40,990 TRACE [main]: PersonController                     - updatePerson: result={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:17:41,083 TRACE [main]: PersonController                     - deletePerson: personId=2 
+2017-06-04T02:17:41,083 TRACE [main]: PersonController                     - deletePerson - method end 
+2017-06-04T02:17:41,121 TRACE [main]: PersonController                     - getPersons 
+2017-06-04T02:17:41,121 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-04T02:17:41,148 TRACE [main]: PersonController                     - createPerson: personDtoMap={Person=PersonDto{user='newPerson', password='1234', name='newPerson', affiliation='newPerson', email='newPerson@newPerson.com'}BaseEntityDto(id=null)} 
+2017-06-04T02:19:52,636 TRACE [main]: PersonController                     - updatePerson: personId=2, personDtoMap={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:19:52,638 TRACE [main]: PersonController                     - updatePerson: result={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:19:52,714 TRACE [main]: PersonController                     - deletePerson: personId=2 
+2017-06-04T02:19:52,714 TRACE [main]: PersonController                     - deletePerson - method end 
+2017-06-04T02:19:52,743 TRACE [main]: PersonController                     - getPersons 
+2017-06-04T02:19:52,744 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-04T02:19:52,777 TRACE [main]: PersonController                     - createPerson: personDtoMap={Person=PersonDto{user='newPerson', password='1234', name='newPerson', affiliation='newPerson', email='newPerson@newPerson.com'}BaseEntityDto(id=null)} 
+2017-06-04T02:22:32,648 TRACE [main]: PersonController                     - updatePerson: personId=2, personDtoMap={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:22:32,650 TRACE [main]: PersonController                     - updatePerson: result={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:22:32,724 TRACE [main]: PersonController                     - deletePerson: personId=2 
+2017-06-04T02:22:32,725 TRACE [main]: PersonController                     - deletePerson - method end 
+2017-06-04T02:22:32,751 TRACE [main]: PersonController                     - getPersons 
+2017-06-04T02:22:32,751 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-04T02:22:32,783 TRACE [main]: PersonController                     - createPerson: personDtoMap={Person=PersonDto{user='newPerson', password='1234', name='newPerson', affiliation='newPerson', email='newPerson@newPerson.com'}BaseEntityDto(id=31)} 
+2017-06-04T02:23:42,046 TRACE [main]: PersonController                     - updatePerson: personId=2, personDtoMap={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:23:42,049 TRACE [main]: PersonController                     - updatePerson: result={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:23:42,121 TRACE [main]: PersonController                     - deletePerson: personId=2 
+2017-06-04T02:23:42,121 TRACE [main]: PersonController                     - deletePerson - method end 
+2017-06-04T02:23:42,146 TRACE [main]: PersonController                     - getPersons 
+2017-06-04T02:23:42,146 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-04T02:23:42,176 TRACE [main]: PersonController                     - createPerson: personDtoMap={Person=PersonDto{user='newPerson', password='1234', name='newPerson', affiliation='newPerson', email='newPerson@newPerson.com'}BaseEntityDto(id=31)} 
+2017-06-04T02:26:47,864 TRACE [main]: PersonController                     - updatePerson: personId=2, personDtoMap={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:26:47,867 TRACE [main]: PersonController                     - updatePerson: result={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:26:47,942 TRACE [main]: PersonController                     - deletePerson: personId=2 
+2017-06-04T02:26:47,942 TRACE [main]: PersonController                     - deletePerson - method end 
+2017-06-04T02:26:47,968 TRACE [main]: PersonController                     - getPersons 
+2017-06-04T02:26:47,968 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-04T02:26:47,999 TRACE [main]: PersonController                     - createPerson: personDtoMap={Person=PersonDto{user='newPerson', password='1234', name='newPerson', affiliation='newPerson', email='newPerson@newPerson.com'}BaseEntityDto(id=31)} 
+2017-06-04T02:29:04,266 TRACE [main]: PersonController                     - updatePerson: personId=2, personDtoMap={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:29:04,268 TRACE [main]: PersonController                     - updatePerson: result={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:29:04,313 TRACE [main]: PersonController                     - deletePerson: personId=2 
+2017-06-04T02:29:04,313 TRACE [main]: PersonController                     - deletePerson - method end 
+2017-06-04T02:29:04,339 TRACE [main]: PersonController                     - getPersons 
+2017-06-04T02:29:04,339 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-04T02:29:04,395 TRACE [main]: PersonController                     - createPerson: personDtoMap={Person=PersonDto{user='newPerson', password='1234', name='newPerson', affiliation='newPerson', email='newPerson@newPerson.com'}BaseEntityDto(id=31)} 
+2017-06-04T02:31:46,594 TRACE [main]: PersonController                     - updatePerson: personId=2, personDtoMap={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:31:46,597 TRACE [main]: PersonController                     - updatePerson: result={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:31:46,642 TRACE [main]: PersonController                     - deletePerson: personId=2 
+2017-06-04T02:31:46,642 TRACE [main]: PersonController                     - deletePerson - method end 
+2017-06-04T02:31:46,668 TRACE [main]: PersonController                     - getPersons 
+2017-06-04T02:31:46,668 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-04T02:31:46,725 TRACE [main]: PersonController                     - createPerson: personDtoMap={Person=PersonDto{user='newPerson', password='1234', name='newPerson', affiliation='newPerson', email='newPerson@newPerson.com'}BaseEntityDto(id=31)} 
+2017-06-04T02:32:22,017 TRACE [main]: PersonController                     - updatePerson: personId=2, personDtoMap={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:32:22,020 TRACE [main]: PersonController                     - updatePerson: result={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:32:22,099 TRACE [main]: PersonController                     - deletePerson: personId=2 
+2017-06-04T02:32:22,100 TRACE [main]: PersonController                     - deletePerson - method end 
+2017-06-04T02:32:22,128 TRACE [main]: PersonController                     - getPersons 
+2017-06-04T02:32:22,129 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-04T02:32:22,158 TRACE [main]: PersonController                     - createPerson: personDtoMap={Person=PersonDto{user='newPerson', password='1234', name='newPerson', affiliation='newPerson', email='newPerson@newPerson.com'}BaseEntityDto(id=31)} 
+2017-06-04T02:33:27,687 TRACE [main]: PersonController                     - updatePerson: personId=2, personDtoMap={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:33:27,690 TRACE [main]: PersonController                     - updatePerson: result={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-04T02:33:27,765 TRACE [main]: PersonController                     - deletePerson: personId=2 
+2017-06-04T02:33:27,765 TRACE [main]: PersonController                     - deletePerson - method end 
+2017-06-04T02:33:27,794 TRACE [main]: PersonController                     - getPersons 
+2017-06-04T02:33:27,794 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-04T02:33:27,824 TRACE [main]: PersonController                     - createPerson: personDtoMap={Person=PersonDto{user='newPerson', password='1234', name='newPerson', affiliation='newPerson', email='newPerson@newPerson.com'}BaseEntityDto(id=31)} 
