@@ -6,11 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ro.ubb.conference.core.domain.Author;
 import ro.ubb.conference.core.domain.Reviewer;
-import ro.ubb.conference.core.service.AuthorService;
 import ro.ubb.conference.core.service.ReviewerService;
-import ro.ubb.conference.web.converter.AuthorConverter;
 import ro.ubb.conference.web.converter.ReviewerConverter;
 import ro.ubb.conference.web.dto.*;
 
@@ -18,45 +15,41 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by langchristian96 on 5/18/2017.
- */
-
 @RestController
 public class ReviewerController {
 
     private static final Logger log = LoggerFactory.getLogger(ReviewerController.class);
 
     @Autowired
-    private ReviewerService personService;
+    private ReviewerService reviewerService;
 
     @Autowired
-    private ReviewerConverter personConverter;
+    private ReviewerConverter reviewerConverter;
 
     @RequestMapping(value = "/reviewers", method = RequestMethod.GET)
     @CrossOrigin(origins = "http://localhost:4200")
     public ReviewersDto getReviewers() {
         log.trace("getReviewers");
 
-        List<Reviewer> persons = personService.findAll();
+        List<Reviewer> reviewers = reviewerService.findAll();
 
-        log.trace("getReviewers: persons={}", persons);
+        log.trace("getReviewers: reviewer={}", reviewers);
 
-        return new ReviewersDto(personConverter.convertModelsToDtos(persons));
+        return new ReviewersDto(reviewerConverter.convertModelsToDtos(reviewers));
     }
 
-    @RequestMapping(value = "/reviewers/{personId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/reviewers/{reviewerId}", method = RequestMethod.PUT)
     @CrossOrigin(origins = "http://localhost:4200")
     public Map<String, ReviewerDto> updateReviewer(
-            @PathVariable final Long personId,
-            @RequestBody final Map<String, ReviewerDto> personDtoMap) {
-        log.trace("updateReviewer: personId={}, personDtoMap={}", personId, personDtoMap);
+            @PathVariable final Long reviewerId,
+            @RequestBody final Map<String, ReviewerDto> reviewerDtoMap) {
+        log.trace("updateReviewer: personId={}, reviewerDtoMap={}", reviewerId, reviewerDtoMap);
 
-        ReviewerDto personDto = personDtoMap.get("reviewer");
-        Reviewer person = personService.updateReviewer(personId,personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
+        ReviewerDto reviewerDto = reviewerDtoMap.get("reviewer");
+        Reviewer reviewer = reviewerService.updateReviewer(reviewerId, reviewerDto.getPassword(), reviewerDto.getName(), reviewerDto.getAffiliation(), reviewerDto.getEmail(), reviewerDto.getPapers());
 
         Map<String, ReviewerDto> result = new HashMap<>();
-        result.put("reviewer", personConverter.convertModelToDto(person));
+        result.put("reviewer", reviewerConverter.convertModelToDto(reviewer));
 
         log.trace("updateReviewer: result={}", result);
 
@@ -66,28 +59,26 @@ public class ReviewerController {
     @RequestMapping(value = "/reviewers", method = RequestMethod.POST)
     @CrossOrigin(origins = "http://localhost:4200")
     public Map<String, ReviewerDto> createReviewer(
-            @RequestBody final Map<String, ReviewerDto> personDtoMap) {
-        log.trace("createReviewer: personDtoMap={}", personDtoMap);
+            @RequestBody final Map<String, ReviewerDto> reviewerDtoMap) {
+        log.trace("createReviewer: reviewerDtoMap={}", reviewerDtoMap);
 
-        ReviewerDto personDto = personDtoMap.get("reviewer");
-        Reviewer person = personService.createReviewer(personDto.getUsern(),personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
+        ReviewerDto personDto = reviewerDtoMap.get("reviewer");
+        Reviewer person = reviewerService.createReviewer(personDto.getUsern(),personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
 
         Map<String, ReviewerDto> result = new HashMap<>();
-        result.put("reviewer", personConverter.convertModelToDto(person));
+        result.put("reviewer", reviewerConverter.convertModelToDto(person));
 
         log.trace("updateReviewer: result={}", result);
 
         return result;
     }
 
-    @RequestMapping(value = "/reviewers/{personId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/reviewers/{reviewerId}", method = RequestMethod.DELETE)
     @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity deleteReviewer(@PathVariable final Long personId) {
-        log.trace("deleteReviewer: personId={}", personId);
+    public ResponseEntity deleteReviewer(@PathVariable final Long reviewerId) {
+        log.trace("deleteReviewer: reviewerId={}", reviewerId);
 
-
-
-        personService.deleteReviewer(personId);
+        reviewerService.deleteReviewer(reviewerId);
 
         log.trace("deleteReviewer - method end");
 

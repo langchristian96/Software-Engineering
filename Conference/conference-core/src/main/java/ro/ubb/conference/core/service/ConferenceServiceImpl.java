@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubb.conference.core.domain.Conference;
+import ro.ubb.conference.core.domain.Session;
 import ro.ubb.conference.core.repository.ConferenceRepository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by user on 5/4/2017.
@@ -46,7 +49,7 @@ public class ConferenceServiceImpl implements ConferenceService {
 
     @Override
     @Transactional
-    public Conference updateConference(Long id, String name, int edition, String startDate, String endDate, String callDate, String papersDeadline) {
+    public Conference updateConference(Long id, String name, int edition, String startDate, String endDate, String callDate, String papersDeadline, Set<Session> sessions) {
         log.trace("updateConference: id={}, name={}, edition={}, startDate={}, endDate={}, callDate={}, papersDeadline={}, committee={}, sections={}", id, name, edition, startDate, endDate, callDate, papersDeadline);
 
         Conference conference = (Conference) conferenceRepository.findOne(id);
@@ -57,6 +60,7 @@ public class ConferenceServiceImpl implements ConferenceService {
         conference.setEndDate(endDate);
         conference.setCallDate(callDate);
         conference.setPapersDeadline(papersDeadline);
+        conference.setSessions(sessions);
 //        conference.setCommittee(commitee);
 //        conference.setSections(sections);
 
@@ -69,7 +73,7 @@ public class ConferenceServiceImpl implements ConferenceService {
     public Conference createConference(String name, int edition, String startDate, String endDate, String callDate, String papersDeadline) {
         log.trace("createConference: name={}, edition={}, startDate={}, endDate={}, callDate={}, papersDeadline={}, committee={}, sections={}");
 
-        Conference conference = new Conference(name, edition, startDate, endDate, callDate, papersDeadline);
+        Conference conference = new Conference(name, edition, startDate, endDate, callDate, papersDeadline, new HashSet<>());
         conference = (Conference) conferenceRepository.save(conference);
 
 

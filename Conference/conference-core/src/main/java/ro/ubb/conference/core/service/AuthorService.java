@@ -4,6 +4,7 @@ import ro.ubb.conference.core.domain.Author;
 import ro.ubb.conference.core.domain.Listener;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by langchristian96 on 5/18/2017.
@@ -14,7 +15,9 @@ import java.util.List;
 public interface AuthorService {
     List<Author> findAll();
 
-    Author updateAuthor(Long personId, String password, String name, String affiliation, String email);
+    Author findAuthor(Long authorId);
+
+    Author updateAuthor(Long personId, String password, String name, String affiliation, String email, Set<Long> papers);
 
     Author createAuthor(String user, String password, String name, String affiliation, String email);
 

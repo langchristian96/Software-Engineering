@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.ubb.conference.core.domain.Conference;
 import ro.ubb.conference.core.service.ConferenceService;
+import ro.ubb.conference.core.service.SessionService;
 import ro.ubb.conference.web.converter.ConferenceConverter;
 import ro.ubb.conference.web.dto.ConferenceDto;
 import ro.ubb.conference.web.dto.ConferencesDto;
@@ -27,6 +28,9 @@ public class ConferenceController {
 
     @Autowired
     private ConferenceService conferenceService;
+
+    @Autowired
+    private SessionService sessionService;
 
     @Autowired
     private ConferenceConverter conferenceConverter;
@@ -63,7 +67,7 @@ public class ConferenceController {
         log.trace("updateConference: id={}, conferenceDtoMap={}", conferenceId, conferenceDtoMap);
 
         ConferenceDto conferenceDto = conferenceDtoMap.get("conference");
-        Conference conference = conferenceService.updateConference(conferenceId, conferenceDto.getName(), conferenceDto.getEdition(), conferenceDto.getStartDate(), conferenceDto.getEndDate(), conferenceDto.getCallDate(), conferenceDto.getPapersDeadline());
+        Conference conference = conferenceService.updateConference(conferenceId, conferenceDto.getName(), conferenceDto.getEdition(), conferenceDto.getStartDate(), conferenceDto.getEndDate(), conferenceDto.getCallDate(), conferenceDto.getPapersDeadline(), sessionService.findAll(conferenceDto.getSessions()));
 
         Map<String, ConferenceDto> result = new HashMap<>();
         result.put("conference", conferenceConverter.convertModelToDto(conference));

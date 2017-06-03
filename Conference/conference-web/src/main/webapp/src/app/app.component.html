@@ -1,19 +1,65 @@
-<h1 style="text-align:center;">
-  {{title}}
-</h1>
-<nav style="text-align:center;">
-  <a class="btn btn-raised btn-primary" routerLink="/conferences" routerLinkActive="active">Conferences</a>
-  <a class="btn btn-raised btn-primary" routerLink="/sessions" routerLinkActive="active">Sessions</a>
-  <a class="btn btn-raised btn-primary" routerLink="/persons" routerLinkActive="active">Persons</a>
-  <a class="btn btn-raised btn-primary" routerLink="/papers" routerLinkActive="active">Papers</a>
-  <a class="btn btn-raised btn-primary" routerLink="/login" routerLinkActive="active">Login</a>
-</nav>
-<div class="jumbotron">
-  <div class="container">
-    <div class="col-sm-8 col-sm-offset-2">
-      <alert></alert>
-      <router-outlet></router-outlet>
-    </div>
-  </div>
+<!--<h1 style="text-align:center;">-->
+  <!--{{title}}-->
+<!--</h1>-->
+<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<div class="hdr">
+  <span> <a _ngcontent-c0="" class="btn mybtn" routerlink="/login" routerlinkactive="active" ng-reflect-router-link="/login" ng-reflect-router-link-active="active" href="/login" style="float:right">Login/Register<div class="ripple-container"></div></a> </span>
+  <span> <a _ngcontent-c0="" class="btn mybtn" routerlink="" routerlinkactive="active" ng-reflect-router-link="" ng-reflect-router-link-active="active" href="" style="float:right">Logout<div class="ripple-container"></div></a></span>
 </div>
 
+  <div class="wrapper">
+    <div class="sidebar">
+      <div class="sidebar-wrapper">
+        <div class="header-side">
+          <a class="head-home" href="/">Home<div class="ripple-container"></div></a>
+        </div>
+        <ul class="nav">
+          <!--<li class="navbtn">-->
+            <!--<a class="btn btn-inverse active" href="/">Home<div class="ripple-container"></div></a>-->
+
+          <!--</li>-->
+
+          <li class="navbtn">
+            <a _ngcontent-c0="" class="btn nav-links" routerlink="/conferences" routerlinkactive="active" ng-reflect-router-link="/conferences" ng-reflect-router-link-active="active" href="/conferences"><p>Conferences</p><div class="ripple-container"></div></a>
+          </li>
+
+          <li class="navbtn">
+            <a _ngcontent-c0="" class="btn nav-links" routerlink="/sessions" routerlinkactive="active" ng-reflect-router-link="/sessions" ng-reflect-router-link-active="active" href="/sessions"><p>Sessions</p><div class="ripple-container"></div></a>
+          </li>
+
+          <li class="navbtn">
+            <a _ngcontent-c0="" class="btn nav-links" routerlink="/persons" routerlinkactive="active" ng-reflect-router-link="/persons" ng-reflect-router-link-active="active" href="/persons"><p>Persons</p><div class="ripple-container"></div></a>
+          </li>
+
+          <li class="navbtn">
+            <a _ngcontent-c0="" class="btn nav-links" routerlink="/papers" routerlinkactive="active" ng-reflect-router-link="/papers" ng-reflect-router-link-active="active" href="/papers"><p>Papers</p></a>
+          </li>
+
+          <li class="navbtn">
+            <a _ngcontent-c0="" class="btn nav-links" routerlink="/login" routerlinkactive="active" ng-reflect-router-link="/login" ng-reflect-router-link-active="active" href="/login"><p>Login</p><div class="ripple-container"></div></a>
+          </li>
+
+          <!--<p>-->
+            <!--<button mdl-button mdl-button-type="raised" mdl-colored="accent" mdl-ripple>Button</button>-->
+          <!--</p>-->
+
+
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align:center; padding-top:58px;">
+      <div class="pagecontainer">
+          <div class="container">
+            <div class="col-sm-8 col-sm-offset-2">
+              <alert></alert>
+              <router-outlet></router-outlet>
+            </div>
+          </div>
+      </div>
+
+    </div>
+  </div>

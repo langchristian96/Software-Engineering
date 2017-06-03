@@ -42,7 +42,7 @@ export class ConferenceListComponent implements OnInit {
     this.router.navigate(['/conference/detail/', this.selectedConference.id]);
   }
 
-  delete(conference: Conference): void {
+  deleteConference(conference: Conference): void {
     this.conferenceService.delete(conference.id)
       .subscribe(() => {
         this.conferences = this.conferences.filter(c => c !== conference);
@@ -50,6 +50,10 @@ export class ConferenceListComponent implements OnInit {
           this.selectedConference = null;
         }
       });
+  }
+
+  addNewConference(): void{
+    this.router.navigate(['/conference/new']);
   }
 
 }
