@@ -1,6 +1,8 @@
 package ro.ubb.conference.core.domain;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,7 +27,7 @@ public class ReviewerPaper implements Serializable {
 
 
     @Id
-    @ManyToOne(optional=false,fetch=FetchType.EAGER)
+    @ManyToOne(optional=false, fetch=FetchType.EAGER)
     @JoinColumn(name="PaperId")
     private Paper reviewerPaper;
 }

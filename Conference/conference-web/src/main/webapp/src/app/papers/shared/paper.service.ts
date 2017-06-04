@@ -2,7 +2,7 @@
  * Created by Adriana on 5/4/2017.
  */
 import {Injectable} from '@angular/core';
-import {Http, Response, Headers} from "@angular/http";
+import {Http, Response, Headers, RequestOptions} from "@angular/http";
 
 import {Observable} from "rxjs";
 import 'rxjs/add/operator/catch';
@@ -23,6 +23,28 @@ export class PaperService {
     return this.http.get(this.papersUrl,{withCredentials: true})
       .map(this.extractData)
       .catch(this.handleError);
+  }
+
+  getPaperById(id:number): Observable<Paper[]> {
+    return this.getPapers()
+      .map(papers => papers.filter(paper => paper.sessionId === id))
+
+  }
+
+  addPaperWithFile(formData): void{
+    let headers = new Headers();
+    headers.append('Accept', 'application/json');
+    let options = new RequestOptions({withCredentials: true, headers: headers });
+    this.http.post('http://localhost:8080/api/papers/file',formData, options)
+    /*.map((res: Response) => res.json())*/
+      .catch(error => Observable.throw(error))
+      .subscribe(
+        data =>{
+          console.log(data);
+        }
+        ,
+        error => console.log(error)
+      )
   }
 
   private extractData(res: Response) {

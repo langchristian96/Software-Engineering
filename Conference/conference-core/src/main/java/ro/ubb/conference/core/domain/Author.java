@@ -1,11 +1,13 @@
 package ro.ubb.conference.core.domain;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,18 +26,34 @@ import java.util.stream.Collectors;
 @Table(name="Author")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Author extends Person {
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
     private Set<AuthorPaper> authorPapers = new HashSet<>();
 
     public Set<Paper> getPapers(){
-        return Collections.unmodifiableSet(this.authorPapers.stream().map(AuthorPaper::getAuthorPaper).collect(Collectors.toSet()));
+        return this.authorPapers.stream().map(AuthorPaper::getAuthorPaper).collect(Collectors.toSet());
     }
 
-    public void addPaper(Paper paper){
+    public void addPaper(Paper paper) {
+        boolean isAdded = false;
+        for(AuthorPaper authorPaper: authorPapers){
+            if(authorPaper.getAuthorPaper().getId().equals(paper.getId())){
+                isAdded = true;
+                break;
+            }
+        }
+        if(!isAdded) {
+            AuthorPaper authorPaper = new AuthorPaper();
+            authorPaper.setAuthorPaper(paper);
+            authorPaper.setAuthor(this);
+            authorPapers.add(authorPaper);
+        }
+    }
+
+    public void removePaper(Paper paper){
         AuthorPaper authorPaper = new AuthorPaper();
         authorPaper.setAuthorPaper(paper);
         authorPaper.setAuthor(this);
-        authorPapers.add(authorPaper);
+        authorPapers.remove(authorPaper);
     }
 
     public void addPapers(Set<Paper> papers){

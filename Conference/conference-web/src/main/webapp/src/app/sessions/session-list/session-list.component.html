@@ -13,7 +13,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let session of sessions">
+      <tr *ngFor="let session of sessions | callback:filterSession">
         <td>{{ session.id }}</td>
         <td>{{ session.date }}</td>
         <td>{{ session.conferenceId }}</td>
@@ -29,3 +29,4 @@
     <div class="ripple-container"></div>
   </a>
 </div>
+\

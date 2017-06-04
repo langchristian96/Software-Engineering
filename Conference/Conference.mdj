@@ -7203,7 +7203,7 @@
 									},
 									"edgePosition": 2,
 									"underline": false,
-									"text": "+authors",
+									"text": "+authorsUsername",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -8241,7 +8241,7 @@
 								"_parent": {
 									"$ref": "AAAAAAFbvuBsvxe1yqc="
 								},
-								"name": "authors",
+								"name": "authorsUsername",
 								"reference": {
 									"$ref": "AAAAAAFbvlUGE8e4IdI="
 								},

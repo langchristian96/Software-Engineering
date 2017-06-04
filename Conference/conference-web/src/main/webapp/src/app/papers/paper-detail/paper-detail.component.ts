@@ -20,6 +20,7 @@ import {Paper} from "../shared/paper.model";
 export class PaperDetailComponent implements OnInit {
   @Input()
   paper: Paper;
+  fileList: FileList;
 
   constructor(private paperService: PaperService,
               private route: ActivatedRoute,
@@ -32,8 +33,26 @@ export class PaperDetailComponent implements OnInit {
       .subscribe(paper => this.paper = paper);
   }
 
-  updatePaperDetail(): void {
+  updatePaperDetail(authors: string): void {
+    this.paper.authorsUsername = authors.split(', ');
     this.paperService.updatePaper(this.paper).subscribe(_ => this.cancel());
+  }
+
+  fileChange(e){
+    this.fileList = e.target.files;
+  }
+
+  addPaperWithFile(): void {
+    if (this.fileList.length > 0) {
+      let file: File = this.fileList[0];
+      let formData: FormData = new FormData();
+      formData.append('uploadFile', file, file.name);
+      formData.append('paper', new Blob([JSON.stringify(this.paper)],
+        {
+          type: "application/json"
+        }));
+      this.paperService.addPaperWithFile(formData);
+    }
   }
 
   cancel(): void {

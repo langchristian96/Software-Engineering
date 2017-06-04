@@ -21,21 +21,22 @@
     <table class="table table-striped table-hover">
       <thead>
       <tr>
-        <th style="min-width: 80px;">Id</th>
-        <th style="min-width: 80px;">Name</th>
-        <th style="min-width: 80px;">Affiliate</th>
-        <th style="min-width: 80px;">Email</th>
-        <th style="width:20px;"> </th>
-        <th style="width:20px;"> </th>
+        <th style="text-align: center;min-width: 80px;">Id</th>
+        <th style="text-align: center;min-width: 80px;">Username</th>
+        <th style="text-align: center;min-width: 80px;">Affiliation</th>
+        <th style="text-align: center;min-width: 80px;">Email</th>
+        <th style="text-align: center;width:20px;"> </th>
+        <th style="text-align: center;width:20px;"> </th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let person of persons">
         <td>{{ person.id }}</td>
-        <td>{{ person.name }}</td>
-        <td>{{ person.affiliate }}</td>
+        <td>{{ person.usern }}</td>
+        <td>{{ person.affiliation }}</td>
         <td>{{ person.email }}</td>
-        <td><a (click)="deletePerson(person)" class="btn btn-raised btn-danger">Delete</a></td>
+        <td><a (click)="editPerson(person.id)" class="btn btn-raised btn-success">Edit</a></td>
+        <td><a (click)="deletePerson(person.id)" class="btn btn-raised btn-danger">Delete</a></td>
       </tr>
       </tbody>
     </table>

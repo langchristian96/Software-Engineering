@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {Session} from "./shared/session.model";
 
 @Component({
   moduleId: module.id,
@@ -6,4 +7,5 @@ import {Component} from "@angular/core";
   templateUrl: './sessions.component.html',
   styleUrls: ['./sessions.component.css'],
 })
-export class SessionsComponent{}
+
+export class SessionsComponent {}

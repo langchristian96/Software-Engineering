@@ -1,26 +1,48 @@
 <div *ngIf="person">
-  <h2>Person {{person.usern}} details</h2>
-  <div>
-    <label>Usern: </label> {{person.usern}}
-    <input [(ngModel)]="person.usern" placeholder="usern">
-  </div>
-  <div>
-    <label>Password: </label> {{person.password}}
-    <input [(ngModel)]="person.password" placeholder="password">
-  </div>
-  <div>
-    <label>Name: </label> {{person.name}}
-    <input [(ngModel)]="person.name" placeholder="name">
-  </div>
-  <div>
-    <label>Affiliate: </label> {{person.affiliation}}
-    <input [(ngModel)]="person.affiliation" placeholder="affiliation">
-  </div>
-  <div>
-    <label>Email: </label> {{person.email}}
-    <input [(ngModel)]="person.email" placeholder="email">
-  </div>
+  <div class="container">
+    <h1>Update {{person.usern}}</h1>
 
-  <button (click)="goBack()">Back</button>
-  <button (click)="save()">Save</button>
+    <form novalidate="novalidate" class="form-horizontal" #myForm="ngForm">
+      <fieldset ngModelGroup="inputss" #inputss="ngModelGroup">
+        <div class="form-group label-floating" *ngFor="let input of inputs">
+          <label class="control-label" for="inputPerson{{input.name}}">Person {{input.name}}:</label>
+          <input class="form-control" [type]="input.type" id="inputPerson{{input.name}}" name="{{input.name}}" [ngModel]="input.value" #{{input.name}}/>
+        </div>
+      </fieldset>
+      <!--<div class="form-group label-floating">-->
+        <!--<label class="control-label" for="inputPersonId">Person id:</label>-->
+        <!--<input class="form-control" type="text" id="inputPersonId" name="id" [(ngModel)]="person.id" #id readonly/>-->
+      <!--</div>-->
+      <!--<div class="form-group label-floating">-->
+        <!--<label class="control-label" for="inputPersonUsername">Person Username:</label>-->
+        <!--<input class="form-control" type="text" id="inputPersonUsername" name="date" [(ngModel)]="person.usern" #username/>-->
+      <!--</div>-->
+      <!--<div class="form-group label-floating">-->
+        <!--<label class="control-label" for="inputPersonPassword">Person Password:</label>-->
+        <!--<input class="form-control" type="text" id="inputPersonPassword" name="password" [(ngModel)]="person.password" #password/>-->
+      <!--</div>-->
+      <!--<div class="form-group label-floating">-->
+        <!--<label class="control-label" for="inputPersonName">Person Name:</label>-->
+        <!--<input class="form-control" type="text" id="inputPersonName" name="name" [(ngModel)]="person.name" #name/>-->
+      <!--</div>-->
+      <!--<div class="form-group label-floating">-->
+        <!--<label class="control-label" for="inputPersonAffiliation">Person Affiliation:</label>-->
+        <!--<input class="form-control" type="text" id="inputPersonAffiliation" name="affiliation" [(ngModel)]="person.affiliation" #affiliation/>-->
+      <!--</div>-->
+      <!--<div class="form-group label-floating">-->
+        <!--<label class="control-label" for="inputPersonEmail">Person Email:</label>-->
+        <!--<input class="form-control" type="text" id="inputPersonEmail" name="email" [(ngModel)]="person.email" #email/>-->
+      <!--</div>-->
+      <!--<div *ngIf="author">-->
+        <!--<div class="form-group label-floating">-->
+          <!--<label class="control-label" for="inputAuthorPapers">Author Papers:</label>-->
+          <!--<input class="form-control" type="text" id="inputAuthorPapers" name="papers" [(ngModel)]="author.papers" #papers/>-->
+        <!--</div>-->
+      <!--</div>-->
+      <div class="form-group">
+        <a (click)="cancel()" class="btn btn-raised btn-danger">cancel</a>
+        <a (click)="updatePersonDetail(myForm)" class="btn btn-raised btn-info">update person</a>
+      </div>
+    </form>
+  </div>
 </div>

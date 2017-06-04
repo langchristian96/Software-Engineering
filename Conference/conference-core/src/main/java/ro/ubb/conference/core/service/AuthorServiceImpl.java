@@ -5,15 +5,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ro.ubb.conference.core.domain.Author;
-import ro.ubb.conference.core.domain.Paper;
-import ro.ubb.conference.core.domain.Person;
+import ro.ubb.conference.core.domain.*;
 import ro.ubb.conference.core.repository.AuthorRepository;
+import ro.ubb.conference.core.repository.ListenerRepository;
 import ro.ubb.conference.core.repository.PaperRepository;
 import ro.ubb.conference.core.repository.PersonRepository;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by langchristian96 on 5/18/2017.
@@ -45,6 +45,21 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    public Set<Author> findAllAuthorsByUsernames(Set<String> authorsUsername) {
+        log.trace("findAllAuthorsByUsername");
+
+        List<Author> authors = authorRepository.findAll();
+
+        Set<Author> authorSet = authors.stream()
+                        .filter(e -> authorsUsername.contains(e.getUsern()))
+                        .collect(Collectors.toSet());
+
+        log.trace("findAllAuthorsByUsername: Authors={}", authors);
+
+        return authorSet;
+    }
+
+    @Override
     public Author findAuthor(Long authorId){
         log.trace("findAuthor: AuthorId={}",authorId);
 
@@ -56,7 +71,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     @Transactional
-    public Author updateAuthor(Long personId, String password, String name, String affiliation, String email, Set<Long> papers) {
+    public Author updateAuthor(Long personId, String password, String name, String affiliation, String email, Set<Paper> papers) {
         log.trace("updateAuthor: personId={}, password={}, name={}, affiliation={}, email={}",
                 personId, password, name, affiliation, email);
 
@@ -65,17 +80,20 @@ public class AuthorServiceImpl implements AuthorService {
         person.setName(name);
         person.setAffiliation(affiliation);
         person.setEmail(email);
+//        person.getPapers().stream()
+//                .map(d->d.getId())
+//                .forEach(i->
+//                {
+//                    if(papers.contains(i)){
+//                        papers.remove(i);
+//                    }
+//                });
+        List<Paper> paperList = paperRepository.findAll(papers.stream().map(paper -> paper.getId()).collect(Collectors.toSet()));
+        paperList.forEach(paper -> person.addPaper(paper));
 
-        person.getPapers().stream()
-                .map(d->d.getId())
-                .forEach(i->
-                {
-                    if(papers.contains(i)){
-                        papers.remove(i);
-                    }
-                });
-        List<Paper> paperList=paperRepository.findAll(papers);
-        paperList.forEach(person::addPaper);
+
+//        List<Paper> paperList=paperRepository.findAll(papers);
+//        paperList.forEach(person::addPaper);
 
 
         log.trace("updateAuthor: Author={}", person);
@@ -89,19 +107,29 @@ public class AuthorServiceImpl implements AuthorService {
                 user, password, name, affiliation, email);
 
         Author person = new Author();
-        Person p=personRepository.getUserByUserName(user);
+        //Person p=personRepository.getUserByUserName(user);
         person.setUsern(user);
         person.setEmail(email);
         person.setAffiliation(affiliation);
         person.setPassword(password);
         person.setName(name);
-        person.setId(p.getId());
+        person.setUserRole(UserRole.NORMAL);
+        //person.setId(p.getId());
 
         person = (Author) authorRepository.save(person);
 
         log.trace("createAuthor: Author={}", person);
 
         return person;
+    }
+
+    @Override
+    @Transactional
+    public Author updateAuthorPapers(Long authorId, Set<Paper> papers){
+        Author author = (Author) authorRepository.findOne(authorId);
+        List<Paper> paperList = paperRepository.findAll(papers.stream().map(paper -> paper.getId()).collect(Collectors.toSet()));
+        paperList.forEach(paper -> author.addPaper(paper));
+        return author;
     }
 
     @Override

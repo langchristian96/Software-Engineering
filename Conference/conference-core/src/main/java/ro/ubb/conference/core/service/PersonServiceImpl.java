@@ -28,6 +28,17 @@ public class PersonServiceImpl implements PersonService {
     private PersonRepository personRepository;
 
     @Override
+    public Person findOne(Long personId) {
+        log.trace("findOne");
+
+        Person person = (Person) personRepository.findOne(personId);
+
+        log.trace("findOne: person={}", person);
+
+        return person;
+    }
+
+    @Override
     public List<Person> findAll() {
         log.trace("findAll");
 
@@ -78,6 +89,7 @@ public class PersonServiceImpl implements PersonService {
                 user, password, name, affiliation, email);
 
         Person person = new Person(user, password, name, affiliation, email);
+        person.setUserRole(UserRole.NORMAL);
         person = (Person) personRepository.save(person);
 
         log.trace("createPerson: person={}", person);

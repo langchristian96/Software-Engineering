@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {HttpModule, BaseRequestOptions, Headers} from '@angular/http';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {SessionEditComponent} from "./sessions/session-edit/session-edit.component";
@@ -38,6 +38,8 @@ import {GlobalApp} from "./helpers/global";
 //   });
 //   withCredentials: boolean = true;
 // }
+import {PersonNewComponent} from "./persons/person-new/person-new.component";
+import {CallbackPipe} from "./sessions/callback.pipe";
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import {GlobalApp} from "./helpers/global";
     PersonDetailComponent,
     PersonListComponent,
     PersonsComponent,
+    PersonNewComponent,
     PaperDetailComponent,
     PaperListComponent,
     PapersComponent,
@@ -59,7 +62,8 @@ import {GlobalApp} from "./helpers/global";
     ConferenceListComponent,
     LoginComponent,
     RegisterComponent,
-    AlertComponent
+    AlertComponent,
+    CallbackPipe
   ],
   imports: [
     BrowserModule,

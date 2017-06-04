@@ -14,9 +14,11 @@ export class PersonListComponent implements OnInit {
   errorMessage: string;
   persons: Person[];
   selectedPerson: Person;
+  newUrl: string;
 
   constructor(private personService: PersonService,
               private router: Router) {
+    this.newUrl = router.url
   }
 
   ngOnInit(): void {
@@ -24,33 +26,29 @@ export class PersonListComponent implements OnInit {
   }
 
   getPersons() {
-    this.personService.getPersons()
+    console.log("test");
+    console.log(this.newUrl);
+    this.personService.getPersons(this.newUrl)
       .subscribe(
-        persons => this.persons = persons,
-        error => this.errorMessage = <any>error
+        persons => this.persons = persons//,
+        //error => this.errorMessage = <any>error
       );
+    console.log(this.persons);
   }
 
   onSelect(person: Person): void {
     this.selectedPerson= person;
   }
 
-  gotoDetail(): void {
-    this.router.navigate(['/person/detail/', this.selectedPerson.id]);
+  editPerson(personId: number): void {
+    this.router.navigate([this.newUrl.substring(0, this.newUrl.length - 1) + '/detail/', personId]);
   }
 
-  deletePerson(person: Person): void {
-    console.log("Person deleted id: ",person.id);
-    this.personService.delete(person.id)
-      .subscribe(() => {
-        this.persons = this.persons.filter(c => c !== person);
-        if (this.selectedPerson === person) {
-          this.selectedPerson = null;
-        }
-      });
+  deletePerson(personId): void {
+      this.personService.deletePerson(this.newUrl, personId).subscribe(_ => this.getPersons());
   }
   addNewPerson(): void{
-    this.router.navigate(['/person/new']);
+    this.router.navigate([this.newUrl.substring(0, this.newUrl.length - 1)+'/new']);
   }
 
 }

@@ -5,6 +5,8 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Paper} from "../shared/paper.model";
 import {PaperService} from "../shared/paper.service";
 import {Location} from '@angular/common';
+import {Http, RequestOptions} from "@angular/http";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   moduleId: module.id,
@@ -13,7 +15,7 @@ import {Location} from '@angular/common';
   styleUrls: ['./paper-new.component.css']
 })
 export class PaperNewComponent  {
-  @Input() paper: Paper;
+  paper: Paper;
 
   constructor(private paperService: PaperService,
               private location: Location) {
@@ -23,9 +25,11 @@ export class PaperNewComponent  {
     this.location.back();
   };
 
-  addPaper(title, author, content): void{
-    this.paper = new Paper(title, author, content);
-    this.paperService.createPaper(this.paper).subscribe(_ => this.cancel());
+  addPaper(title, abstractText, keywords, topics, authors, sessionId): void{
+    var authorsUsername = authors.split(', ');
+    var contentPath = "mumu";
+    let paper = {title, abstractText, contentPath, keywords, topics, authorsUsername, sessionId};
+    this.paperService.createPaper(paper).subscribe(_ => this.cancel());
   }
 
   private isValid(title, author, content) {

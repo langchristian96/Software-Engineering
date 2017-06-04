@@ -7,17 +7,28 @@
       <input class="form-control" type="text" id="inputPaperTitle" name="title" #title/>
     </div>
     <div class="form-group label-floating">
-      <label class="control-label" for="inputPaperAuthor">Paper Author:</label>
-      <input class="form-control" type="text" id="inputPaperAuthor" name="author" #author/>
+      <label class="control-label" for="inputPaperAbstract">Paper Abstract:</label>
+      <input class="form-control" type="text" id="inputPaperAbstract" name="abstractText" #abstractText/>
     </div>
     <div class="form-group label-floating">
-      <label class="control-label" for="inputPaperContent">Paper Content:</label>
-      <input class="form-control" type="text" id="inputPaperContent" name="content" #content/>
+      <label class="control-label" for="inputPaperKeywords">Paper Keywords:</label>
+      <input class="form-control" type="text" id="inputPaperKeywords" name="keywords" #keywords/>
     </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputPaperTopics">Paper Topics:</label>
+      <input class="form-control" type="text" id="inputPaperTopics" name="topics" #topics/>
+    </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputPaperAuthors">Paper Author:</label>
+      <input class="form-control" type="text" id="inputPaperAuthors" name="authors" #authors/>
+    </div> <div class="form-group label-floating">
+    <label class="control-label" for="inputPaperAuthors">SessionId:</label>
+    <input class="form-control" type="text" id="inputPaperSessionId" name="sessionId" #sessionId/>
+  </div>
     <div class="form-group">
       <a (click)="cancel()" class="btn btn-raised btn-danger">cancel</a>
 
-      <a (click)="addPaper(title.value, author.value, content.value)" class="btn btn-raised btn-info">create new paper</a>
+      <a (click)="addPaper(title.value, abstractText.value, keywords.value, topics.value, authors.value, sessionId.value)" class="btn btn-raised btn-info">create new paper</a>
     </div>
   </form>
 </div>

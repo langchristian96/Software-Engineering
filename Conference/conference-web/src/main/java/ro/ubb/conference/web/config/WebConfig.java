@@ -8,6 +8,12 @@ import org.springframework.web.servlet.config.annotation.*;
 import ro.ubb.conference.web.security.CorsFilter;
 
 import javax.servlet.Filter;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 @EnableWebMvc
@@ -24,7 +30,6 @@ public class WebConfig {
                         .allowedOrigins("http://localhost:4200", "http://localhost:8080");
 
             }
-
         };
     }
 
@@ -35,5 +40,12 @@ public class WebConfig {
     }
 
 
+
+    @Bean
+    public MultipartResolver multipartResolver() {
+        org.springframework.web.multipart.commons.CommonsMultipartResolver multipartResolver = new org.springframework.web.multipart.commons.CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(1000000);
+        return multipartResolver;
+    }
 }
 

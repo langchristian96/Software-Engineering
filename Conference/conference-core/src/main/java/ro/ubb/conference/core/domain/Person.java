@@ -9,7 +9,10 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "person")
+
+@Table(name = "person",uniqueConstraints = {
+            @UniqueConstraint(columnNames = "usern")
+            })
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -63,3 +66,4 @@ public class Person extends BaseEntity<Long> {
                 '}'+super.toString();
     }
 }
+
