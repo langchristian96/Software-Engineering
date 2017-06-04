@@ -40,6 +40,7 @@ export class PersonListComponent implements OnInit {
   }
 
   deletePerson(person: Person): void {
+    console.log("Person deleted id: ",person.id);
     this.personService.delete(person.id)
       .subscribe(() => {
         this.persons = this.persons.filter(c => c !== person);
