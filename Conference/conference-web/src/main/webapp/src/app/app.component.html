@@ -6,8 +6,8 @@
 
 
 <div class="hdr">
-  <span> <a _ngcontent-c0="" class="btn mybtn" routerlink="/login" routerlinkactive="active" ng-reflect-router-link="/login" ng-reflect-router-link-active="active" href="/login" style="float:right">Login/Register<div class="ripple-container"></div></a> </span>
-  <span> <a _ngcontent-c0="" class="btn mybtn" routerlink="/login" routerlinkactive="active" ng-reflect-router-link="/login" ng-reflect-router-link-active="active" href="/login" style="float:right">Logout<div class="ripple-container"></div></a></span>
+  <span> <a *ngIf="app && !app.localStorageItem('currentUser')" _ngcontent-c0="" class="btn mybtn" routerlink="/login" routerlinkactive="active" ng-reflect-router-link="/login" ng-reflect-router-link-active="active" href="/login" style="float:right">Login/Register<div class="ripple-container"></div></a> </span>
+  <span> <a *ngIf="app && app.localStorageItem('currentUser')" _ngcontent-c0="" class="btn mybtn" routerlink="/login" routerlinkactive="active" ng-reflect-router-link="/login" ng-reflect-router-link-active="active" href="/login" style="float:right">Logout<div class="ripple-container"></div></a></span>
 </div>
 
   <div class="wrapper">
@@ -38,9 +38,7 @@
             <a _ngcontent-c0="" class="btn nav-links" routerlink="/papers" routerlinkactive="active" ng-reflect-router-link="/papers" ng-reflect-router-link-active="active" href="/papers"><p>Papers</p></a>
           </li>
 
-          <li class="navbtn">
-            <a _ngcontent-c0="" class="btn nav-links" routerlink="/login" routerlinkactive="active" ng-reflect-router-link="/login" ng-reflect-router-link-active="active" href="/login"><p>Login</p><div class="ripple-container"></div></a>
-          </li>
+
 
           <!--<p>-->
             <!--<button mdl-button mdl-button-type="raised" mdl-colored="accent" mdl-ripple>Button</button>-->

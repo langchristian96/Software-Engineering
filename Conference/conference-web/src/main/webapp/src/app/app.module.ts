@@ -30,6 +30,7 @@ import {AlertService} from "./alert/alert.service";
 import {AlertComponent} from "./alert/alert.component";
 import { AuthGuard } from './guards/index';
 import {AuthenticationService} from "./login/authentication.service";
+import {GlobalApp} from "./helpers/global";
 
 // class MyBaseRequestOptions extends BaseRequestOptions {
 //   headers: Headers = new Headers({
@@ -66,7 +67,7 @@ import {AuthenticationService} from "./login/authentication.service";
     HttpModule,
     AppRoutingModule,
   ],
-  providers: [SessionService, ConferenceService, PersonService, PaperService, AlertService, AuthGuard, AuthenticationService],
+  providers: [SessionService, ConferenceService, PersonService, PaperService, AlertService, AuthGuard, AuthenticationService, GlobalApp],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
