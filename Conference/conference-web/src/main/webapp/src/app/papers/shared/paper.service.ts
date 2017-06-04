@@ -27,6 +27,12 @@ export class PaperService {
       .catch(this.handleError);
   }
 
+  getPaperById(id:number): Observable<Paper[]> {
+    return this.getPapers()
+      .map(papers => papers.filter(paper => paper.sessionId === id))
+
+  }
+
   addPaperWithFile(formData): void{
     let headers = new Headers();
     headers.append('Accept', 'application/json');

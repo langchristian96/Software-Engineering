@@ -19,6 +19,13 @@ export class SessionService{
       .catch(this.handleError);
   }
 
+  getSessionById(id:number): Observable<Session[]> {
+    return this.getSessions()
+       .map(sessions => sessions.filter(session => session.conferenceId === id))
+      // .do( sessions => console.log(sessions));
+
+  }
+
   private extractData(response: Response){
     let body = response.json();
     return body.sessions || {};
@@ -41,6 +48,7 @@ export class SessionService{
     return this.getSessions()
       .map(sessions => sessions.find(session => session.id === id));
   }
+
 
   private extractSessionData(response:Response){
     let body=response.json();

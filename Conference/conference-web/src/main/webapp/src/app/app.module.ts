@@ -29,6 +29,7 @@ import {RegisterComponent} from "./register/register.component";
 import {AlertService} from "./alert/alert.service";
 import {AlertComponent} from "./alert/alert.component";
 import {PersonNewComponent} from "./persons/person-new/person-new.component";
+import {CallbackPipe} from "./sessions/callback.pipe";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {PersonNewComponent} from "./persons/person-new/person-new.component";
     ConferenceListComponent,
     LoginComponent,
     RegisterComponent,
-    AlertComponent
+    AlertComponent,
+    CallbackPipe
   ],
   imports: [
     BrowserModule,

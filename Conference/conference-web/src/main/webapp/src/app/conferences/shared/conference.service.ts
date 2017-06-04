@@ -10,11 +10,14 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import {Conference} from "./conference.model";
+import {SessionService} from "../../sessions/shared/session.service";
+import {Session} from "../../sessions/shared/session.model";
 
 
 @Injectable()
 export class ConferenceService {
   private conferencesUrl = 'http://localhost:8080/api/conferences';
+  // private sessionsUrl = 'http://localhost:8080/api/sessions';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) {
@@ -25,6 +28,19 @@ export class ConferenceService {
       .map(this.extractData)
       .catch(this.handleError);
   }
+
+  // getConferenceById(id:number): Observable<Conference[]> {
+  //   return this.getConferences()
+  //     .map(conferences => conferences.filter(conference => conference.id === id))
+  //     .catch(this.handleError);
+  // }
+
+  // getSessions(): Observable<Session[]> {
+  //   return this.http.get(this.sessionsUrl)
+  //     .map(this.extractData)
+  //     .catch(this.handleError);
+  // }
+  //
 
   private extractData(res: Response) {
     let body = res.json();
