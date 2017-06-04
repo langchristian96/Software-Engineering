@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubb.conference.core.domain.Author;
-import ro.ubb.conference.core.domain.Listener;
 import ro.ubb.conference.core.domain.Paper;
+import ro.ubb.conference.core.domain.Person;
 import ro.ubb.conference.core.repository.AuthorRepository;
-import ro.ubb.conference.core.repository.ListenerRepository;
 import ro.ubb.conference.core.repository.PaperRepository;
+import ro.ubb.conference.core.repository.PersonRepository;
 
 import java.util.List;
 import java.util.Set;
@@ -25,7 +25,10 @@ public class AuthorServiceImpl implements AuthorService {
     private static final Logger log = LoggerFactory.getLogger(AuthorServiceImpl.class);
 
     @Autowired
-    private AuthorRepository personRepository;
+    private AuthorRepository authorRepository;
+
+    @Autowired
+    private PersonRepository personRepository;
 
     @Autowired
     private PaperRepository paperRepository;
@@ -34,7 +37,7 @@ public class AuthorServiceImpl implements AuthorService {
     public List<Author> findAll() {
         log.trace("findAll");
 
-        List<Author> persons = personRepository.findAll();
+        List<Author> persons = authorRepository.findAll();
 
         log.trace("findAll: Authors={}", persons);
 
@@ -45,7 +48,7 @@ public class AuthorServiceImpl implements AuthorService {
     public Author findAuthor(Long authorId){
         log.trace("findAuthor: AuthorId={}",authorId);
 
-        Author client=(Author)personRepository.findOne(authorId);
+        Author client=(Author) authorRepository.findOne(authorId);
 
         log.trace("findAuthor: Author={}",client);
         return client;
@@ -57,7 +60,7 @@ public class AuthorServiceImpl implements AuthorService {
         log.trace("updateAuthor: personId={}, password={}, name={}, affiliation={}, email={}",
                 personId, password, name, affiliation, email);
 
-        Author person = (Author) personRepository.findOne(personId);
+        Author person = (Author) authorRepository.findOne(personId);
         person.setPassword(password);
         person.setName(name);
         person.setAffiliation(affiliation);
@@ -86,13 +89,15 @@ public class AuthorServiceImpl implements AuthorService {
                 user, password, name, affiliation, email);
 
         Author person = new Author();
+        Person p=personRepository.getUserByUserName(user);
         person.setUsern(user);
         person.setEmail(email);
         person.setAffiliation(affiliation);
         person.setPassword(password);
         person.setName(name);
+        person.setId(p.getId());
 
-        person = (Author) personRepository.save(person);
+        person = (Author) authorRepository.save(person);
 
         log.trace("createAuthor: Author={}", person);
 
@@ -103,7 +108,7 @@ public class AuthorServiceImpl implements AuthorService {
     public void deleteAuthor(Long personId) {
         log.trace("deleteAuthor: personId={}", personId);
 
-        personRepository.delete(personId);
+        authorRepository.delete(personId);
 
         log.trace("deleteAuthor - method end");
     }

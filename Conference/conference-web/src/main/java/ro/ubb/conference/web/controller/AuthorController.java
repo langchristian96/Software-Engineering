@@ -7,11 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.ubb.conference.core.domain.Author;
-import ro.ubb.conference.core.domain.Listener;
 import ro.ubb.conference.core.service.AuthorService;
-import ro.ubb.conference.core.service.ListenerService;
+import ro.ubb.conference.core.service.PersonService;
 import ro.ubb.conference.web.converter.AuthorConverter;
-import ro.ubb.conference.web.converter.ListenerConverter;
 import ro.ubb.conference.web.dto.*;
 
 import java.util.HashMap;
@@ -28,7 +26,10 @@ public class AuthorController {
     private static final Logger log = LoggerFactory.getLogger(AuthorController.class);
 
     @Autowired
-    private AuthorService personService;
+    private AuthorService authorService;
+
+    @Autowired
+    private PersonService  personService;
 
     @Autowired
     private AuthorConverter personConverter;
@@ -38,7 +39,7 @@ public class AuthorController {
     public AuthorsDto getAuthors() {
         log.trace("getAuthors");
 
-        List<Author> persons = personService.findAll();
+        List<Author> persons = authorService.findAll();
 
         log.trace("getAuthors: persons={}", persons);
 
@@ -53,7 +54,7 @@ public class AuthorController {
         log.trace("updateAuthor: personId={}, personDtoMap={}", personId, personDtoMap);
 
         AuthorDto personDto = personDtoMap.get("author");
-        Author person = personService.updateAuthor(personId,personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail(),personDto.getPapers());
+        Author person = authorService.updateAuthor(personId,personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail(),personDto.getPapers());
 
         Map<String, AuthorDto> result = new HashMap<>();
         result.put("author", personConverter.convertModelToDto(person));
@@ -70,7 +71,7 @@ public class AuthorController {
         log.trace("createAuthor: personDtoMap={}", personDtoMap);
 
         AuthorDto personDto = personDtoMap.get("author");
-        Author person = personService.createAuthor(personDto.getUsern(),personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
+        Author person = authorService.createAuthor(personDto.getUsern(),personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
 
         Map<String, AuthorDto> result = new HashMap<>();
         result.put("author", personConverter.convertModelToDto(person));
@@ -87,7 +88,7 @@ public class AuthorController {
 
 
 
-        personService.deleteAuthor(personId);
+        authorService.deleteAuthor(personId);
 
         log.trace("deleteAuthor - method end");
 
