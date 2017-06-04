@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import {HttpModule, BaseRequestOptions, Headers} from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {SessionEditComponent} from "./sessions/session-edit/session-edit.component";
@@ -30,6 +30,13 @@ import {AlertService} from "./alert/alert.service";
 import {AlertComponent} from "./alert/alert.component";
 import { AuthGuard } from './guards/index';
 import {AuthenticationService} from "./login/authentication.service";
+
+class MyBaseRequestOptions extends BaseRequestOptions {
+  headers: Headers = new Headers({
+    'X-Requested-With': 'XMLHttpRequest'
+  });
+  withCredentials: boolean = true;
+}
 
 @NgModule({
   declarations: [

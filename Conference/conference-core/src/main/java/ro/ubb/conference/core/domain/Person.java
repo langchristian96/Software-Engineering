@@ -39,6 +39,19 @@ public class Person extends BaseEntity<Long> {
     @Column(name="email",nullable = false)
     private String email;
 
+    public Person(String usern, String password, String name, String affiliation, String email) {
+        this.usern = usern;
+        this.password = password;
+        this.name = name;
+        this.affiliation = affiliation;
+        this.email = email;
+        this.userRole=UserRole.NORMAL;
+    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_role", nullable = false)
+    private UserRole userRole;
+
     @Override
     public String toString() {
         return "Person{" +

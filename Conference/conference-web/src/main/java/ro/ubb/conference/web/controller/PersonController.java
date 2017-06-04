@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ro.ubb.conference.core.domain.Paper;
 import ro.ubb.conference.core.domain.Person;
@@ -31,6 +32,9 @@ public class PersonController {
     private static final Logger log = LoggerFactory.getLogger(PersonController.class);
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private PersonService personService;
 
     @Autowired
@@ -38,6 +42,7 @@ public class PersonController {
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
     @CrossOrigin(origins = "http://localhost:4200")
+
     public PersonsDto getPersons() {
         log.trace("getPersons");
 
@@ -67,15 +72,36 @@ public class PersonController {
         return result;
     }
 
+
+    @RequestMapping(value = "/getPersonId/{personUsern}", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:4200")
+
+    public Map<String, Long> getPersonId(
+            @PathVariable final String personUsern) {
+
+        log.trace("getPersonId");
+
+        Person person = personService.getUserByUserName(personUsern);
+        Map<String, Long> result = new HashMap<>();
+        result.put("personId", person.getId());
+
+        log.trace("getPersonId: result={}", result);
+
+        return result;
+
+    }
+
+
+
     @RequestMapping(value = "/persons", method = RequestMethod.POST)
     @CrossOrigin(origins = "http://localhost:4200")
-    @PermitAll
+
     public Map<String, PersonDto> createPerson(
             @RequestBody final Map<String, PersonDto> personDtoMap) {
         log.trace("createPerson: personDtoMap={}", personDtoMap);
 
         PersonDto personDto = personDtoMap.get("person");
-        Person person = personService.createPerson(personDto.getUsern(),personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
+        Person person = personService.createPerson(personDto.getUsern(),passwordEncoder.encode(personDto.getPassword()),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
 
         Map<String, PersonDto> result = new HashMap<>();
         result.put("person", personConverter.convertModelToDto(person));
@@ -99,4 +125,19 @@ public class PersonController {
 
         return new ResponseEntity(new EmptyJsonResponse(), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/persons/{usern}", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:4200")
+
+    public PersonDto getPersonByUsername(@PathVariable final String usern) {
+        log.trace("getPersonByUsername");
+
+        Person person = personService.getUserByUserName(usern);
+
+        log.trace("getPersonByUsername: person={}", person);
+
+        return personConverter.convertModelToDto(person);
+    }
+
+
 }
