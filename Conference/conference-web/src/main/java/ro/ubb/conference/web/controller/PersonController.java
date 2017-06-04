@@ -89,7 +89,7 @@ public class PersonController {
         Map<String, PersonDto> result = new HashMap<>();
         result.put("person", personConverter.convertModelToDto(person));
 
-        log.trace("updatePerson: result={}", result);
+        log.trace("createPerson: result={}", result);
 
         return result;
     }
