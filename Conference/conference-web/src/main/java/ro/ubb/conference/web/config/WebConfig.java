@@ -3,10 +3,11 @@ package ro.ubb.conference.web.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.core.Ordered;
+import org.springframework.web.servlet.config.annotation.*;
+import ro.ubb.conference.web.security.CorsFilter;
+
+import javax.servlet.Filter;
 
 @Configuration
 @EnableWebMvc
@@ -18,9 +19,21 @@ public class WebConfig {
             public void addCorsMapping(CorsRegistry registry){
                 registry.addMapping("/**").allowedOrigins("*")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("*");
+                        .allowedHeaders("*")
+                        //.allowedHeaders("x-test-header", "Origin", "X-Requested-With", "Content-Type", "Accept")
+                        .allowedOrigins("http://localhost:4200", "http://localhost:8080");
+
             }
+
         };
     }
+
+    @Bean
+    public Filter someFilterRegistration() {
+
+        return new CorsFilter();
+    }
+
+
 }
 

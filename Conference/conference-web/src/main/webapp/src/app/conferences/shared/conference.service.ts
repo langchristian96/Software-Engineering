@@ -21,7 +21,7 @@ export class ConferenceService {
   }
 
   getConferences(): Observable<Conference[]> {
-    return this.http.get(this.conferencesUrl)
+    return this.http.get(this.conferencesUrl,{withCredentials: true})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -51,7 +51,7 @@ export class ConferenceService {
   create(name: string, edition: number, startDate: string, endDate: string, callDate: string, papersDeadline: string/*, committee: string, sections: string*/): Observable<Conference> {
     let conference = {name, edition, startDate, endDate, callDate, papersDeadline/*, committee, sections*/};
     return this.http
-      .post(this.conferencesUrl, JSON.stringify({"conference": conference}), {headers: this.headers})
+      .post(this.conferencesUrl, JSON.stringify({"conference": conference}), {withCredentials: true,headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -60,7 +60,7 @@ export class ConferenceService {
   update(conference): Observable<Conference> {
     const url = `${this.conferencesUrl}/${conference.id}`;
     return this.http
-      .put(url, JSON.stringify({"conference": conference}), {headers: this.headers})
+      .put(url, JSON.stringify({"conference": conference}), {withCredentials: true,headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -68,7 +68,7 @@ export class ConferenceService {
   delete(id: number): Observable<void> {
     const url = `${this.conferencesUrl}/${id}`;
     return this.http
-      .delete(url, {headers: this.headers})
+      .delete(url, {withCredentials: true,headers: this.headers})
       .map(() => null)
       .catch(this.handleError);
   }

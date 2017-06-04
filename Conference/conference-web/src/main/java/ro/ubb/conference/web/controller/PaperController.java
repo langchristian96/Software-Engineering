@@ -37,8 +37,8 @@ public class PaperController {
     @Autowired
     private PaperConverter paperConverter;
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/papers", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:4200")
     public PapersDto getPapers() {
         log.trace("getPapers");
 
@@ -49,8 +49,8 @@ public class PaperController {
         return new PapersDto(paperConverter.convertModelsToDtos(papers));
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "papers/{paperId}", method = RequestMethod.PUT)
+    @CrossOrigin(origins = "http://localhost:4200")
     public Map<String, PaperDto> updatePaper(
             @PathVariable final Long paperId,
             @RequestBody final Map<String, PaperDto> paperDtoMap) {
@@ -68,8 +68,8 @@ public class PaperController {
         return result;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/papers", method = RequestMethod.POST)
+    @CrossOrigin(origins = "http://localhost:4200")
     public Map<String, PaperDto> createPaper(
             @RequestBody final Map<String, PaperDto> paperDtoMap) {
         log.trace("createPaper: paperDtoMap={}", paperDtoMap);
@@ -86,7 +86,6 @@ public class PaperController {
         return result;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "papers/{paperId}", method = RequestMethod.DELETE)
     public ResponseEntity deletePaper(@PathVariable final Long paperId) {
         log.trace("deletePaper: paperId={}", paperId);

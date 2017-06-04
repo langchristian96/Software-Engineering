@@ -20,7 +20,7 @@ export class PaperService {
   }
 
   getPapers(): Observable<Paper[]> {
-    return this.http.get(this.papersUrl)
+    return this.http.get(this.papersUrl,{withCredentials: true})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -49,7 +49,7 @@ export class PaperService {
 
   createPaper(paper): Observable<Paper> {
     return this.http
-      .post(this.papersUrl, JSON.stringify({"paper": paper}), {headers: this.headers})
+      .post(this.papersUrl, JSON.stringify({"paper": paper}), {withCredentials: true,headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -58,7 +58,7 @@ export class PaperService {
   updatePaper(paper): Observable<Paper> {
     const url = `${this.papersUrl}/${paper.id}`;
     return this.http
-      .put(url, JSON.stringify({"paper": paper}), {headers: this.headers})
+      .put(url, JSON.stringify({"paper": paper}), {withCredentials: true,headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -66,7 +66,7 @@ export class PaperService {
   deletePaper(id: number): Observable<void> {
     const url = `${this.papersUrl}/${id}`;
     return this.http
-      .delete(url, {headers: this.headers})
+      .delete(url, {withCredentials: true,headers: this.headers})
       .map(() => null)
       .catch(this.handleError);
   }

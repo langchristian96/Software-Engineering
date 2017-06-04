@@ -34,7 +34,7 @@ public class AuthorController {
     private AuthorConverter personConverter;
 
     @RequestMapping(value = "/authors", method = RequestMethod.GET)
-    @CrossOrigin(origins = "http://localhost:4200")
+
     public AuthorsDto getAuthors() {
         log.trace("getAuthors");
 
@@ -46,7 +46,7 @@ public class AuthorController {
     }
 
     @RequestMapping(value = "/authors/{personId}", method = RequestMethod.PUT)
-    @CrossOrigin(origins = "http://localhost:4200")
+
     public Map<String, AuthorDto> updateAuthor(
             @PathVariable final Long personId,
             @RequestBody final Map<String, AuthorDto> personDtoMap) {
@@ -64,7 +64,7 @@ public class AuthorController {
     }
 
     @RequestMapping(value = "/authors", method = RequestMethod.POST)
-    @CrossOrigin(origins = "http://localhost:4200")
+
     public Map<String, AuthorDto> createAuthor(
             @RequestBody final Map<String, AuthorDto> personDtoMap) {
         log.trace("createAuthor: personDtoMap={}", personDtoMap);
@@ -81,7 +81,7 @@ public class AuthorController {
     }
 
     @RequestMapping(value = "/authors/{personId}", method = RequestMethod.DELETE)
-    @CrossOrigin(origins = "http://localhost:4200")
+
     public ResponseEntity deleteAuthor(@PathVariable final Long personId) {
         log.trace("deleteAuthor: personId={}", personId);
 
