@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import {HttpModule, BaseRequestOptions, Headers} from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {SessionEditComponent} from "./sessions/session-edit/session-edit.component";
@@ -31,12 +31,12 @@ import {AlertComponent} from "./alert/alert.component";
 import { AuthGuard } from './guards/index';
 import {AuthenticationService} from "./login/authentication.service";
 
-class MyBaseRequestOptions extends BaseRequestOptions {
-  headers: Headers = new Headers({
-    'X-Requested-With': 'XMLHttpRequest'
-  });
-  withCredentials: boolean = true;
-}
+// class MyBaseRequestOptions extends BaseRequestOptions {
+//   headers: Headers = new Headers({
+//     'X-Requested-With': 'XMLHttpRequest'
+//   });
+//   withCredentials: boolean = true;
+// }
 
 @NgModule({
   declarations: [
@@ -66,7 +66,7 @@ class MyBaseRequestOptions extends BaseRequestOptions {
     HttpModule,
     AppRoutingModule,
   ],
-  providers: [SessionService, ConferenceService, PersonService, PaperService, AlertService],
+  providers: [SessionService, ConferenceService, PersonService, PaperService, AlertService, AuthGuard, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

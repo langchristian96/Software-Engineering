@@ -77,7 +77,7 @@ public class PersonServiceImpl implements PersonService {
         log.trace("user={}, password={}, name={}, affiliation={}, email={}",
                 user, password, name, affiliation, email);
 
-        Person person = new Person(user, password, name, affiliation, email, UserRole.NORMAL);
+        Person person = new Person(user, password, name, affiliation, email);
         person = (Person) personRepository.save(person);
 
         log.trace("createPerson: person={}", person);

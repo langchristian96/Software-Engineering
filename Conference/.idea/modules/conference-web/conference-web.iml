@@ -5,8 +5,6 @@
     <content url="file://$MODULE_DIR$/../../../conference-web">
       <excludeFolder url="file://$MODULE_DIR$/../../../conference-web/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../conference-web/build" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../conference-web/src/main/webapp/dist" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../conference-web/src/main/webapp/tmp" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

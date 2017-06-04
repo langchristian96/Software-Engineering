@@ -18,6 +18,7 @@ import {PaperNewComponent} from "./papers/paper-new/paper-new.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {PersonNewComponent} from "./persons/person-new/person-new.component";
+import {AuthGuard} from "./guards/auth.guard";
 
 
 const routes: Routes = [

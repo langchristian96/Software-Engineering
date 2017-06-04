@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.ubb.conference.core.domain.Session;
+import ro.ubb.conference.core.service.PaperService;
 import ro.ubb.conference.core.service.SessionService;
 import ro.ubb.conference.web.converter.SessionConverter;
 import ro.ubb.conference.web.dto.EmptyJsonResponse;
