@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * Created by anca.
  */
-
+@Builder
 @Entity
 @Table(name = "Paper")
 @NoArgsConstructor
