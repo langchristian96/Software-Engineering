@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Created by user on 5/3/2017.
  */
-
+@Builder
 @Entity
 @Table(name = "Conference", uniqueConstraints = {
         @UniqueConstraint(columnNames = "Name")})

@@ -105,18 +105,23 @@ public class ReviewerControllerTests {
 
     @Test
     public void createReviewer() throws Exception{
-        Reviewer p=new Reviewer();
-        p.setId((long) 31);
-        ReviewerDto reviewerDto=createReviewerDto(p);
-        when(reviewerService.createReviewer(p.getUsern(),p.getPassword(),p.getName(),p.getAffiliation(),p.getEmail()))
-                .thenReturn(p);
-        when(reviewerConverter.convertModelToDto(p)).thenReturn(reviewerDto);
+        Reviewer r=new Reviewer();
+        r.setUsern("newReviewer");
+        r.setName("newReviewer");
+        r.setPassword("1234");
+        r.setEmail("name2@name2.com");
+        r.setAffiliation("affiliation2");
+        r.setId(2l);
+        ReviewerDto reviewerDto=createReviewerDto(r);
+        when(reviewerService.createReviewer(r.getUsern(),r.getPassword(),r.getName(),r.getAffiliation(),r.getEmail()))
+                .thenReturn(r);
+        when(reviewerConverter.convertModelToDto(r)).thenReturn(reviewerDto);
         Map<String,ReviewerDto> reviewerDtoMap=new HashMap<>();
         reviewerDtoMap.put("reviewer",reviewerDto);
 
         ResultActions resultActions=mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/reviewer",reviewerDto)
+                        .post("/reviewers",reviewerDto)
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(toJsonString(reviewerDtoMap)))
 
@@ -127,7 +132,7 @@ public class ReviewerControllerTests {
 
 
 
-        verify(reviewerService, times(1)).createReviewer(p.getUsern(),p.getPassword(),p.getName(),p.getAffiliation(),p.getEmail());
+        verify(reviewerService, times(1)).createReviewer(r.getUsern(),r.getPassword(),r.getName(),r.getAffiliation(),r.getEmail());
         //verifyNoMoreInteractions(reviewerService, reviewerConverter);
     }
 
@@ -152,8 +157,8 @@ public class ReviewerControllerTests {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(print())
-                .andExpect(jsonPath("$.reviewer.name", is("name1")))
-                .andExpect(jsonPath("$.reviewer.usern", is("name1")));
+                .andExpect(jsonPath("$.reviewer.name", is("name2")))
+                .andExpect(jsonPath("$.reviewer.usern", is("name2")));
 
         verify(reviewerService, times(1)).updateReviewer(reviewer1.getId()
                 ,reviewerDto1.getPassword(),reviewerDto1.getName(),reviewerDto1.getAffiliation(),reviewerDto1.getEmail(),null);
