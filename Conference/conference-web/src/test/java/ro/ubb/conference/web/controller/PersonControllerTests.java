@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -33,15 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import ro.ubb.conference.core.domain.Person;
-import ro.ubb.conference.core.service.PersonService;
-import ro.ubb.conference.web.converter.PersonConverter;
-import ro.ubb.conference.web.dto.PersonDto;
 
-
-/**
- * Created by langchristian96 on 5/30/2017.
- */
 public class PersonControllerTests {
     private MockMvc mockMvc;
 
@@ -53,6 +46,9 @@ public class PersonControllerTests {
 
     @Mock
     private PersonConverter personConverter;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
 
     private Person person1;
@@ -73,7 +69,7 @@ public class PersonControllerTests {
 
 
     @Test
-    public void getPerson() throws Exception {
+    public void getPersons() throws Exception {
         List<Person> persons = Arrays.asList(person1, person2);
         Set<PersonDto> personDtos =
                 new HashSet<>(Arrays.asList(personDto1,personDto2));
@@ -88,8 +84,6 @@ public class PersonControllerTests {
                 .andExpect(jsonPath("$.persons[0].name", anyOf(is("name1"), is("name2"))));
 
         String result = resultActions.andReturn().getResponse().getContentAsString();
-//        System.out.println(result);
-
         verify(personService, times(1)).findAll();
         verify(personConverter, times(1)).convertModelsToDtos(persons);
         verifyNoMoreInteractions(personService, personConverter);
@@ -117,28 +111,30 @@ public class PersonControllerTests {
 
     @Test
     public void createPerson() throws Exception{
-        Person p=new Person("newPerson","1234","newPerson","newPerson","newPerson@newPerson.com");
+        Person p=new Person("newPerson","1234","newPerson","nasdf","newPerson@newPerson.com");
+        p.setId((long) 31);
         PersonDto personDto=createPersonDto(p);
-        when(personService.createPerson(p.getUsern(),p.getPassword(),p.getName(),p.getAffiliation(),p.getEmail()))
+        when(personService.createPerson(p.getUsern(),passwordEncoder.encode(personDto.getPassword()),p.getName(),p.getAffiliation(),p.getEmail()))
                 .thenReturn(p);
-
+        when(personConverter.convertModelToDto(p)).thenReturn(personDto);
         Map<String,PersonDto> personDtoMap=new HashMap<>();
         personDtoMap.put("person",personDto);
 
         ResultActions resultActions=mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/person",personDto)
+                        .post("/persons",personDto)
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(toJsonString(personDtoMap)))
 
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
-                //.andExpect(jsonPath("$.person", is("")));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.person.usern", is("newPerson")))
+                .andExpect(jsonPath("$.person.name", is("newPerson")));
 
 
 
-        verify(personService, times(1)).createPerson(p.getUsern(),p.getPassword(),p.getName(),p.getAffiliation(),p.getEmail());
-        //verifyNoMoreInteractions(personService, personConverter);
+        verify(personService, times(1)).createPerson(p.getUsern(),passwordEncoder.encode(p.getPassword()),p.getName(),p.getAffiliation(),p.getEmail());
+
     }
 
     @Test
@@ -162,7 +158,8 @@ public class PersonControllerTests {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(print())
-                .andExpect(jsonPath("$.person.name", is("name1")));
+                .andExpect(jsonPath("$.person.name", is("name1")))
+                .andExpect(jsonPath("$.person.usern", is("name1")));
 
         verify(personService, times(1)).updatePerson(person1.getId()
                 ,personDto1.getPassword(),personDto1.getName(),personDto1.getAffiliation(),personDto1.getEmail());
