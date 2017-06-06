@@ -1340,3 +1340,61 @@
 2017-06-06T17:57:36,921 TRACE [main]: SessionController                    - updateSession: result={session=SessionDto{date='2017-12-12', conferenceId='null', sessionChairId=4} BaseEntityDto(id=2)} 
 2017-06-06T17:57:36,936 TRACE [main]: SessionController                    - deleteSession: sessionId=2 
 2017-06-06T17:57:36,936 TRACE [main]: SessionController                    - deleteSession - method end 
+2017-06-06T18:22:43,581 TRACE [main]: AuthorController                     - updateAuthor: personId=2, personDtoMap={author=AuthorDto{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com', papers=null}} 
+2017-06-06T18:22:43,583 TRACE [main]: AuthorController                     - updateAuthor: result={author=AuthorDto{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com', papers=null}} 
+2017-06-06T18:22:43,658 TRACE [main]: AuthorController                     - deleteAuthor: personId=2 
+2017-06-06T18:22:43,658 TRACE [main]: AuthorController                     - deleteAuthor - method end 
+2017-06-06T18:22:43,679 TRACE [main]: AuthorController                     - getAuthors 
+2017-06-06T18:22:43,679 TRACE [main]: AuthorController                     - getAuthors: persons=[Author{}Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Author{}Person{usern='name2', password='1234', name='name2', affiliation='affiliation1', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-06T18:22:43,711 TRACE [main]: AuthorController                     - createAuthor: personDtoMap={author=AuthorDto{usern='newAuthor', password='1234', name='newAuthor', affiliation='nasdf', email='newAuthor@newAuthor.com', papers=null}} 
+2017-06-06T18:22:43,712 TRACE [main]: AuthorController                     - updateAuthor: result={author=AuthorDto{usern='newAuthor', password='1234', name='newAuthor', affiliation='nasdf', email='newAuthor@newAuthor.com', papers=null}} 
+2017-06-06T18:22:43,796 TRACE [main]: ConferenceController                 - createConference: conferenceDtoMap={conference=ConferenceDto{name='newConference', edition=1, startDate='2017-20-20', endDate='2017-20-23', callDate='2017-20-20', papersDeadline='today'}BaseEntityDto(id=null)} 
+2017-06-06T18:22:43,797 TRACE [main]: ConferenceController                 - updateConference: result={conference=ConferenceDto{name='newConference', edition=1, startDate='2017-20-20', endDate='2017-20-23', callDate='2017-20-20', papersDeadline='today'}BaseEntityDto(id=null)} 
+2017-06-06T18:22:43,817 TRACE [main]: ConferenceController                 - deleteConference: id=2 
+2017-06-06T18:22:43,818 TRACE [main]: ConferenceController                 - deleteConference - method end 
+2017-06-06T18:22:43,838 TRACE [main]: ConferenceController                 - updateConference: id=2, conferenceDtoMap={conference=ConferenceDto{name='name1', edition=1, startDate='2017-20-20', endDate='2017-20-23', callDate='2017-20-20', papersDeadline='today'}BaseEntityDto(id=null)} 
+2017-06-06T18:22:43,839 TRACE [main]: ConferenceController                 - updateConference: result={conference=ConferenceDto{name='name1', edition=1, startDate='2017-20-20', endDate='2017-20-23', callDate='2017-20-20', papersDeadline='today'}BaseEntityDto(id=null)} 
+2017-06-06T18:22:43,862 TRACE [main]: ConferenceController                 - getConferences 
+2017-06-06T18:22:43,863 TRACE [main]: ConferenceController                 - getConferences: conferences=[Conference{name='name1', edition=1, startDate='2017-20-20', endDate='2017-20-23', callDate='2017-20-20', papersDeadline='today'}, Conference{name='name2', edition=1, startDate='2017-20-20', endDate='2017-20-23', callDate='2017-20-20', papersDeadline='today'}] 
+2017-06-06T18:22:43,933 TRACE [main]: ListenerController                   - updateListener: personId=2, personDtoMap={listener=ListenerDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-06T18:22:43,934 TRACE [main]: ListenerController                   - updateListener: result={listener=ListenerDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-06T18:22:43,955 TRACE [main]: ListenerController                   - createListener: personDtoMap={listener=ListenerDto{user='newListener', password='1234', name='newListener', affiliation='affiliation2', email='name2@name2.com'}BaseEntityDto(id=2)} 
+2017-06-06T18:22:43,956 TRACE [main]: ListenerController                   - updateListener: result={listener=ListenerDto{user='newListener', password='1234', name='newListener', affiliation='affiliation2', email='name2@name2.com'}BaseEntityDto(id=2)} 
+2017-06-06T18:22:43,975 TRACE [main]: ListenerController                   - getListeners 
+2017-06-06T18:22:43,975 TRACE [main]: ListenerController                   - getListeners: listeners=[Listener{}Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Listener{}Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-06T18:22:43,998 TRACE [main]: ListenerController                   - deleteListener: personId=2 
+2017-06-06T18:22:43,999 TRACE [main]: ListenerController                   - deleteListener - method end 
+2017-06-06T18:22:44,041 TRACE [main]: PaperController                      - deletePaper: paperId=2 
+2017-06-06T18:22:44,041 TRACE [main]: PaperController                      - deletePaper - method end 
+2017-06-06T18:22:44,067 TRACE [main]: PaperController                      - updatePaper: paperId=2, paperDtoMap={paper=PaperDto{title='name1', abstractText='abstractText1', contentPath='name1', keywords='keywords1', topics='topics1', authorsUsername=[a1], reviewers=null, sessionId=null}} 
+2017-06-06T18:22:44,068 TRACE [main]: PaperController                      - updatePaper: result={paper=PaperDto{title='name1', abstractText='abstractText1', contentPath='name1', keywords='keywords1', topics='topics1', authorsUsername=[a1], reviewers=null, sessionId=null}} 
+2017-06-06T18:22:44,090 TRACE [main]: PaperController                      - createPaper: paperDtoMap={paper=PaperDto{title='newPaper', abstractText='1234', contentPath='newPaper', keywords='keywors', topics='topic1', authorsUsername=[a1], reviewers=null, sessionId=null}} 
+2017-06-06T18:22:44,091 TRACE [main]: PaperController                      - updatePaper: result={paper=PaperDto{title='newPaper', abstractText='1234', contentPath='newPaper', keywords='keywors', topics='topic1', authorsUsername=[a1], reviewers=null, sessionId=null}} 
+2017-06-06T18:22:44,110 TRACE [main]: PaperController                      - getPapers 
+2017-06-06T18:22:44,110 TRACE [main]: PaperController                      - getPapers: papers=[Paper{title='name1', contentPath=name1} BaseEntity{id=2}, Paper{title='name2', contentPath=name2} BaseEntity{id=3}] 
+2017-06-06T18:22:44,171 TRACE [main]: PersonController                     - updatePerson: personId=2, personDtoMap={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-06T18:22:44,171 TRACE [main]: PersonController                     - updatePerson: result={person=PersonDto{user='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntityDto(id=2)} 
+2017-06-06T18:22:44,198 TRACE [main]: PersonController                     - deletePerson: personId=2 
+2017-06-06T18:22:44,198 TRACE [main]: PersonController                     - deletePerson - method end 
+2017-06-06T18:22:44,214 TRACE [main]: PersonController                     - getPersons 
+2017-06-06T18:22:44,214 TRACE [main]: PersonController                     - getPersons: persons=[Person{usern='name1', password='1234', name='name1', affiliation='affiliation1', email='name1@name1.com'}BaseEntity{id=2}, Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-06T18:22:44,232 TRACE [main]: PersonController                     - createPerson: personDtoMap={person=PersonDto{user='newPerson', password='1234', name='newPerson', affiliation='nasdf', email='newPerson@newPerson.com'}BaseEntityDto(id=31)} 
+2017-06-06T18:22:44,233 TRACE [main]: PersonController                     - createPerson: result={person=PersonDto{user='newPerson', password='1234', name='newPerson', affiliation='nasdf', email='newPerson@newPerson.com'}BaseEntityDto(id=31)} 
+2017-06-06T18:22:44,278 TRACE [main]: ReviewerController                   - getReviewers 
+2017-06-06T18:22:44,278 TRACE [main]: ReviewerController                   - getReviewers: reviewer=[Reviewer{}Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=2}, Reviewer{}Person{usern='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntity{id=3}] 
+2017-06-06T18:22:44,296 TRACE [main]: ReviewerController                   - updateReviewer: personId=2, reviewerDtoMap={reviewer=ReviewerDto{user='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntityDto(id=2)} 
+2017-06-06T18:22:44,296 TRACE [main]: ReviewerController                   - updateReviewer: result={reviewer=ReviewerDto{user='name2', password='1234', name='name2', affiliation='affiliation2', email='name2@name2.com'}BaseEntityDto(id=2)} 
+2017-06-06T18:22:44,315 TRACE [main]: ReviewerController                   - createReviewer: reviewerDtoMap={reviewer=ReviewerDto{user='newReviewer', password='1234', name='newReviewer', affiliation='affiliation2', email='name2@name2.com'}BaseEntityDto(id=2)} 
+2017-06-06T18:22:44,315 TRACE [main]: ReviewerController                   - updateReviewer: result={reviewer=ReviewerDto{user='newReviewer', password='1234', name='newReviewer', affiliation='affiliation2', email='name2@name2.com'}BaseEntityDto(id=2)} 
+2017-06-06T18:22:44,333 TRACE [main]: ReviewerController                   - deleteReviewer: reviewerId=2 
+2017-06-06T18:22:44,333 TRACE [main]: ReviewerController                   - deleteReviewer - method end 
+2017-06-06T18:22:44,368 TRACE [main]: AuthorPaperController                - getAuthorPapers : reviewerId=1 
+2017-06-06T18:22:44,368 TRACE [main]: AuthorPaperController                - getReviewerPapers: result=ro.ubb.conference.web.dto.ReviewerPapersDto@26f96b85 
+2017-06-06T18:22:44,407 TRACE [main]: SessionController                    - getSessions 
+2017-06-06T18:22:44,407 TRACE [main]: SessionController                    - getSessions: sessions=[Session{date='2017-12-12', sessionChairId=4}, Session{date='2017-12-13', sessionChairId=2}] 
+2017-06-06T18:22:44,422 TRACE [main]: SessionController                    - createSession: sessionDtoMap={session=SessionDto{date='2017-12-15', conferenceId='null', sessionChairId=4} BaseEntityDto(id=31)} 
+2017-06-06T18:22:44,422 TRACE [main]: SessionController                    - updateSession: result={session=SessionDto{date='2017-12-15', conferenceId='null', sessionChairId=4} BaseEntityDto(id=31)} 
+2017-06-06T18:22:44,437 TRACE [main]: SessionController                    - updateSession: sessionId=2, sessionDtoMap={session=SessionDto{date='2017-12-12', conferenceId='null', sessionChairId=4} BaseEntityDto(id=2)} 
+2017-06-06T18:22:44,437 TRACE [main]: SessionController                    - updateSession: result={session=SessionDto{date='2017-12-12', conferenceId='null', sessionChairId=4} BaseEntityDto(id=2)} 
+2017-06-06T18:22:44,452 TRACE [main]: SessionController                    - deleteSession: sessionId=2 
+2017-06-06T18:22:44,452 TRACE [main]: SessionController                    - deleteSession - method end 
