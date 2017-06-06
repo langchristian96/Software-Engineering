@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -33,11 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import ro.ubb.conference.core.domain.Person;
-import ro.ubb.conference.core.service.PersonService;
-import ro.ubb.conference.web.converter.PersonConverter;
-import ro.ubb.conference.web.dto.PersonDto;
-
 
 public class PersonControllerTests {
     private MockMvc mockMvc;
@@ -50,6 +46,9 @@ public class PersonControllerTests {
 
     @Mock
     private PersonConverter personConverter;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
 
     private Person person1;
@@ -115,7 +114,7 @@ public class PersonControllerTests {
         Person p=new Person("newPerson","1234","newPerson","nasdf","newPerson@newPerson.com");
         p.setId((long) 31);
         PersonDto personDto=createPersonDto(p);
-        when(personService.createPerson(p.getUsern(),p.getPassword(),p.getName(),p.getAffiliation(),p.getEmail()))
+        when(personService.createPerson(p.getUsern(),passwordEncoder.encode(personDto.getPassword()),p.getName(),p.getAffiliation(),p.getEmail()))
                 .thenReturn(p);
         when(personConverter.convertModelToDto(p)).thenReturn(personDto);
         Map<String,PersonDto> personDtoMap=new HashMap<>();
@@ -123,7 +122,7 @@ public class PersonControllerTests {
 
         ResultActions resultActions=mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/person",personDto)
+                        .post("/persons",personDto)
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(toJsonString(personDtoMap)))
 
@@ -134,8 +133,8 @@ public class PersonControllerTests {
 
 
 
-        verify(personService, times(1)).createPerson(p.getUsern(),p.getPassword(),p.getName(),p.getAffiliation(),p.getEmail());
-        //verifyNoMoreInteractions(personService, personConverter);
+        verify(personService, times(1)).createPerson(p.getUsern(),passwordEncoder.encode(p.getPassword()),p.getName(),p.getAffiliation(),p.getEmail());
+
     }
 
     @Test

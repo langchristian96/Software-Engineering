@@ -138,7 +138,7 @@ public class PaperControllerTests {
 
 
         verify(paperService, times(1)).createPaper(p.getTitle(),p.getAbstractText(),p.getContentPath(),p.getKeywords(),p.getTopics());
-        //verifyNoMoreInteractions(paperService, paperConverter);
+
     }
 
     @Test

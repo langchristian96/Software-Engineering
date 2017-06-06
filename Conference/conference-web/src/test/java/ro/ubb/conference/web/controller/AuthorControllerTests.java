@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -49,6 +50,8 @@ public class AuthorControllerTests {
     @Mock
     private PaperService paperService;
 
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     private Author author1;
     private Author author2;
@@ -114,7 +117,7 @@ public class AuthorControllerTests {
         Author p=new Author("newAuthor","1234","newAuthor","nasdf","newAuthor@newAuthor.com");
         p.setId((long) 31);
         AuthorDto authorDto=createAuthorDto(p);
-        when(authorService.createAuthor(p.getUsern(),p.getPassword(),p.getName(),p.getAffiliation(),p.getEmail()))
+        when(authorService.createAuthor(p.getUsern(),passwordEncoder.encode(p.getPassword()),p.getName(),p.getAffiliation(),p.getEmail()))
                 .thenReturn(p);
         when(authorService.updateAuthorPapers(p.getId(), paperService.findAllPapersByTitle(authorDto.getPapers()))).thenReturn(p);
         when(authorConverter.convertModelToDto(p)).thenReturn(authorDto);
@@ -134,7 +137,7 @@ public class AuthorControllerTests {
 
 
 
-        verify(authorService, times(1)).createAuthor(p.getUsern(),p.getPassword(),p.getName(),p.getAffiliation(),p.getEmail());
+        verify(authorService, times(1)).createAuthor(p.getUsern(),passwordEncoder.encode(p.getPassword()),p.getName(),p.getAffiliation(),p.getEmail());
     }
 
     @Test
