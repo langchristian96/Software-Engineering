@@ -17,6 +17,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @EqualsAndHashCode
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person extends BaseEntity<Long> {

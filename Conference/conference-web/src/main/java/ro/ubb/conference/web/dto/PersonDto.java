@@ -1,13 +1,11 @@
 package ro.ubb.conference.web.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * Created by langchristian96 on 5/5/2017.
  */
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
