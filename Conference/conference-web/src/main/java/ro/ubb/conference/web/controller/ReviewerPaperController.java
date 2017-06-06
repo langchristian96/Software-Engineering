@@ -26,7 +26,7 @@ public class ReviewerPaperController {
     @Autowired
     private ReviewerPaperConverter reviewerPaperConverter;
 
-    @RequestMapping(value="reviewerpapers/{reviewerId}",method= RequestMethod.GET)
+    @RequestMapping(value="/reviewerpapers/{reviewerId}",method= RequestMethod.GET)
     public ReviewerPapersDto getReviewerPapers(
             @PathVariable final Long reviewerId
     ) {
