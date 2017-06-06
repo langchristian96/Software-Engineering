@@ -17,10 +17,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-/**
- * Created by langchristian96 on 5/30/2017.
- */
-
 
 @Configuration
 @EnableJpaRepositories("ro.ubb.conference.core.repository")
@@ -45,7 +41,7 @@ public class JPAConfigIT {
         return dataSource;
     }
 
-
+    @Bean
     public EntityManagerFactory entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setDatabase(Database.H2);
@@ -54,7 +50,7 @@ public class JPAConfigIT {
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("ro.ubb.conference.core.model");
+        factory.setPackagesToScan("ro.ubb.conference.core.domain");
         factory.setDataSource(dataSource());
         factory.getJpaPropertyMap().put("hibernate.generate_statistics", true);
         factory.afterPropertiesSet();

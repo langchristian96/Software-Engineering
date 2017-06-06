@@ -1,0 +1,6 @@
+<dataset>
+    <paper id="11" title="title1" abstractText="text1" contentPath="path1" keywords="keyword1"  topics="topic1"/>
+    <paper id="2" title="title2" abstractText="text2" contentPath="path2" keywords="keyword2"  topics="topic2"/>
+    <paper id="3" title="title3" abstractText="text3" contentPath="path3" keywords="keyword3"  topics="topic3"/>
+    <paper id="4" title="title4" abstractText="text4" contentPath="path4" keywords="keyword4"  topics="topic4"/>
+</dataset>
