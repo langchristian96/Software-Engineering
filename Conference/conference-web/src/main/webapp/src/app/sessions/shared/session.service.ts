@@ -14,9 +14,16 @@ export class SessionService{
   constructor(private http: Http){}
 
   getSessions(): Observable<Session[]>{
-    return this.http.get(this.sessionUrl)
+    return this.http.get(this.sessionUrl,{withCredentials: true})
       .map(this.extractData)
       .catch(this.handleError);
+  }
+
+  getSessionById(id:number): Observable<Session[]> {
+    return this.getSessions()
+       .map(sessions => sessions.filter(session => session.conferenceId === id))
+      // .do( sessions => console.log(sessions));
+
   }
 
   private extractData(response: Response){
@@ -42,6 +49,7 @@ export class SessionService{
       .map(sessions => sessions.find(session => session.id === id));
   }
 
+
   private extractSessionData(response:Response){
     let body=response.json();
     console.log("BODY OF Session DATA: ",body);
@@ -53,7 +61,7 @@ export class SessionService{
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.post(this.sessionUrl, bodyString, {headers: headers}) // ...using post request
+    return this.http.post(this.sessionUrl, bodyString, {withCredentials: true,headers: headers}) // ...using post request
       .map(this.extractSessionData) // ...and calling .json() on the response to return data
       .catch(this.handleError); //...errors if
   }
@@ -65,7 +73,7 @@ export class SessionService{
     console.log(bodyString);
     headers.append('Content-Type', 'application/json');
 
-    return this.http.put(updateUrl, bodyString, {headers: headers}) // ...using post request
+    return this.http.put(updateUrl, bodyString, {withCredentials: true,headers: headers}) // ...using post request
       .map(this.extractSessionData) // ...and calling .json() on the response to return data
       .catch(this.handleError); //...errors if
   }
@@ -76,7 +84,7 @@ export class SessionService{
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.delete(deleteUrl, {headers: headers}) // ...using post request
+    return this.http.delete(deleteUrl, {withCredentials: true,headers: headers}) // ...using post request
       .mapTo(()=>null) // ...and calling .json() on the response to return data
       .catch(this.handleError); //...errors if
   }

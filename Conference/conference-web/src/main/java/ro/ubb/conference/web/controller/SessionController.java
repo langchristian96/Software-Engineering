@@ -37,8 +37,9 @@ public class SessionController {
     @Autowired
     private SessionConverter sessionConverter;
 
-    @CrossOrigin(origins = "*")
+
     @RequestMapping(value = "/sessions", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:4200")
     public SessionsDto getSessions() {
         log.trace("getSessions");
 
@@ -80,8 +81,9 @@ public class SessionController {
         return result;
     }
 
-    @CrossOrigin(origins = "*")
+
     @RequestMapping(value = "/sessions", method = RequestMethod.POST)
+    @CrossOrigin(origins = "http://localhost:4200")
     public Map<String, SessionDto> createSession(
             @RequestBody final Map<String, SessionDto> sessionDtoMap) {
         log.trace("createSession: sessionDtoMap={}", sessionDtoMap);
@@ -98,8 +100,9 @@ public class SessionController {
         return result;
     }
 
-    @CrossOrigin(origins = "*")
+
     @RequestMapping(value = "sessions/{sessionId}", method = RequestMethod.DELETE)
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity deleteSession(@PathVariable final Long sessionId) {
         log.trace("deleteSession: sessionId={}", sessionId);
 

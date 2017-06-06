@@ -37,7 +37,7 @@ public class ListenerController {
     private ListenerConverter personConverter;
 
     @RequestMapping(value = "/listeners", method = RequestMethod.GET)
-    @CrossOrigin(origins = "http://localhost:4200")
+
     public ListenersDto getListeners() {
         log.trace("getListeners");
 
@@ -49,7 +49,7 @@ public class ListenerController {
     }
 
     @RequestMapping(value = "/listeners/{personId}", method = RequestMethod.PUT)
-    @CrossOrigin(origins = "http://localhost:4200")
+
     public Map<String, ListenerDto> updateListener(
             @PathVariable final Long personId,
             @RequestBody final Map<String, ListenerDto> personDtoMap) {
@@ -67,7 +67,7 @@ public class ListenerController {
     }
 
     @RequestMapping(value = "/listeners", method = RequestMethod.POST)
-    @CrossOrigin(origins = "http://localhost:4200")
+
     public Map<String, ListenerDto> createListener(
             @RequestBody final Map<String, ListenerDto> personDtoMap) {
         log.trace("createListener: personDtoMap={}", personDtoMap);
@@ -84,7 +84,7 @@ public class ListenerController {
     }
 
     @RequestMapping(value = "/listeners/{personId}", method = RequestMethod.DELETE)
-    @CrossOrigin(origins = "http://localhost:4200")
+
     public ResponseEntity deletePerson(@PathVariable final Long personId) {
         log.trace("deleteListener: personId={}", personId);
 

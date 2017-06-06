@@ -10,7 +10,11 @@ dependencies {
 
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "$jacksonDatabindVersion"
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: "$jacksonDatabindVersion"
-
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: '4.2.2.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.2.2.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-orm', version: '0.12.0.RELEASE'
+    compile group: 'org.springframework.hateoas', name: 'spring-hateoas', version: '0.12.0.RELEASE'
     compile group: 'javax.servlet', name: 'javax.servlet-api', version: "$javaxServeletApiVersion"
 
     testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'

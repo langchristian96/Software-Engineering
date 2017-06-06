@@ -10,6 +10,11 @@ import java.util.List;
 public interface PersonService {
     List<Person> findAll();
 
+
+    Person getUserByUserName(String userName);
+
+
+
     Person findOne(Long personId);
 
     Person updatePerson(Long personId, String password, String name, String affiliation, String email);

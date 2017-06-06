@@ -28,8 +28,18 @@ import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {AlertService} from "./alert/alert.service";
 import {AlertComponent} from "./alert/alert.component";
+import { AuthGuard } from './guards/index';
+import {AuthenticationService} from "./login/authentication.service";
+import {GlobalApp} from "./helpers/global";
+
+// class MyBaseRequestOptions extends BaseRequestOptions {
+//   headers: Headers = new Headers({
+//     'X-Requested-With': 'XMLHttpRequest'
+//   });
+//   withCredentials: boolean = true;
+// }
 import {PersonNewComponent} from "./persons/person-new/person-new.component";
-import {MdlModule} from "@angular-mdl/core";
+import {CallbackPipe} from "./sessions/callback.pipe";
 
 @NgModule({
   declarations: [
@@ -52,16 +62,16 @@ import {MdlModule} from "@angular-mdl/core";
     ConferenceListComponent,
     LoginComponent,
     RegisterComponent,
-    AlertComponent
+    AlertComponent,
+    CallbackPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    MdlModule,
   ],
-  providers: [SessionService, ConferenceService, PersonService, PaperService, AlertService],
+  providers: [SessionService, ConferenceService, PersonService, PaperService, AlertService, AuthGuard, AuthenticationService, GlobalApp],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

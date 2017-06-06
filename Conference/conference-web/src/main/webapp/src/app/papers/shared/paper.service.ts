@@ -17,20 +17,24 @@ export class PaperService {
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) {
-    // this.headers.append('Content-Type', 'multipart/form-data');
-    // this.headers.append('Accept', 'application/json');
   }
 
   getPapers(): Observable<Paper[]> {
-    return this.http.get(this.papersUrl)
+    return this.http.get(this.papersUrl,{withCredentials: true})
       .map(this.extractData)
       .catch(this.handleError);
+  }
+
+  getPaperById(id:number): Observable<Paper[]> {
+    return this.getPapers()
+      .map(papers => papers.filter(paper => paper.sessionId === id))
+
   }
 
   addPaperWithFile(formData): void{
     let headers = new Headers();
     headers.append('Accept', 'application/json');
-    let options = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({withCredentials: true, headers: headers });
     this.http.post('http://localhost:8080/api/papers/file',formData, options)
     /*.map((res: Response) => res.json())*/
       .catch(error => Observable.throw(error))
@@ -66,9 +70,8 @@ export class PaperService {
   }
 
   createPaper(paper): Observable<Paper> {
-    let json = JSON.stringify({"paper": paper});
     return this.http
-      .post(this.papersUrl, json, {headers: this.headers})
+      .post(this.papersUrl, JSON.stringify({"paper": paper}), {withCredentials: true,headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -77,7 +80,7 @@ export class PaperService {
   updatePaper(paper): Observable<Paper> {
     const url = `${this.papersUrl}/${paper.id}`;
     return this.http
-      .put(url, JSON.stringify({"paper": paper}), {headers: this.headers})
+      .put(url, JSON.stringify({"paper": paper}), {withCredentials: true,headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -85,7 +88,7 @@ export class PaperService {
   deletePaper(id: number): Observable<void> {
     const url = `${this.papersUrl}/${id}`;
     return this.http
-      .delete(url, {headers: this.headers})
+      .delete(url, {withCredentials: true,headers: this.headers})
       .map(() => null)
       .catch(this.handleError);
   }

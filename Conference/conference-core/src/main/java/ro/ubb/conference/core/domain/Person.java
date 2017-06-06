@@ -9,10 +9,12 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "Person",uniqueConstraints = {
-            @UniqueConstraint(columnNames = "Username")
+
+@Table(name = "person",uniqueConstraints = {
+            @UniqueConstraint(columnNames = "usern")
             })
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Builder
@@ -21,24 +23,24 @@ import javax.persistence.*;
 public class Person extends BaseEntity<Long> {
 
     //username
-    @Column(name = "Username", nullable = false)
+    @Column(name = "usern", nullable = false)
     private String usern;
 
     //password
-    @Column(name="Password",nullable = false)
+    @Column(name="password",nullable = false)
     private String password;
 
 
     //name
-    @Column(name="Name",nullable = false)
+    @Column(name="name",nullable = false)
     private String name;
 
     //affiliation
-    @Column(name="Affiliation",nullable=false)
+    @Column(name="affiliation",nullable=false)
     private String affiliation;
 
     //email
-    @Column(name="Email",nullable = false)
+    @Column(name="email",nullable = false)
     private String email;
 
     public Person(String usern, String password, String name, String affiliation, String email) {
@@ -47,7 +49,12 @@ public class Person extends BaseEntity<Long> {
         this.name = name;
         this.affiliation = affiliation;
         this.email = email;
+        this.userRole=UserRole.NORMAL;
     }
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_role", nullable = false)
+    private UserRole userRole;
 
     @Override
     public String toString() {

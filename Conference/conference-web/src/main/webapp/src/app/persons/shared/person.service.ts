@@ -17,15 +17,33 @@ export class PersonService {
   constructor(private http: Http) {
   }
 
+  private heads2=new Headers({'Access-Control-Allow-Origin':'http://localhost:8080'});
+
+
   getPersons(urlNew: string): Observable<Person[]> {
-    console.log(this.http.get(this.personsUrl + urlNew)
-      .map(this.extractData)
-      .catch(this.handleError));
-    return this.http.get(this.personsUrl + urlNew)
+    // console.log(this.http.get(this.personsUrl + urlNew,{withCredentials: true})
+    //   .map(this.extractData)
+    //   .catch(this.handleError));
+    console.log("Inside get persons: ",this.personsUrl + urlNew);
+    return this.http.get(this.personsUrl + urlNew,{withCredentials: true})
       .map(this.extractData)
       .catch(this.handleError);
   }
 
+  getPersonIdByUsern(usern: string): Observable<number> {
+    let personByUsernURL=`http://localhost:8080/api/getPersonId/`+usern;
+    console.log("inside getPersonIdByUsern function",personByUsernURL);
+    let tempRes=this.http.get(personByUsernURL,{withCredentials: true});
+    console.log(tempRes);
+    return tempRes
+      .map(this.extractId)
+      .catch(this.handleError);
+  }
+
+  private extractId(res: Response) {
+    let body = res.json();
+    return body.personId || {};
+  }
   private extractData(res: Response) {
     let body = res.json();
     return body.persons || {};
@@ -56,8 +74,9 @@ export class PersonService {
     else if(urlNew.includes("author")){
       m = JSON.stringify({"author": person});
     }
+    console.log("URL: ",this.personsUrl + urlNew);
     return this.http
-      .post(this.personsUrl + urlNew, m, {headers: this.headers})
+      .post(this.personsUrl + urlNew, m, {withCredentials: true,headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -73,7 +92,7 @@ export class PersonService {
     }
     const url = `${this.personsUrl+urlNew}/${person.id}`;
     return this.http
-      .put(url, m, {headers: this.headers})
+      .put(url, m, {withCredentials: true,headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -81,7 +100,7 @@ export class PersonService {
   deletePerson(urlNew: string, id: number): Observable<void> {
     const url = `${this.personsUrl+ urlNew}/${id}`;
     return this.http
-      .delete(url, {headers: this.headers})
+      .delete(url, {withCredentials: true,headers: this.headers})
       .map(() => null)
       .catch(this.handleError);
   }

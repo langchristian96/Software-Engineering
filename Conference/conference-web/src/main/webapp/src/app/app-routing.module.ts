@@ -18,26 +18,26 @@ import {PaperNewComponent} from "./papers/paper-new/paper-new.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {PersonNewComponent} from "./persons/person-new/person-new.component";
+import {AuthGuard} from "./guards/auth.guard";
 
 
 const routes: Routes = [
 
-  { path: '', redirectTo: '/', pathMatch: 'full' },
-  {path: 'sessions', component: SessionsComponent},
-  {path: 'session/edit/:id', component: SessionEditComponent},
-  {path: 'session/new', component: SessionNewComponent},
-  { path: 'conferences', component: ConferencesComponent },
-  { path: 'conference/detail/:id', component: ConferenceDetailComponent},
-  { path: 'conference/new', component: ConferenceNewComponent},
-  { path: 'persons', component: PersonsComponent },
-  { path: 'person/detail/:id', component: PersonDetailComponent},
-  { path: 'person/new', component: PersonNewComponent},
-  { path: 'authors', component: PersonsComponent },
-  { path: 'author/detail/:id', component: PersonDetailComponent},
-  { path: 'author/new', component: PersonNewComponent},
-  { path: 'papers', component: PapersComponent },
-  { path: 'paper/detail/:id', component: PaperDetailComponent},
-  { path: 'paper/new', component: PaperNewComponent},
+  { path: '', redirectTo: '/', pathMatch: 'full', canActivate: [AuthGuard] },
+  {path: 'sessions', component: SessionsComponent, canActivate: [AuthGuard]},
+  {path: 'session/edit/:id', component: SessionEditComponent, canActivate: [AuthGuard]},
+  {path: 'session/new', component: SessionNewComponent, canActivate: [AuthGuard]},
+  { path: 'conferences', component: ConferencesComponent, canActivate: [AuthGuard] },
+  { path: 'conference/detail/:id', component: ConferenceDetailComponent, canActivate: [AuthGuard]},
+  { path: 'conference/new', component: ConferenceNewComponent, canActivate: [AuthGuard]},
+  { path: 'persons', component: PersonsComponent, canActivate: [AuthGuard] },
+  { path: 'person/detail/:id', component: PersonDetailComponent, canActivate: [AuthGuard]},
+  { path: 'authors', component: PersonsComponent, canActivate: [AuthGuard] },
+  { path: 'author/detail/:id', component: PersonDetailComponent, canActivate: [AuthGuard]},
+  { path: 'author/new', component: PersonNewComponent, canActivate: [AuthGuard]},
+  { path: 'papers', component: PapersComponent, canActivate: [AuthGuard] },
+  { path: 'paper/detail/:id', component: PaperDetailComponent, canActivate: [AuthGuard]},
+  { path: 'paper/new', component: PaperNewComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   // { path: '**', redirectTo: '' }

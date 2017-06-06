@@ -8,7 +8,7 @@ import {PersonService} from "../shared/person.service";
   moduleId: module.id,
   selector: 'app-person-list',
   templateUrl: './person-list.component.html',
-  styleUrls: ['./person-list.component.css'],
+  styleUrls: ['./person-list.component.css']
 })
 export class PersonListComponent implements OnInit {
   errorMessage: string;
@@ -26,11 +26,14 @@ export class PersonListComponent implements OnInit {
   }
 
   getPersons() {
+    console.log("test");
+    console.log(this.newUrl);
     this.personService.getPersons(this.newUrl)
       .subscribe(
-        persons => this.persons = persons,
-        error => this.errorMessage = <any>error
+        persons => this.persons = persons//,
+        //error => this.errorMessage = <any>error
       );
+    console.log(this.persons);
   }
 
   onSelect(person: Person): void {

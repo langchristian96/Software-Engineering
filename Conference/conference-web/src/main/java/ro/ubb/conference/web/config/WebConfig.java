@@ -3,6 +3,11 @@ package ro.ubb.conference.web.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.web.servlet.config.annotation.*;
+import ro.ubb.conference.web.security.CorsFilter;
+
+import javax.servlet.Filter;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -20,10 +25,21 @@ public class WebConfig {
             public void addCorsMapping(CorsRegistry registry){
                 registry.addMapping("/**").allowedOrigins("*")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("*");
+                        .allowedHeaders("*")
+                        //.allowedHeaders("x-test-header", "Origin", "X-Requested-With", "Content-Type", "Accept")
+                        .allowedOrigins("http://localhost:4200", "http://localhost:8080");
+
             }
         };
     }
+
+    @Bean
+    public Filter someFilterRegistration() {
+
+        return new CorsFilter();
+    }
+
+
 
     @Bean
     public MultipartResolver multipartResolver() {

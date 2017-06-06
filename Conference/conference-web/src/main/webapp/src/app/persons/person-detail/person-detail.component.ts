@@ -40,8 +40,8 @@ export class PersonDetailComponent implements OnInit {
       ];
       let a = new Person(-1, "", "", "", "", "");
       let array = Object.getOwnPropertyNames(a);
-      for(var i = 1; i < array.length; i++){
-        this.inputs[i - 1].name = array[i];
+      for(var i = 0; i < array.length; i++){
+        this.inputs[i].name = array[i];
       }
     }
     if(this.newUrl.substring(1, this.newUrl.length - 9) == "author"){
@@ -64,6 +64,7 @@ export class PersonDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.newUrl.substring(1, this.newUrl.length - 9));
     this.route.params
       .switchMap((params: Params) => this.personService.getPerson(+params['id'], this.newUrl.substring(0, this.newUrl.length - 9) + 's'))
       .subscribe(person => {

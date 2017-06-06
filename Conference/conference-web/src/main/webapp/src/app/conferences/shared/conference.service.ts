@@ -10,21 +10,37 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import {Conference} from "./conference.model";
+import {SessionService} from "../../sessions/shared/session.service";
+import {Session} from "../../sessions/shared/session.model";
 
 
 @Injectable()
 export class ConferenceService {
   private conferencesUrl = 'http://localhost:8080/api/conferences';
+  // private sessionsUrl = 'http://localhost:8080/api/sessions';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) {
   }
 
   getConferences(): Observable<Conference[]> {
-    return this.http.get(this.conferencesUrl)
+    return this.http.get(this.conferencesUrl,{withCredentials: true})
       .map(this.extractData)
       .catch(this.handleError);
   }
+
+  // getConferenceById(id:number): Observable<Conference[]> {
+  //   return this.getConferences()
+  //     .map(conferences => conferences.filter(conference => conference.id === id))
+  //     .catch(this.handleError);
+  // }
+
+  // getSessions(): Observable<Session[]> {
+  //   return this.http.get(this.sessionsUrl)
+  //     .map(this.extractData)
+  //     .catch(this.handleError);
+  // }
+  //
 
   private extractData(res: Response) {
     let body = res.json();
@@ -51,7 +67,7 @@ export class ConferenceService {
   create(name: string, edition: number, startDate: string, endDate: string, callDate: string, papersDeadline: string/*, committee: string, sections: string*/): Observable<Conference> {
     let conference = {name, edition, startDate, endDate, callDate, papersDeadline/*, committee, sections*/};
     return this.http
-      .post(this.conferencesUrl, JSON.stringify({"conference": conference}), {headers: this.headers})
+      .post(this.conferencesUrl, JSON.stringify({"conference": conference}), {withCredentials: true,headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -60,7 +76,7 @@ export class ConferenceService {
   update(conference): Observable<Conference> {
     const url = `${this.conferencesUrl}/${conference.id}`;
     return this.http
-      .put(url, JSON.stringify({"conference": conference}), {headers: this.headers})
+      .put(url, JSON.stringify({"conference": conference}), {withCredentials: true,headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -68,7 +84,7 @@ export class ConferenceService {
   delete(id: number): Observable<void> {
     const url = `${this.conferencesUrl}/${id}`;
     return this.http
-      .delete(url, {headers: this.headers})
+      .delete(url, {withCredentials: true,headers: this.headers})
       .map(() => null)
       .catch(this.handleError);
   }

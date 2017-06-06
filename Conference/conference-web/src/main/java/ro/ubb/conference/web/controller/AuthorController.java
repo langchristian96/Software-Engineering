@@ -5,11 +5,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ro.ubb.conference.core.domain.Author;
+import ro.ubb.conference.core.domain.Listener;
+import ro.ubb.conference.core.domain.Person;
 import ro.ubb.conference.core.service.AuthorService;
+import ro.ubb.conference.core.service.ListenerService;
 import ro.ubb.conference.core.service.PaperService;
+import ro.ubb.conference.core.service.PersonService;
 import ro.ubb.conference.web.converter.AuthorConverter;
+import ro.ubb.conference.web.converter.ListenerConverter;
 import ro.ubb.conference.web.dto.*;
 
 import java.util.HashMap;
@@ -25,8 +31,15 @@ public class AuthorController {
 
     private static final Logger log = LoggerFactory.getLogger(AuthorController.class);
 
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
     private AuthorService authorService;
+
+    @Autowired
+    private PersonService personService;
 
     @Autowired
     private PaperService paperService;
@@ -37,11 +50,11 @@ public class AuthorController {
     @RequestMapping(value = "/authors", method = RequestMethod.GET)
     @CrossOrigin(origins = "http://localhost:4200")
     public AuthorsDto getAuthors() {
-        log.trace("getAuthorsUsername");
+        log.trace("getAuthors");
 
         List<Author> persons = authorService.findAll();
 
-        log.trace("getAuthorsUsername: persons={}", persons);
+        log.trace("getAuthors: persons={}", persons);
 
         return new AuthorsDto(personConverter.convertModelsToDtos(persons));
     }
@@ -53,11 +66,11 @@ public class AuthorController {
             @RequestBody final Map<String, AuthorDto> personDtoMap) {
         log.trace("updateAuthor: personId={}, personDtoMap={}", personId, personDtoMap);
 
-        AuthorDto authorDto = personDtoMap.get("author");
-        Author author = authorService.updateAuthor(personId, authorDto.getPassword(), authorDto.getName(), authorDto.getAffiliation(), authorDto.getEmail(), paperService.findAllPapersByTitle(authorDto.getPapers()));
+        AuthorDto personDto = personDtoMap.get("author");
+        Author person = authorService.updateAuthor(personId,personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail(),paperService.findAllPapersByTitle(personDto.getPapers()));
 
         Map<String, AuthorDto> result = new HashMap<>();
-        result.put("author", personConverter.convertModelToDto(author));
+        result.put("author", personConverter.convertModelToDto(person));
 
         log.trace("updateAuthor: result={}", result);
 
@@ -71,8 +84,10 @@ public class AuthorController {
         log.trace("createAuthor: personDtoMap={}", personDtoMap);
 
         AuthorDto authorDto = personDtoMap.get("author");
-        Author author = authorService.createAuthor(authorDto.getUsern(), authorDto.getPassword(), authorDto.getName(), authorDto.getAffiliation(), authorDto.getEmail());
-
+//        Person p=personService.getUserByUserName(authorDto.getUsern());
+        System.out.println("Prev test author create");
+        Author author = authorService.createAuthor(authorDto.getUsern(), passwordEncoder.encode(authorDto.getPassword()), authorDto.getName(), authorDto.getAffiliation(), authorDto.getEmail());
+        System.out.println(author);
         author = authorService.updateAuthorPapers(author.getId(), paperService.findAllPapersByTitle(authorDto.getPapers()));
 
         Map<String, AuthorDto> result = new HashMap<>();
@@ -87,6 +102,8 @@ public class AuthorController {
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity deleteAuthor(@PathVariable final Long personId) {
         log.trace("deleteAuthor: personId={}", personId);
+
+
 
         authorService.deleteAuthor(personId);
 

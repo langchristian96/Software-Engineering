@@ -5,12 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ro.ubb.conference.core.domain.Author;
-import ro.ubb.conference.core.domain.Paper;
+import ro.ubb.conference.core.domain.*;
 import ro.ubb.conference.core.repository.AuthorRepository;
+import ro.ubb.conference.core.repository.ListenerRepository;
 import ro.ubb.conference.core.repository.PaperRepository;
+import ro.ubb.conference.core.repository.PersonRepository;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -26,6 +26,9 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Autowired
     private AuthorRepository authorRepository;
+
+    @Autowired
+    private PersonRepository personRepository;
 
     @Autowired
     private PaperRepository paperRepository;
@@ -104,11 +107,14 @@ public class AuthorServiceImpl implements AuthorService {
                 user, password, name, affiliation, email);
 
         Author person = new Author();
+        //Person p=personRepository.getUserByUserName(user);
         person.setUsern(user);
         person.setEmail(email);
         person.setAffiliation(affiliation);
         person.setPassword(password);
         person.setName(name);
+        person.setUserRole(UserRole.NORMAL);
+        //person.setId(p.getId());
 
         person = (Author) authorRepository.save(person);
 

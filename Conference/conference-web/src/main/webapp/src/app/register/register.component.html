@@ -1,13 +1,13 @@
 <div class="col-md-6 col-md-offset-3">
   <h2>Register</h2>
-  <form name="form" (ngSubmit)="f.form.valid && register(username.value, password.value, name.value, affiliation.value, email.value)" #f="ngForm" novalidate>
+  <form name="form" (ngSubmit)="f.form.valid && register('/persons',username.value, password.value, name.value, affiliation.value, email.value)" #f="ngForm" novalidate>
     <div class="form-group label-floating" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
       <label for="name">Name</label>
       <input type="text" id="name" class="form-control" name="name" [(ngModel)]="person.name" #name="ngModel" required />
       <div *ngIf="f.submitted && !name.valid" class="help-block">Name is required</div>
     </div>
     <div class="form-group label-floating" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-      <label for="affiliation">Username</label>
+      <label for="affiliation">Affiliation</label>
       <input type="text" id="affiliation" class="form-control" name="affiliation" [(ngModel)]="person.affiliation" #affiliation="ngModel" required />
       <div *ngIf="f.submitted && !affiliation.valid" class="help-block">Affiliation is required</div>
     </div>

@@ -20,7 +20,9 @@ export class RegisterComponent {
 
   register(newUrl: string,username, password, name, affiliate, email) {
     this.loading = true;
-    let person = {username, password, name, affiliate, email};
+    let affiliation=affiliate;
+    let usern=username;
+    let person = {usern, password, name, affiliation, email};
     this.personService.createPerson(newUrl, person)
       .subscribe(
         data => {
