@@ -6,6 +6,7 @@ import {Person} from "../shared/person.model";
 import {PersonService} from "../shared/person.service";
 import {Author} from "../shared/author.model";
 import {forEach} from "@angular/router/src/utils/collection";
+import {Reviewer} from "../shared/reviewer.model";
 
 @Component({
   selector: 'person-edit',
@@ -24,7 +25,7 @@ export class PersonNewComponent implements OnInit{
               private location: Location,
               private router: Router){
     this.newUrl = router.url;
-    if(this.newUrl.substring(1, this.newUrl.length - 4) == "person"){
+    if(this.newUrl.includes("person")){
       this.personType = "Person";
       this.inputs = [
         { type: 'text', value: '', name: ''},
@@ -39,7 +40,8 @@ export class PersonNewComponent implements OnInit{
         this.inputs[i - 1].name = array[i];
       }
     }
-    if(this.newUrl.substring(1, this.newUrl.length - 4) == "author"){
+    // if(this.newUrl.substring(1, this.newUrl.length - 4) == "author"){
+    if(this.newUrl.includes("author")){
       this.personType = "Author";
       this.inputs = [
         { type: 'text', value: '', name: ''},
@@ -50,6 +52,22 @@ export class PersonNewComponent implements OnInit{
         { type: 'text', value: '', name: ''}
       ];
       let a = new Author(-1, "", "", "", "", "", []);
+      let array = Object.getOwnPropertyNames(a);
+      for(var i = 1; i < array.length; i++){
+        this.inputs[i - 1].name = array[i];
+      }
+    }
+    if(this.newUrl.includes("reviewer")){
+      this.personType = "Reviewer";
+      this.inputs = [
+        { type: 'text', value: '', name: ''},
+        { type: 'password', value: '', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'text', value: '', name: ''}
+      ];
+      let a = new Reviewer(-1, "", "", "", "", "", []);
       let array = Object.getOwnPropertyNames(a);
       for(var i = 1; i < array.length; i++){
         this.inputs[i - 1].name = array[i];
@@ -83,6 +101,16 @@ export class PersonNewComponent implements OnInit{
       let email = myForm.form.value.inputss.email;
       let author = {usern, password, name, affiliation, email, papers};
       this.personService.createPerson(this.newUrl.substring(0, this.newUrl.length - 4) + 's', author).subscribe(_ => this.cancel());
+    }
+    else if(this.newUrl.includes("reviewer")) {
+      let papers = myForm.form.value.inputss.papers.split(', ');
+      let usern = myForm.form.value.inputss.usern;
+      let password = myForm.form.value.inputss.password;
+      let name = myForm.form.value.inputss.name;
+      let affiliation = myForm.form.value.inputss.affiliation;
+      let email = myForm.form.value.inputss.email;
+      let reviewer = {usern, password, name, affiliation, email, papers};
+      this.personService.createPerson(this.newUrl.substring(0, this.newUrl.length - 4) + 's', reviewer).subscribe(_ => this.cancel());
     }
   }
 }

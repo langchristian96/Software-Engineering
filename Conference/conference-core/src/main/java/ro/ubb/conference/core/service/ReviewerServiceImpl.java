@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ro.ubb.conference.core.domain.Author;
 import ro.ubb.conference.core.domain.Paper;
 import ro.ubb.conference.core.domain.Reviewer;
+import ro.ubb.conference.core.domain.UserRole;
 import ro.ubb.conference.core.repository.AuthorRepository;
 import ro.ubb.conference.core.repository.PaperRepository;
 import ro.ubb.conference.core.repository.ReviewerRepository;
@@ -94,6 +95,7 @@ public class ReviewerServiceImpl implements ReviewerService {
         person.setAffiliation(affiliation);
         person.setPassword(password);
         person.setName(name);
+        person.setUserRole(UserRole.NORMAL);
 
         person = (Reviewer) personRepository.save(person);
 
