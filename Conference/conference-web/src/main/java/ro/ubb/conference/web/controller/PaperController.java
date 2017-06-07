@@ -65,7 +65,7 @@ public class PaperController {
 
         PaperDto paperDto = paperDtoMap.get("paper");
         Paper paper = paperService.updatePaper(paperId, paperDto.getTitle(),
-                paperDto.getAbstractText(), paperDto.getContentPath(), paperDto.getKeywords(), paperDto.getTopics(), authorService.findAllAuthorsByUsernames(paperDto.getAuthorsUsername()), null/*, paperDto.getReviewers(), sessionService.findOne(paperDto.getSessionId())*/);
+                paperDto.getAbstractText(), paperDto.getContentPath(), paperDto.getKeywords(), paperDto.getTopics(), authorService.findAllAuthorsByUsernames(paperDto.getAuthorsUsername()), sessionService.findOne(paperDto.getSessionId())/*, paperDto.getReviewers(), sessionService.findOne(paperDto.getSessionId())*/);
 
         Map<String, PaperDto> result = new HashMap<>();
         result.put("paper", paperConverter.convertModelToDto(paper));
