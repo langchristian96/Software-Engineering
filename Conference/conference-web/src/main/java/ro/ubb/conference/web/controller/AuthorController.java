@@ -67,7 +67,7 @@ public class AuthorController {
         log.trace("updateAuthor: personId={}, personDtoMap={}", personId, personDtoMap);
 
         AuthorDto personDto = personDtoMap.get("author");
-        Author person = authorService.updateAuthor(personId,personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail(),paperService.findAllPapersByTitle(personDto.getPapers()));
+        Author person = authorService.updateAuthor(personId,passwordEncoder.encode(personDto.getPassword()),personDto.getName(),personDto.getAffiliation(),personDto.getEmail(),paperService.findAllPapersByTitle(personDto.getPapers()));
 
         Map<String, AuthorDto> result = new HashMap<>();
         result.put("author", personConverter.convertModelToDto(person));

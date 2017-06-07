@@ -74,6 +74,10 @@ export class PersonService {
     else if(urlNew.includes("author")){
       m = JSON.stringify({"author": person});
     }
+    else if(urlNew.includes("listener")){
+      m = JSON.stringify({"listener": person});
+
+    }
     console.log("URL: ",this.personsUrl + urlNew);
     return this.http
       .post(this.personsUrl + urlNew, m, {withCredentials: true,headers: this.headers})
@@ -89,6 +93,10 @@ export class PersonService {
     }
     else if(urlNew.includes("author")){
       m = JSON.stringify({"author": person});
+    }
+    else if(urlNew.includes("listener")){
+      m = JSON.stringify({"listener": person});
+
     }
     const url = `${this.personsUrl+urlNew}/${person.id}`;
     return this.http

@@ -33,7 +33,7 @@ export class PersonListComponent implements OnInit {
         persons => this.persons = persons//,
         //error => this.errorMessage = <any>error
       );
-    console.log(this.persons);
+    console.log("Persons: ",this.persons);
   }
 
   onSelect(person: Person): void {
