@@ -15,5 +15,5 @@ import java.util.Set;
 @Getter
 @Setter
 public class ReviewersDto {
-    private Set<ReviewerDto> reviewers;
+    private Set<ReviewerDto> persons;
 }
