@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @Table(name="Reviewer")
-public class Reviewer extends Person {
+public class Reviewer extends Author {
     @OneToMany(mappedBy = "reviewer", orphanRemoval = true, fetch = FetchType.EAGER)
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<ReviewerPaper> reviewerPapers = new HashSet<>();

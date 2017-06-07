@@ -73,7 +73,7 @@ public class PersonController {
         log.trace("updatePerson: personId={}, personDtoMap={}", personId, personDtoMap);
 
         PersonDto personDto = personDtoMap.get("person");
-        Person person = personService.updatePerson(personId,personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
+        Person person = personService.updatePerson(personId,passwordEncoder.encode(personDto.getPassword()),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
 
         Map<String, PersonDto> result = new HashMap<>();
         result.put("person", personConverter.convertModelToDto(person));

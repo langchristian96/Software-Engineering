@@ -69,6 +69,8 @@ public class SessionServiceImpl implements SessionService {
         return session;
     }
 
+
+
     @Override
     @Transactional
     public Session updateSession(Long sessionId, String date, Long sessionChairId, Long conferenceId, Set<Paper> papers, Set<Long> listeners) {

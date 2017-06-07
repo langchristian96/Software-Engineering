@@ -19,5 +19,5 @@ import java.util.Set;
 @Getter
 @Setter
 public class ListenersDto {
-    private Set<ListenerDto> listeners;
+    private Set<ListenerDto> persons;
 }

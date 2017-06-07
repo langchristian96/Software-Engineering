@@ -7,6 +7,7 @@ import 'rxjs/add/operator/switchMap';
 import {PersonService} from "../shared/person.service";
 import {Person} from "../shared/person.model";
 import {Author} from "../shared/author.model";
+import {Listener} from "../shared/listener.model";
 
 
 @Component({
@@ -64,6 +65,27 @@ export class PersonDetailComponent implements OnInit {
         this.inputs[i].name = array[i];
       }
     }
+
+
+    if(crt == "listener"){
+      this.personType = "Listener";
+      this.inputs = [
+        { type: 'number', value: '-1', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'password', value: '', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'text', value: '', name: ''}
+      ];
+      let a = new Listener(-1, "", "", "", "", "", []);
+      let array = Object.getOwnPropertyNames(a);
+      for(var i = 0; i < array.length; i++){
+        this.inputs[i].name = array[i];
+      }
+    }
+
+
   }
 
   ngOnInit(): void {
@@ -79,6 +101,10 @@ export class PersonDetailComponent implements OnInit {
         else if(crt == "author"){
           var newPers =<Author> person;
           newPerson = new Author(person.id, person.usern, person.password, person.name, person.affiliation, person.email, newPers.papers)
+        }
+        else if(crt == "listener"){
+          var newPers2 =<Listener> person;
+          newPerson = new Listener(person.id, person.usern, person.password, person.name, person.affiliation, person.email, newPers2.sessions)
         }
         for (var i = 0; i < this.inputs.length; i++) {
           var str = this.inputs[i].name;
@@ -114,6 +140,17 @@ export class PersonDetailComponent implements OnInit {
       let email = myForm.form.value.inputss.email;
       let author = {id, usern, password, name, affiliation, email, papers};
       this.personService.updatePerson("/"+crt + 's', author)
+        .subscribe(_ => this.cancel());
+    } else if (this.newUrl.includes("listener")) {
+      let sessions = myForm.form.value.inputss.sessions;
+      let id = myForm.form.value.inputss.id;
+      let usern = myForm.form.value.inputss.usern;
+      let password = myForm.form.value.inputss.password;
+      let name = myForm.form.value.inputss.name;
+      let affiliation = myForm.form.value.inputss.affiliation;
+      let email = myForm.form.value.inputss.email;
+      let listener = {id, usern, password, name, affiliation, email, sessions};
+      this.personService.updatePerson("/"+crt + 's', listener)
         .subscribe(_ => this.cancel());
     }
   }

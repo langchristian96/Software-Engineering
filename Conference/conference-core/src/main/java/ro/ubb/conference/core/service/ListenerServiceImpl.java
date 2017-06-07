@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubb.conference.core.domain.Listener;
-import ro.ubb.conference.core.domain.Person;
 import ro.ubb.conference.core.domain.Session;
+import ro.ubb.conference.core.domain.UserRole;
 import ro.ubb.conference.core.repository.ListenerRepository;
-import ro.ubb.conference.core.repository.PersonRepository;
 import ro.ubb.conference.core.repository.SessionRepository;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class ListenerServiceImpl implements ListenerService {
     private static final Logger log = LoggerFactory.getLogger(ListenerServiceImpl.class);
 
     @Autowired
-    private ListenerRepository personRepository;
+    private ListenerRepository listenerRepository;
 
     @Autowired
     private SessionRepository sessionRepository;
@@ -36,7 +35,7 @@ public class ListenerServiceImpl implements ListenerService {
     public List<Listener> findAll() {
         log.trace("findAll");
 
-        List<Listener> persons = personRepository.findAll();
+        List<Listener> persons = listenerRepository.findAll();
 
         log.trace("findAll: persons={}", persons);
 
@@ -59,11 +58,12 @@ public class ListenerServiceImpl implements ListenerService {
         log.trace("updatePerson: personId={}, password={}, name={}, affiliation={}, email={}",
                 personId, password, name, affiliation, email);
 
-        Listener person = (Listener) personRepository.findOne(personId);
+        Listener person = (Listener) listenerRepository.findOne(personId);
         person.setPassword(password);
         person.setName(name);
         person.setAffiliation(affiliation);
         person.setEmail(email);
+        person.setUserRole(UserRole.NORMAL);
 
         person.getSessions().stream()
                 .map(d->d.getId())
@@ -83,17 +83,19 @@ public class ListenerServiceImpl implements ListenerService {
 
     @Override
     public Listener createListener(String user, String password, String name, String affiliation, String email) {
+
         log.trace("user={}, password={}, name={}, affiliation={}, email={}",
                 user, password, name, affiliation, email);
-
+        log.trace("test");
         Listener person = new Listener();
         person.setUsern(user);
         person.setEmail(email);
+        person.setUserRole(UserRole.NORMAL);
         person.setAffiliation(affiliation);
         person.setPassword(password);
         person.setName(name);
 
-        person = (Listener) personRepository.save(person);
+        person = (Listener) listenerRepository.save(person);
 
         log.trace("createListener: Listener={}", person);
 
@@ -104,7 +106,7 @@ public class ListenerServiceImpl implements ListenerService {
     public void deleteListener(Long personId) {
         log.trace("deleteListener: personId={}", personId);
 
-        personRepository.delete(personId);
+        listenerRepository.delete(personId);
 
         log.trace("deleteListener - method end");
     }
