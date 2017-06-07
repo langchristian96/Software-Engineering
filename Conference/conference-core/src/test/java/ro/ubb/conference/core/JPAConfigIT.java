@@ -45,7 +45,7 @@ public class JPAConfigIT {
         return dataSource;
     }
 
-
+   @Bean
     public EntityManagerFactory entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setDatabase(Database.H2);
@@ -54,7 +54,7 @@ public class JPAConfigIT {
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("ro.ubb.conference.core.model");
+        factory.setPackagesToScan("ro.ubb.conference.core.domain");
         factory.setDataSource(dataSource());
         factory.getJpaPropertyMap().put("hibernate.generate_statistics", true);
         factory.afterPropertiesSet();
