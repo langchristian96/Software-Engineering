@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ro.ubb.conference.core.domain.Reviewer;
 import ro.ubb.conference.core.service.ReviewerService;
@@ -22,6 +23,9 @@ public class ReviewerController {
 
     @Autowired
     private ReviewerService reviewerService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private ReviewerConverter reviewerConverter;
@@ -63,7 +67,7 @@ public class ReviewerController {
         log.trace("createReviewer: reviewerDtoMap={}", reviewerDtoMap);
 
         ReviewerDto personDto = reviewerDtoMap.get("reviewer");
-        Reviewer person = reviewerService.createReviewer(personDto.getUsern(),personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
+        Reviewer person = reviewerService.createReviewer(personDto.getUsern(),passwordEncoder.encode(personDto.getPassword()),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
 
         Map<String, ReviewerDto> result = new HashMap<>();
         result.put("reviewer", reviewerConverter.convertModelToDto(person));

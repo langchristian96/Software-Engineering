@@ -22,4 +22,3 @@ gradle
 /Conference/conference-web/src/main/resources/local/db.properties
 /Conference/conference-core/src/main/java/ro/ubb/conference/core/JPAConfig.java
 /conference-web/src/main/resources/local/db.properties
-/conference-core/src/main/java/ro/ubb/conference/core/JPAConfig.java
