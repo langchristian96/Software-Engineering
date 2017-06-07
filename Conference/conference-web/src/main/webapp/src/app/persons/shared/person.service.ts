@@ -74,6 +74,9 @@ export class PersonService {
     else if(urlNew.includes("author")){
       m = JSON.stringify({"author": person});
     }
+    else if(urlNew.includes("reviewer")){
+      m = JSON.stringify({"reviewer": person});
+    }
     console.log("URL: ",this.personsUrl + urlNew);
     return this.http
       .post(this.personsUrl + urlNew, m, {withCredentials: true,headers: this.headers})
