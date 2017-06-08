@@ -22,36 +22,36 @@
 
           <!--</li>-->
 
-          <li class="navbtn">
-            <a _ngcontent-c0="" class="btn nav-links" routerlink="/conferences" routerlinkactive="active" ng-reflect-router-link="/conferences" ng-reflect-router-link-active="active" href="/conferences"><p>Conferences</p><div class="ripple-container"></div></a>
+          <li *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin'||app.getLocalStorageItem('userClass')=='listener'||app.getLocalStorageItem('userClass')=='reviewer'||app.getLocalStorageItem('userClass')=='person')" class="navbtn">
+            <a  _ngcontent-c0="" class="btn nav-links" routerlink="/conferences" routerlinkactive="active" ng-reflect-router-link="/conferences" ng-reflect-router-link-active="active" href="/conferences"><p>Conferences</p><div class="ripple-container"></div></a>
           </li>
 
-          <li class="navbtn">
+          <li *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin'||app.getLocalStorageItem('userClass')=='listener')||app.getLocalStorageItem('userClass')=='reviewer'||app.getLocalStorageItem('userClass')=='person'" class="navbtn">
             <a _ngcontent-c0="" class="btn nav-links" routerlink="/sessions" routerlinkactive="active" ng-reflect-router-link="/sessions" ng-reflect-router-link-active="active" href="/sessions"><p>Sessions</p><div class="ripple-container"></div></a>
           </li>
 
-          <li class="navbtn">
+          <li *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin'||app.getLocalStorageItem('userClass')=='person')" class="navbtn">
             <a _ngcontent-c0="" class="btn nav-links" routerlink="/persons" routerlinkactive="active" ng-reflect-router-link="/persons" ng-reflect-router-link-active="active" href="/persons"><p>Persons</p><div class="ripple-container"></div></a>
           </li>
 
-          <li class="navbtn">
+          <li *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin')||app.getLocalStorageItem('userClass')=='person'" class="navbtn">
             <a _ngcontent-c0="" class="btn nav-links" routerlink="/authors" routerlinkactive="active" ng-reflect-router-link="/authors" ng-reflect-router-link-active="active" href="/authors"><p>Authors</p><div class="ripple-container"></div></a>
           </li>
 
-          <li class="navbtn">
+          <li *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin')||app.getLocalStorageItem('userClass')=='person'" class="navbtn">
             <a _ngcontent-c0="" class="btn nav-links" routerlink="/reviewers" routerlinkactive="active" ng-reflect-router-link="/reviewers" ng-reflect-router-link-active="active" href="/reviewers"><p>Reviewers</p><div class="ripple-container"></div></a>
           </li>
 
 
-          <li class="navbtn">
+          <li *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin'||app.getLocalStorageItem('userClass')=='person')" class="navbtn">
             <a _ngcontent-c0="" class="btn nav-links" routerlink="/listeners" routerlinkactive="active" ng-reflect-router-link="/listeners" ng-reflect-router-link-active="active" href="/listeners"><p>Listeners</p><div class="ripple-container"></div></a>
           </li>
 
-          <li class="navbtn">
+          <li *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin')||app.getLocalStorageItem('userClass')=='reviewer'||app.getLocalStorageItem('userClass')=='person'" class="navbtn">
             <a _ngcontent-c0="" class="btn nav-links" routerlink="/papers" routerlinkactive="active" ng-reflect-router-link="/papers" ng-reflect-router-link-active="active" href="/papers"><p>Papers</p></a>
           </li>
 
-          <li class="navbtn">
+          <li *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin'||app.getLocalStorageItem('userClass')=='reviewer')" class="navbtn">
             <a _ngcontent-c0="" class="btn nav-links" routerlink="/papers/reviewer" routerlinkactive="active" ng-reflect-router-link="/papers/reviewer" ng-reflect-router-link-active="active" href="/papers/reviewer"><p>Papers To Be Reviewed</p></a>
           </li>
 

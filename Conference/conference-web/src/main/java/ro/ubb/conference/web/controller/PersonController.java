@@ -7,10 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import ro.ubb.conference.core.domain.Listener;
-import ro.ubb.conference.core.domain.Paper;
-import ro.ubb.conference.core.domain.Person;
-import ro.ubb.conference.core.domain.Reviewer;
+import ro.ubb.conference.core.domain.*;
 import ro.ubb.conference.core.service.*;
 import ro.ubb.conference.web.converter.PaperConverter;
 import ro.ubb.conference.web.converter.PersonConverter;
@@ -124,6 +121,8 @@ public class PersonController {
 
             Map<String, String> result = new HashMap<>();
             result.put("personClass", "reviewer");
+            if(reviewer.getUserRole()== UserRole.ADMIN)
+                result.put("personClass", "admin");
             log.trace("getPersonClass: result={}", result);
             return result;
         }
@@ -133,6 +132,9 @@ public class PersonController {
 
             Map<String, String> result = new HashMap<>();
             result.put("personClass", "listener");
+            if(listener.getUserRole()== UserRole.ADMIN)
+                result.put("personClass", "admin");
+
             log.trace("getPersonClass: result={}", result);
             return result;
         }
@@ -140,6 +142,8 @@ public class PersonController {
         Person person = personService.getUserByUserName(personUsern);
         Map<String, String> result = new HashMap<>();
         result.put("personClass", "person");
+        if(person.getUserRole()== UserRole.ADMIN)
+            result.put("personClass", "admin");
         log.trace("getPersonClass: result={}", result);
 
 

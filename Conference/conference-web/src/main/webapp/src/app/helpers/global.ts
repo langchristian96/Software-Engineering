@@ -8,4 +8,11 @@ export class GlobalApp {
       return true;
     return false;
   }
+
+
+  public getLocalStorageItem(id: string): string {
+    return localStorage.getItem(id);
+
+  }
+
 }
