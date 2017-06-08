@@ -5,10 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ro.ubb.conference.core.domain.Author;
-import ro.ubb.conference.core.domain.Paper;
-import ro.ubb.conference.core.domain.Reviewer;
-import ro.ubb.conference.core.domain.UserRole;
+import ro.ubb.conference.core.domain.*;
 import ro.ubb.conference.core.repository.AuthorRepository;
 import ro.ubb.conference.core.repository.PaperRepository;
 import ro.ubb.conference.core.repository.ReviewerRepository;
@@ -70,6 +67,14 @@ public class ReviewerServiceImpl implements ReviewerService {
         log.trace("findReviewer: ReviewerId={}",reviewer);
         return reviewer;
     }
+
+
+    @Override
+    public Reviewer getUserByUserName(String userName) {
+
+        return personRepository.getUserByUserName(userName);
+    }
+
 
     @Override
     @Transactional

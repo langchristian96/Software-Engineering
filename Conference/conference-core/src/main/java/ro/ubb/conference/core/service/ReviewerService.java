@@ -1,6 +1,7 @@
 package ro.ubb.conference.core.service;
 
 import ro.ubb.conference.core.domain.Author;
+import ro.ubb.conference.core.domain.Listener;
 import ro.ubb.conference.core.domain.Paper;
 import ro.ubb.conference.core.domain.Reviewer;
 
@@ -28,4 +29,5 @@ public interface ReviewerService {
 
     void deleteReviewer(Long personId);
 
+    Reviewer getUserByUserName(String userName);
 }

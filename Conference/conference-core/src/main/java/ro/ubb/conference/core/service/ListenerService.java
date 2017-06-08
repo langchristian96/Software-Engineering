@@ -13,6 +13,10 @@ import java.util.Set;
 public interface ListenerService {
     List<Listener> findAll();
 
+
+
+    Listener getUserByUserName(String userName);
+
     Session findSession(Long sessionId);
 
     Listener updateListener(Long personId, String password, String name, String affiliation, String email, Set<Long> sessions);

@@ -40,6 +40,10 @@ export class AuthenticationService {
         console.log("userID: ",data);
       });
 
+      this.personService.getPersonClassByUsern(username).subscribe(data=>{
+        localStorage.setItem('userClass',data);
+        console.log("userClass: ",data);
+      });
 
       localStorage.setItem('currentUser',username);
       // if () {

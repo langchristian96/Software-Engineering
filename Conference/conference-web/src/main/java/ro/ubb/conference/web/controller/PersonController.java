@@ -7,10 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import ro.ubb.conference.core.domain.Listener;
 import ro.ubb.conference.core.domain.Paper;
 import ro.ubb.conference.core.domain.Person;
-import ro.ubb.conference.core.service.PaperService;
-import ro.ubb.conference.core.service.PersonService;
+import ro.ubb.conference.core.domain.Reviewer;
+import ro.ubb.conference.core.service.*;
 import ro.ubb.conference.web.converter.PaperConverter;
 import ro.ubb.conference.web.converter.PersonConverter;
 import ro.ubb.conference.web.dto.*;
@@ -36,6 +37,12 @@ public class PersonController {
 
     @Autowired
     private PersonService personService;
+
+    @Autowired
+    private ReviewerService reviewerService;
+
+    @Autowired
+    private ListenerService listenerService;
 
     @Autowired
     private PersonConverter personConverter;
@@ -73,7 +80,7 @@ public class PersonController {
         log.trace("updatePerson: personId={}, personDtoMap={}", personId, personDtoMap);
 
         PersonDto personDto = personDtoMap.get("person");
-        Person person = personService.updatePerson(personId,personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
+        Person person = personService.updatePerson(personId,passwordEncoder.encode(personDto.getPassword()),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
 
         Map<String, PersonDto> result = new HashMap<>();
         result.put("person", personConverter.convertModelToDto(person));
@@ -97,6 +104,44 @@ public class PersonController {
         result.put("personId", person.getId());
 
         log.trace("getPersonId: result={}", result);
+
+        return result;
+
+    }
+
+
+
+    @RequestMapping(value = "/getPersonClass/{personUsern}", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:4200")
+
+    public Map<String, String> getPersonClass(
+            @PathVariable final String personUsern) {
+
+        log.trace("getPersonClass");
+
+        Reviewer reviewer=reviewerService.getUserByUserName(personUsern);
+        if(reviewer!=null){
+
+            Map<String, String> result = new HashMap<>();
+            result.put("personClass", "reviewer");
+            log.trace("getPersonClass: result={}", result);
+            return result;
+        }
+
+        Listener listener=listenerService.getUserByUserName(personUsern);
+        if(listener!=null){
+
+            Map<String, String> result = new HashMap<>();
+            result.put("personClass", "listener");
+            log.trace("getPersonClass: result={}", result);
+            return result;
+        }
+
+        Person person = personService.getUserByUserName(personUsern);
+        Map<String, String> result = new HashMap<>();
+        result.put("personClass", "person");
+        log.trace("getPersonClass: result={}", result);
+
 
         return result;
 

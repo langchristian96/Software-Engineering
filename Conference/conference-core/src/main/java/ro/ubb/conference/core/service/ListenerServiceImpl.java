@@ -53,6 +53,14 @@ public class ListenerServiceImpl implements ListenerService {
         return session;
     }
 
+
+    @Override
+    public Listener getUserByUserName(String userName) {
+
+        return personRepository.getUserByUserName(userName);
+    }
+
+
     @Override
     @Transactional
     public Listener updateListener(Long personId, String password, String name, String affiliation, String email, Set<Long> sessions) {

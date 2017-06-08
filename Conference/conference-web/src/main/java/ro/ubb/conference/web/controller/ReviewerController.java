@@ -50,7 +50,7 @@ public class ReviewerController {
         log.trace("updateReviewer: personId={}, reviewerDtoMap={}", reviewerId, reviewerDtoMap);
 
         ReviewerDto reviewerDto = reviewerDtoMap.get("reviewer");
-        Reviewer reviewer = reviewerService.updateReviewer(reviewerId, reviewerDto.getPassword(), reviewerDto.getName(), reviewerDto.getAffiliation(), reviewerDto.getEmail(), reviewerDto.getPapers());
+        Reviewer reviewer = reviewerService.updateReviewer(reviewerId, passwordEncoder.encode(reviewerDto.getPassword()), reviewerDto.getName(), reviewerDto.getAffiliation(), reviewerDto.getEmail(), reviewerDto.getPapers());
 
         Map<String, ReviewerDto> result = new HashMap<>();
         result.put("reviewer", reviewerConverter.convertModelToDto(reviewer));

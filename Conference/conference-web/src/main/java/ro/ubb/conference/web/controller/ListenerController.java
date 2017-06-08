@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ro.ubb.conference.core.domain.Listener;
 import ro.ubb.conference.core.domain.Person;
@@ -29,6 +30,9 @@ import java.util.Map;
 public class ListenerController {
 
     private static final Logger log = LoggerFactory.getLogger(ListenerController.class);
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private ListenerService personService;
@@ -56,7 +60,7 @@ public class ListenerController {
         log.trace("updateListener: personId={}, personDtoMap={}", personId, personDtoMap);
 
         ListenerDto personDto = personDtoMap.get("listener");
-        Listener person = personService.updateListener(personId,personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail(), personDto.getSessions());
+        Listener person = personService.updateListener(personId,passwordEncoder.encode(personDto.getPassword()),personDto.getName(),personDto.getAffiliation(),personDto.getEmail(), personDto.getSessions());
 
         Map<String, ListenerDto> result = new HashMap<>();
         result.put("listener", personConverter.convertModelToDto(person));
@@ -73,7 +77,7 @@ public class ListenerController {
         log.trace("createListener: personDtoMap={}", personDtoMap);
 
         ListenerDto personDto = personDtoMap.get("listener");
-        Listener person = personService.createListener(personDto.getUsern(),personDto.getPassword(),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
+        Listener person = personService.createListener(personDto.getUsern(),passwordEncoder.encode(personDto.getPassword()),personDto.getName(),personDto.getAffiliation(),personDto.getEmail());
 
         Map<String, ListenerDto> result = new HashMap<>();
         result.put("listener", personConverter.convertModelToDto(person));

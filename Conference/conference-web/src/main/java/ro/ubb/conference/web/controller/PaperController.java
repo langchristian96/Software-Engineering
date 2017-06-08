@@ -99,7 +99,7 @@ public class PaperController {
                 byte[] bytes = file.getBytes();
                 PaperDto paperDto = paperDtoMap;
                 // Creating the directory to store file
-                String rootPath = "f:/School/Second Year - Second Semester/Software Engineering/Conference-App/Conference/conference-web/src/main/resources/files";
+                String rootPath = "C:/work/Software-Engineering/Conference/conference-web/src/main/resources/files";
 //                String rootPath = "../../../resources/files";
                 File dir = new File(rootPath + File.separator + "tmpFiles");
                 if (!dir.exists())

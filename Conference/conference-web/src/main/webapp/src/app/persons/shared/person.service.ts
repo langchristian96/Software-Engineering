@@ -40,10 +40,28 @@ export class PersonService {
       .catch(this.handleError);
   }
 
+
+  getPersonClassByUsern(usern: string): Observable<string> {
+    let personByUsernURL=`http://localhost:8080/api/getPersonClass/`+usern;
+    console.log("inside getPersonClassByUsern function",personByUsernURL);
+    let tempRes=this.http.get(personByUsernURL,{withCredentials: true});
+    console.log(tempRes);
+    return tempRes
+      .map(this.extractClass)
+      .catch(this.handleError);
+  }
+
   private extractId(res: Response) {
     let body = res.json();
     return body.personId || {};
   }
+
+
+  private extractClass(res: Response) {
+    let body = res.json();
+    return body.personClass || {};
+  }
+
   private extractData(res: Response) {
     let body = res.json();
     return body.persons || {};
@@ -78,6 +96,7 @@ export class PersonService {
       m = JSON.stringify({"reviewer": person});
     }
     console.log("URL: ",this.personsUrl + urlNew);
+    console.log("Json sent: ",m);
     return this.http
       .post(this.personsUrl + urlNew, m, {withCredentials: true,headers: this.headers})
       .map(this.extractData)
