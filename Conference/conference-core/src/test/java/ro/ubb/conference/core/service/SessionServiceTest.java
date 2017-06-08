@@ -13,7 +13,6 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import ro.ubb.conference.core.ITConfig;
 import ro.ubb.conference.core.domain.Session;
-import ro.ubb.conference.core.service.SessionService;
 
 import java.util.HashSet;
 import java.util.List;
@@ -35,7 +34,7 @@ public class SessionServiceTest {
     @Test
     public void findAll() throws Exception {
         List<Session> sessions = sessionService.findAll();
-        assertEquals("there should be four sessions", 1, sessions.size());
+        assertEquals("there should be one session", 1, sessions.size());
     }
 
 
@@ -63,7 +62,7 @@ public class SessionServiceTest {
     @Test
     public void deleteSession() throws Exception {
 
-        sessionService.deleteSession(2l);
+        sessionService.deleteSession(11l);
         assertEquals("Session should be deleted ",1,sessionService.findAll().size());
 
     }

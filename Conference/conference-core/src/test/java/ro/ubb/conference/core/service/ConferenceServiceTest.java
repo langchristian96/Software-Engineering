@@ -1,4 +1,4 @@
-package ro.ubb.conference.core.service;
+package ro.ubb.conference.core.server;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -60,7 +60,7 @@ public class ConferenceServiceTest {
     @Test
     public void deleteConference() throws Exception {
 
-        conferenceService.deleteConference(-4l);
+        conferenceService.deleteConference(4l);
         assertEquals("Conference should be deleted ",3,conferenceService.findAll().size());
 
     }

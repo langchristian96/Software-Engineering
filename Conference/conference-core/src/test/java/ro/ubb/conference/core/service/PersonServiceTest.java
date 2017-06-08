@@ -1,4 +1,4 @@
-package ro.ubb.conference.core.service;
+package ro.ubb.conference.core.server;
 
 
 
@@ -35,7 +35,7 @@ public class PersonServiceTest {
     @Test
     public void findAll() throws Exception {
         List<Person> persons = personService.findAll();
-        assertEquals("there should be four persons", 4, persons.size());
+        assertEquals("there should be six persons", 6, persons.size());
     }
 
 
@@ -55,7 +55,7 @@ public class PersonServiceTest {
     public void createPerson() throws Exception {
 
         personService.createPerson("dark_lord","pass10", "David Bowie", "corpo", "dave_bowie@gmail.com");
-        assertEquals("Person ",5l,(long)personService.findAll().size());
+        assertEquals("Person ",7l,(long)personService.findAll().size());
 
     }
 
@@ -63,8 +63,8 @@ public class PersonServiceTest {
     @Test
     public void deletePerson() throws Exception {
 
-        personService.deletePerson(4l);
-        assertEquals("Person with id 4 should be removed",3,personService.findAll().size());
+        personService.deletePerson(-1l);
+        assertEquals("Person with id 4 should be removed",5,personService.findAll().size());
 
     }
 
