@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Collections;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 @Setter
 @Table(name="Reviewer")
 public class Reviewer extends Person {
-    @OneToMany(mappedBy = "reviewer", orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "reviewer", cascade = CascadeType.MERGE, orphanRemoval = true, fetch = FetchType.EAGER)
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<ReviewerPaper> reviewerPapers = new HashSet<>();
 
@@ -32,9 +33,39 @@ public class Reviewer extends Person {
     }
 
     public void addPaper(Paper paper){
-        ReviewerPaper reviewerPaper=new ReviewerPaper();
+        boolean isAdded = false;
+        for(ReviewerPaper reviewerPaper: reviewerPapers){
+            if(reviewerPaper.getReviewerPaper().getId().equals(paper.getId())){
+                isAdded = true;
+                break;
+            }
+        }
+        if(!isAdded) {
+            ReviewerPaper reviewerPaper = new ReviewerPaper();
+            reviewerPaper.setReviewerPaper(paper);
+            reviewerPaper.setReviewer(this);
+            reviewerPapers.add(reviewerPaper);
+        }
+    }
+
+    public void removePaper(Paper paper){
+        ReviewerPaper reviewerPaper = new ReviewerPaper();
         reviewerPaper.setReviewerPaper(paper);
         reviewerPaper.setReviewer(this);
+        reviewerPapers.remove(reviewerPaper);
+    }
+
+    public void updatePaper(Paper paper, int grade){
+        ReviewerPaper reviewerPaper = new ReviewerPaper();
+        reviewerPaper.setReviewerPaper(paper);
+        reviewerPaper.setReviewer(this);
+        reviewerPaper.setGrade(grade);
+        for(ReviewerPaper reviewerPaper1: reviewerPapers){
+            if(reviewerPaper1.getReviewerPaper().getId().equals(paper.getId())){
+                reviewerPapers.remove(reviewerPaper1);
+                break;
+            }
+        }
         reviewerPapers.add(reviewerPaper);
     }
 

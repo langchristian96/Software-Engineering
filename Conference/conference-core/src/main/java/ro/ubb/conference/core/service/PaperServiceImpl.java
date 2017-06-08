@@ -11,6 +11,7 @@ import ro.ubb.conference.core.domain.Reviewer;
 import ro.ubb.conference.core.domain.Session;
 import ro.ubb.conference.core.repository.AuthorRepository;
 import ro.ubb.conference.core.repository.PaperRepository;
+import ro.ubb.conference.core.repository.ReviewerRepository;
 
 import java.util.List;
 import java.util.Set;
@@ -29,6 +30,9 @@ public class PaperServiceImpl implements PaperService {
 
     @Autowired
     private AuthorRepository authorRepository;
+
+    @Autowired
+    private ReviewerRepository reviewerRepository;
 
     @Override
     public List<Paper> findAll() {
@@ -53,6 +57,33 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
+    public Paper findPaper(Long paperId){
+        log.trace("findReviewer: paperId={}",paperId);
+
+        Paper paper = (Paper) paperRepository.findOne(paperId);
+
+        log.trace("findReviewer: paperId={}",paper);
+        return paper;
+    }
+
+    @Override
+    public Set<Paper> findAllPapersOfReviewer(Long reviewerId){
+        log.trace("findAllPapersOfReviewer");
+
+        List<Paper> papers = paperRepository.findAll();
+
+        Reviewer reviewer = reviewerRepository.findOne(reviewerId);
+
+        Set<Paper> paperSet = papers.stream()
+                .filter(e -> e.getReviewers().contains(reviewer))
+                .collect(Collectors.toSet());
+
+        log.trace("findAllPapersOfReviewer: Papers={}", paperSet);
+
+        return paperSet;
+    }
+
+    @Override
     public Set<Paper> findAllPapersByTitle(Set<String> papersTitle) {
         log.trace("findAllPapersByTitle");
 
@@ -69,7 +100,7 @@ public class PaperServiceImpl implements PaperService {
 
     @Override
     @Transactional
-    public Paper updatePaper(Long paperId, String title, String abstractText,String contentPath, String keywords, String topics, Set<Author> authors/*, Set<Long> reviewers*/, Session sessionId) {
+    public Paper updatePaper(Long paperId, String title, String abstractText, String contentPath, String keywords, String topics, Set<Author> authors, Set<Reviewer> reviewers, Session sessionId) {
         log.trace("updatePaper: paperId={}, title={}, author={}, contentPath={}",
                 paperId, title, keywords, topics, authors, contentPath);
 
@@ -83,6 +114,8 @@ public class PaperServiceImpl implements PaperService {
         List<Author> authorList = authorRepository.findAll(authors.stream().map(author -> author.getId()).collect(Collectors.toSet()));
         authorList.forEach(author -> paper.addAuthor(author));
 
+        List<Reviewer> reviewerList = reviewerRepository.findAll(reviewers.stream().map(reviewer -> reviewer.getId()).collect(Collectors.toSet()));
+        reviewerList.forEach(reviewer -> paper.addReviewer(reviewer));
 //        paper.getReviewers().stream()
 //                .map(d->d.getId())
 //                .forEach(i->

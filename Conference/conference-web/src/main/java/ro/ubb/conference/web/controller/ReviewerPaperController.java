@@ -3,17 +3,21 @@ package ro.ubb.conference.web.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ro.ubb.conference.core.domain.Paper;
 import ro.ubb.conference.core.domain.Reviewer;
 import ro.ubb.conference.core.domain.ReviewerPaper;
+import ro.ubb.conference.core.service.PaperService;
 import ro.ubb.conference.core.service.ReviewerService;
 import ro.ubb.conference.web.converter.ReviewerPaperConverter;
+import ro.ubb.conference.web.dto.EmptyJsonResponse;
 import ro.ubb.conference.web.dto.ReviewerPaperDto;
 import ro.ubb.conference.web.dto.ReviewerPapersDto;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -22,6 +26,9 @@ public class ReviewerPaperController {
 
     @Autowired
     private ReviewerService reviewerService;
+
+    @Autowired
+    private PaperService paperService;
 
     @Autowired
     private ReviewerPaperConverter reviewerPaperConverter;
@@ -40,5 +47,23 @@ public class ReviewerPaperController {
 
         log.trace("getReviewerPapers: result={}",reviewerPapersDto);
         return reviewerPapersDto;
+    }
+
+    @RequestMapping(value = "reviewerpapers/{paperId}/{reviewerId}", method = RequestMethod.PUT)
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity updateGrade(
+            @PathVariable("paperId") final Long paperId,
+            @PathVariable("reviewerId") final Long reviewerId,
+            @RequestBody Map<String, Integer> data) {
+        log.trace("updatePaper: paperId={}, paperDtoMap={}", paperId, reviewerId);
+
+        Reviewer r = reviewerService.updateReviewerGrade(reviewerId, paperId, data.get("data"));
+
+//        Map<String, ReviewerPaperDto> result = new HashMap<>();
+//        result.put("reviewerPaper", reviewerConverter.convertModelToDto(reviewerPaper));
+
+//        log.trace("updatePaper: result={}", result);
+
+        return new ResponseEntity(new EmptyJsonResponse(), HttpStatus.OK);
     }
 }

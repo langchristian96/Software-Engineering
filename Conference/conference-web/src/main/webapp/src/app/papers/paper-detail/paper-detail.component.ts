@@ -33,9 +33,14 @@ export class PaperDetailComponent implements OnInit {
       .subscribe(paper => this.paper = paper);
   }
 
-  updatePaperDetail(authors: string): void {
+  updatePaperDetail(authors: string, reviewers: string): void {
     this.paper.authorsUsername = authors.split(', ');
-    this.paperService.updatePaper(this.paper).subscribe(_ => this.cancel());
+    this.paper.reviewersUsername = reviewers.split(', ');
+    if(this.paper.reviewersUsername.length < 2 || this.paper.reviewersUsername.length > 4){
+      alert("must be at least 2 reviewers for the papers and at most 4");
+    }else {
+      this.paperService.updatePaper(this.paper).subscribe(_ => this.cancel());
+    }
   }
 
   fileChange(e){

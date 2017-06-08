@@ -20,7 +20,7 @@ public class PaperDto extends BaseEntityDto {
     private String keywords;
     private String topics;
     private Set<String> authorsUsername;
-    private Set<Long> reviewers;
+    private Set<String> reviewersUsername;
     private Long sessionId;
 
     @Override
@@ -32,7 +32,7 @@ public class PaperDto extends BaseEntityDto {
                 ", keywords='" + keywords + '\'' +
                 ", topics='" + topics + '\'' +
                 ", authorsUsername=" + authorsUsername +
-                ", reviewers=" + reviewers +
+                ", reviewers=" + reviewersUsername +
                 ", sessionId=" + sessionId +
                 '}';
     }

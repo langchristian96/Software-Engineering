@@ -32,7 +32,7 @@ public class PaperConverter extends BaseConverter<Paper, PaperDto> {
         paperDto.setAuthorsUsername(paper.getAuthors().stream()
                 .map(Person::getUsern).collect(Collectors.toSet())
         );
-        paperDto.setReviewers(paper.getReviewers().stream().map(BaseEntity::getId).collect(Collectors.toSet()));
+        paperDto.setReviewersUsername(paper.getReviewers().stream().map(Person::getUsern).collect(Collectors.toSet()));
         return paperDto;
     }
 }

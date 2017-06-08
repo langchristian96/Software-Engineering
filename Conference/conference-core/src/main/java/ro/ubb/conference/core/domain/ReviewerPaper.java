@@ -30,4 +30,7 @@ public class ReviewerPaper implements Serializable {
     @ManyToOne(optional=false, fetch=FetchType.EAGER)
     @JoinColumn(name="PaperId")
     private Paper reviewerPaper;
+
+    @Column(name = "Grade", nullable = false, columnDefinition = "int default -1")
+    private int grade;
 }

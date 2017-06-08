@@ -5,9 +5,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.Transactional;
 import ro.ubb.conference.core.domain.Author;
 import ro.ubb.conference.core.domain.AuthorPaper;
 import ro.ubb.conference.core.domain.Paper;
+import ro.ubb.conference.core.domain.Reviewer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -30,6 +32,9 @@ public class PaperRepositoryImpl implements CustomPaperRepository {
     @Autowired
     private AuthorRepository authorRepository;
 
+    @Autowired
+    private ReviewerRepository reviewerRepository;
+
     @Override
     public void delete(Long paperId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -45,12 +50,38 @@ public class PaperRepositoryImpl implements CustomPaperRepository {
                         i.removePaper(paper);
                     }
                 });
+        Set<Reviewer> reviewers = paper.getReviewers();
+        reviewers.forEach(i->{
+            if(i.getPapers().contains(paper)){
+                i.removePaper(paper);
+            }
+        });
+        reviewers.clear();
         authors.clear();
         entityManager.remove(paper);
 
 
         transaction.commit();
         entityManager.close();
+    }
+
+    @Override
+    public Reviewer updateReviewerGrade(Long personId, Long paperId, int grade){
+                EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+
+        Reviewer person = (Reviewer) reviewerRepository.findOne(personId);
+        Paper paper =  entityManager.find(Paper.class, paperId);
+
+        person.updatePaper(paper, grade);
+        paper.updateReviewer(person, grade);
+        entityManager.merge(paper);
+        entityManager.merge(person);
+        transaction.commit();
+        entityManager.close();
+
+        return person;
     }
 }
 

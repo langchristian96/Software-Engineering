@@ -16,14 +16,20 @@ import {PaperService} from "../shared/paper.service";
 export class PaperListComponent implements OnInit {
   errorMessage: string;
   papers: Paper[];
+  newUrl: string;
   // selectedPaper: Paper;
 
   constructor(private paperService: PaperService,
               private router: Router) {
+    this.newUrl = router.url;
   }
 
   ngOnInit(): void {
-    this.getPapers();
+    if(this.newUrl.includes("reviewer")){
+      this.getPapersWithReviewerId();
+    }else{
+      this.getPapers();
+    }
   }
 
   getPapers() {
@@ -34,11 +40,24 @@ export class PaperListComponent implements OnInit {
       );
   }
 
+  getPapersWithReviewerId(){
+    this.paperService.getPapersByReviewerId()
+      .subscribe(
+        papers => this.papers = papers,
+        error => this.errorMessage = <any>error
+      );
+  }
+
   editPaper (paperId): void {
     this.router.navigate(['/paper/detail', paperId]);
   }
+
   erasePaper(paperId): void{
     this.paperService.deletePaper(paperId).subscribe(_ => this.getPapers());
+  }
+
+  gradePaper(paperId): void{
+    this.router.navigate(['/paper/reviewer/grade', paperId]);
   }
 
   addNewPaper(): void{

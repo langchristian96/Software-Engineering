@@ -11,6 +11,7 @@ import ro.ubb.conference.core.domain.Author;
 import ro.ubb.conference.core.domain.Paper;
 import ro.ubb.conference.core.service.AuthorService;
 import ro.ubb.conference.core.service.PaperService;
+import ro.ubb.conference.core.service.ReviewerService;
 import ro.ubb.conference.core.service.SessionService;
 import ro.ubb.conference.web.converter.PaperConverter;
 import ro.ubb.conference.web.dto.EmptyJsonResponse;
@@ -39,6 +40,9 @@ public class PaperController {
     private SessionService sessionService;
 
     @Autowired
+    private ReviewerService reviewerService;
+
+    @Autowired
     private AuthorService authorService;
 
     @Autowired
@@ -56,6 +60,18 @@ public class PaperController {
         return new PapersDto(paperConverter.convertModelsToDtos(papers));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "/papers/reviewer/{reviewerId}", method = RequestMethod.GET)
+    public PapersDto getPapersOfReviewer(@PathVariable final Long reviewerId) {
+        log.trace("getPapersOfReviewer");
+
+        Set<Paper> papers = paperService.findAllPapersOfReviewer(reviewerId);
+
+        log.trace("getPapersOfReviewer: papers={}", papers);
+
+        return new PapersDto(paperConverter.convertModelsToDtos(papers));
+    }
+
     @RequestMapping(value = "papers/{paperId}", method = RequestMethod.PUT)
     @CrossOrigin(origins = "http://localhost:4200")
     public Map<String, PaperDto> updatePaper(
@@ -65,7 +81,7 @@ public class PaperController {
 
         PaperDto paperDto = paperDtoMap.get("paper");
         Paper paper = paperService.updatePaper(paperId, paperDto.getTitle(),
-                paperDto.getAbstractText(), paperDto.getContentPath(), paperDto.getKeywords(), paperDto.getTopics(), authorService.findAllAuthorsByUsernames(paperDto.getAuthorsUsername()), null/*, paperDto.getReviewers(), sessionService.findOne(paperDto.getSessionId())*/);
+                paperDto.getAbstractText(), paperDto.getContentPath(), paperDto.getKeywords(), paperDto.getTopics(), authorService.findAllAuthorsByUsernames(paperDto.getAuthorsUsername()), reviewerService.findAllReviewersByUsernames(paperDto.getReviewersUsername()), null);
 
         Map<String, PaperDto> result = new HashMap<>();
         result.put("paper", paperConverter.convertModelToDto(paper));
@@ -95,7 +111,7 @@ public class PaperController {
 
                 paperDto.setContentPath(serverFile.getAbsolutePath());
                 paperService.updatePaper(paperDto.getId(), paperDto.getTitle(), paperDto.getAbstractText(),
-                        paperDto.getContentPath(), paperDto.getKeywords(), paperDto.getTopics(), authorService.findAllAuthorsByUsernames(paperDto.getAuthorsUsername()), null);
+                        paperDto.getContentPath(), paperDto.getKeywords(), paperDto.getTopics(), authorService.findAllAuthorsByUsernames(paperDto.getAuthorsUsername()), reviewerService.findAllReviewersByUsernames(paperDto.getReviewersUsername()), null);
                 BufferedOutputStream stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);

@@ -19,6 +19,7 @@ import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {PersonNewComponent} from "./persons/person-new/person-new.component";
 import {AuthGuard} from "./guards/auth.guard";
+import {PaperGradeComponent} from "./papers/paper-grade/paper-grade.component";
 
 
 const routes: Routes = [
@@ -38,6 +39,8 @@ const routes: Routes = [
   { path: 'reviewers', component: PersonsComponent, canActivate: [AuthGuard] },
   { path: 'reviewer/detail/:id', component: PersonDetailComponent, canActivate: [AuthGuard]},
   { path: 'reviewer/new', component: PersonNewComponent, canActivate: [AuthGuard]},
+  { path: 'papers/reviewer', component: PapersComponent, canActivate: [AuthGuard] },
+  { path: 'paper/reviewer/grade/:id', component: PaperGradeComponent, canActivate: [AuthGuard] },
   { path: 'papers', component: PapersComponent, canActivate: [AuthGuard] },
   { path: 'paper/detail/:id', component: PaperDetailComponent, canActivate: [AuthGuard]},
   { path: 'paper/new', component: PaperNewComponent, canActivate: [AuthGuard]},

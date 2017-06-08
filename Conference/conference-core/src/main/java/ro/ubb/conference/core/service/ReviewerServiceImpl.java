@@ -15,6 +15,7 @@ import ro.ubb.conference.core.repository.ReviewerRepository;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by langchristian96 on 5/18/2017.
@@ -46,6 +47,21 @@ public class ReviewerServiceImpl implements ReviewerService {
     }
 
     @Override
+    public Set<Reviewer> findAllReviewersByUsernames(Set<String> reviewersUsername) {
+        log.trace("findAllReviewersByUsernames");
+
+        List<Reviewer> reviewers = personRepository.findAll();
+
+        Set<Reviewer> reviewerSet = reviewers.stream()
+                .filter(e -> reviewersUsername.contains(e.getUsern()))
+                .collect(Collectors.toSet());
+
+        log.trace("findAllReviewersByUsernames: Authors={}", reviewerSet);
+
+        return reviewerSet;
+    }
+
+    @Override
     public Reviewer findReviewer(Long reviewerId){
         log.trace("findReviewer: ReviewerId={}",reviewerId);
 
@@ -53,6 +69,35 @@ public class ReviewerServiceImpl implements ReviewerService {
 
         log.trace("findReviewer: ReviewerId={}",reviewer);
         return reviewer;
+    }
+
+    @Override
+    @Transactional
+    public Reviewer updateReviewerGrade(Long personId, Long paperId, int grade) {
+        log.trace("updateReviewerGrade: personId={}, paperId={}, grade={}",
+                personId, paperId, grade);
+
+//        Reviewer person = (Reviewer) personRepository.findOne(personId);
+//        Paper paper = (Paper) paperRepository.findOne(paperId);
+//        person.updatePaper(paper, grade);
+//        paper.updateReviewer(person, grade);
+        Reviewer person = (Reviewer) paperRepository.updateReviewerGrade(personId, paperId, grade);
+
+//        person.getPapers().stream()
+//                .map(d->d.getId())
+//                .forEach(i->
+//                {
+//                    if(papers.contains(i)){
+//                        papers.remove(i);
+//                    }
+//                });
+//
+//        List<Paper> paperList = paperRepository.findAll(papers);
+//        paperList.forEach(person::addPaper);
+
+        log.trace("updateReviewerGrade: Reviewer={}", person);
+
+        return person;
     }
 
     @Override
@@ -67,17 +112,20 @@ public class ReviewerServiceImpl implements ReviewerService {
         person.setAffiliation(affiliation);
         person.setEmail(email);
 
-        person.getPapers().stream()
-                .map(d->d.getId())
-                .forEach(i->
-                {
-                    if(papers.contains(i)){
-                        papers.remove(i);
-                    }
-                });
+//        List<Paper> paperList = paperRepository.findAll(papers.stream().map(paper -> paper.getId()).collect(Collectors.toSet()));
+//        paperList.forEach(paper -> person.addPaper(paper));
 
-        List<Paper> paperList = paperRepository.findAll(papers);
-        paperList.forEach(person::addPaper);
+//        person.getPapers().stream()
+//                .map(d->d.getId())
+//                .forEach(i->
+//                {
+//                    if(papers.contains(i)){
+//                        papers.remove(i);
+//                    }
+//                });
+//
+//        List<Paper> paperList = paperRepository.findAll(papers);
+//        paperList.forEach(person::addPaper);
 
         log.trace("updateReviewer: Reviewer={}", person);
 

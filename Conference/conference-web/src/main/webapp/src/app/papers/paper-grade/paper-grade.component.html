@@ -1,6 +1,6 @@
 <div *ngIf="paper">
   <div class="container">
-    <h1>Update {{paper.id}}</h1>
+    <h1>Grade {{paper.id}}</h1>
 
     <form novalidate="novalidate" class="form-horizontal" enctype="multipart/form-data">
       <div class="form-group label-floating">
@@ -9,40 +9,43 @@
       </div>
       <div class="form-group label-floating">
         <label class="control-label" for="inputPaperTitle">Paper Title:</label>
-        <input class="form-control" type="text" id="inputPaperTitle" name="date" [(ngModel)]="paper.title" #title/>
+        <input class="form-control" type="text" id="inputPaperTitle" name="date" [(ngModel)]="paper.title" #title readonly/>
       </div>
       <div class="form-group label-floating">
         <label class="control-label" for="inputPaperAbstract">Paper Abstract:</label>
-        <input class="form-control" type="text" id="inputPaperAbstract" name="abstractText" [(ngModel)]="paper.abstractText" #abstractText/>
+        <input class="form-control" type="text" id="inputPaperAbstract" name="abstractText" [(ngModel)]="paper.abstractText" #abstractText readonly/>
       </div>
       <div class="form-group label-floating">
         <label class="control-label" for="inputPaperKeywords">Paper Keywords:</label>
-        <input class="form-control" type="text" id="inputPaperKeywords" name="keywords" [(ngModel)]="paper.keywords" #keywords/>
+        <input class="form-control" type="text" id="inputPaperKeywords" name="keywords" [(ngModel)]="paper.keywords" #keywords readonly/>
       </div>
       <div class="form-group label-floating">
         <label class="control-label" for="inputPaperTopics">Paper Topics:</label>
-        <input class="form-control" type="text" id="inputPaperTopics" name="topics" [(ngModel)]="paper.topics" #topics/>
+        <input class="form-control" type="text" id="inputPaperTopics" name="topics" [(ngModel)]="paper.topics" #topics readonly/>
       </div>
       <div class="form-group label-floating">
         <label class="control-label" for="inputPaperAuthors">Paper Authors:</label>
-        <input class="form-control" type="text" id="inputPaperAuthors" name="authors" [(ngModel)]="paper.authorsUsername" #authors/>
+        <input class="form-control" type="text" id="inputPaperAuthors" name="authors" [(ngModel)]="paper.authorsUsername" #authors readonly/>
       </div>
       <div class="form-group label-floating">
         <label class="control-label" for="inputPaperReviewers">Paper Reviewers:</label>
-        <input class="form-control" type="text" id="inputPaperReviewers" name="reviewers" [(ngModel)]="paper.reviewersUsername" #reviewers/>
+        <input class="form-control" type="text" id="inputPaperReviewers" name="reviewers" [(ngModel)]="paper.reviewersUsername" #reviewers readonly/>
       </div>
       <div class="form-group label-floating">
         <label class="control-label" for="inputPaperSessionId">Paper SessionId:</label>
-        <input class="form-control" type="text" id="inputPaperSessionId" name="sessionId" [(ngModel)]="paper.sessionId" #sessionId/>
+        <input class="form-control" type="text" id="inputPaperSessionId" name="sessionId" [(ngModel)]="paper.sessionId" #sessionId readonly/>
       </div>
       <div class="form-group label-floating">
         <label class="control-label" for="pdfInput">Paper document:</label>
-        <input type="file" id="pdfInput" class="form-control" name="pdfInput" (change)="fileChange($event)">
+        <input type="file" id="pdfInput" class="form-control" name="pdfInput" (change)="fileChange($event)" readonly>
+      </div>
+      <div class="form-group label-floating">
+        <label class="control-label" for="inputPaperGrade">Paper Grade:</label>
+        <input class="form-control" type="text" id="inputPaperGrade" name="grade" #grade/>
       </div>
       <div class="form-group">
         <a (click)="cancel()" class="btn btn-raised btn-danger">cancel</a>
-        <a (click)="updatePaperDetail(authors.value, reviewers.value)" class="btn btn-raised btn-info">update paper</a>
-        <a (click)="addPaperWithFile(title.value, abstractText.value, keywords.value, topics.value, authors.value)" class="btn btn-raised btn-info">Add Paper document</a>
+        <a (click)="gradePaper(grade.value)" class="btn btn-raised btn-info">grade paper</a>
       </div>
     </form>
   </div>

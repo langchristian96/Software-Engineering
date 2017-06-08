@@ -7,6 +7,7 @@ import 'rxjs/add/operator/switchMap';
 import {PersonService} from "../shared/person.service";
 import {Person} from "../shared/person.model";
 import {Author} from "../shared/author.model";
+import {Reviewer} from "../shared/reviewer.model";
 
 
 @Component({
@@ -28,7 +29,7 @@ export class PersonDetailComponent implements OnInit {
               private location: Location,
               private router: Router) {
     this.newUrl = router.url;
-    if(this.newUrl.substring(1, this.newUrl.length - 9) == "person"){
+    if(this.newUrl.includes("person")){
       this.personType = "Person";
       this.inputs = [
         { type: 'number', value: '-1', name: ''},
@@ -44,7 +45,7 @@ export class PersonDetailComponent implements OnInit {
         this.inputs[i].name = array[i];
       }
     }
-    if(this.newUrl.substring(1, this.newUrl.length - 9) == "author"){
+    if(this.newUrl.includes("author")){
       this.personType = "Author";
       this.inputs = [
         { type: 'number', value: '-1', name: ''},
@@ -61,21 +62,43 @@ export class PersonDetailComponent implements OnInit {
         this.inputs[i].name = array[i];
       }
     }
+    if(this.newUrl.includes("reviewer")){
+      this.personType = "Reviewer";
+      this.inputs = [
+        { type: 'number', value: '-1', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'password', value: '', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'text', value: '', name: ''}
+      ];
+      let a = new Reviewer(-1, "", "", "", "", "", []);
+      let array = Object.getOwnPropertyNames(a);
+      for(var i = 0; i < array.length; i++){
+        this.inputs[i].name = array[i];
+      }
+    }
   }
 
   ngOnInit(): void {
     console.log(this.newUrl.substring(1, this.newUrl.length - 9));
+    var ur = this.newUrl.substring(1, this.newUrl.length);
     this.route.params
-      .switchMap((params: Params) => this.personService.getPerson(+params['id'], this.newUrl.substring(0, this.newUrl.length - 9) + 's'))
+      .switchMap((params: Params) => this.personService.getPerson(+params['id'], this.newUrl.substring(0, ur.indexOf('/') + 1) + 's'))
       .subscribe(person => {
         this.person = person;
         var newPerson;
-        if(this.newUrl.substring(1, this.newUrl.length - 9) == "person") {
+        if(this.newUrl.includes("person")) {
           newPerson = new Person(person.id, person.usern, person.password, person.name, person.affiliation, person.email);
         }
-        else if(this.newUrl.substring(1, this.newUrl.length - 9) == "author"){
+        else if(this.newUrl.includes("author")){
           var newPers =<Author> person;
           newPerson = new Author(person.id, person.usern, person.password, person.name, person.affiliation, person.email, newPers.papers)
+        }
+        else if(this.newUrl.includes("reviewer")){
+          var newPersRev = <Reviewer> person;
+          newPerson = new Reviewer(person.id, person.usern, person.password, person.name, person.affiliation, person.email, newPersRev.papers)
         }
         for (var i = 0; i < this.inputs.length; i++) {
           var str = this.inputs[i].name;
@@ -89,6 +112,7 @@ export class PersonDetailComponent implements OnInit {
   }
 
   updatePersonDetail(myForm): void {
+    var ur = this.newUrl.substring(1, this.newUrl.length);
     if (this.newUrl.includes("person")) {
       let usern = myForm.form.value.inputss.usern;
       let id = myForm.form.value.inputss.id;
@@ -97,7 +121,7 @@ export class PersonDetailComponent implements OnInit {
       let affiliation = myForm.form.value.inputss.affiliation;
       let email = myForm.form.value.inputss.email;
       let person = {id, usern, password, name, affiliation, email};
-      this.personService.updatePerson(this.newUrl.substring(0, this.newUrl.length - 9) + 's', person)
+      this.personService.updatePerson(this.newUrl.substring(0, ur.indexOf('/') + 1) + 's', person)
         .subscribe(_ => this.cancel());
     } else if (this.newUrl.includes("author")) {
       let papers = myForm.form.value.inputss.papers;
@@ -108,7 +132,19 @@ export class PersonDetailComponent implements OnInit {
       let affiliation = myForm.form.value.inputss.affiliation;
       let email = myForm.form.value.inputss.email;
       let author = {id, usern, password, name, affiliation, email, papers};
-      this.personService.updatePerson(this.newUrl.substring(0, this.newUrl.length - 9) + 's', author)
+      this.personService.updatePerson(this.newUrl.substring(0, ur.indexOf('/') + 1) + 's', author)
+        .subscribe(_ => this.cancel());
+    }
+    else if (this.newUrl.includes("reviewer")) {
+      let papers = myForm.form.value.inputss.papers;
+      let id = myForm.form.value.inputss.id;
+      let usern = myForm.form.value.inputss.usern;
+      let password = myForm.form.value.inputss.password;
+      let name = myForm.form.value.inputss.name;
+      let affiliation = myForm.form.value.inputss.affiliation;
+      let email = myForm.form.value.inputss.email;
+      let reviewer = {id, usern, password, name, affiliation, email, papers};
+      this.personService.updatePerson(this.newUrl.substring(0, ur.indexOf('/') + 1) + 's', reviewer)
         .subscribe(_ => this.cancel());
     }
   }

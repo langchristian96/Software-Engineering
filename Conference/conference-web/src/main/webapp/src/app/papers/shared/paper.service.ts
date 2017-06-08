@@ -19,6 +19,25 @@ export class PaperService {
   constructor(private http: Http) {
   }
 
+  getPapersByReviewerId(): Observable<Paper[]>{
+    var user = JSON.parse(localStorage.getItem('userId'));
+    var data = JSON.stringify({"reviewerId": user});
+    let myParams = new URLSearchParams();
+    myParams.append('reviewerId', user);
+    return this.http.get(`${this.papersUrl}/reviewer/${user}`, {withCredentials: true, headers: this.headers})
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  gradePaper(paperId, reviewerId, grade): Observable<void> {
+    const url = `http://localhost:8080/api/reviewerpapers/${paperId}/${reviewerId}`;
+    var data = JSON.stringify({"data": grade});
+    return this.http
+      .put(url, data, {withCredentials: true,headers: this.headers})
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   getPapers(): Observable<Paper[]> {
     return this.http.get(this.papersUrl,{withCredentials: true})
       .map(this.extractData)

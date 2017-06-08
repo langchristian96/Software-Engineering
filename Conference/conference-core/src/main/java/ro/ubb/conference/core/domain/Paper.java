@@ -42,7 +42,7 @@ public class Paper extends BaseEntity<Long> {
     @OneToMany(mappedBy = "authorPaper",cascade = CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
     private Set<AuthorPaper> authors=new HashSet<>();
 
-    @OneToMany(mappedBy = "reviewerPaper",cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "reviewerPaper",cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<ReviewerPaper> reviewers=new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -58,13 +58,28 @@ public class Paper extends BaseEntity<Long> {
     }
 
     public Set<Reviewer> getReviewers(){
-        return Collections.unmodifiableSet(reviewers.stream().map(ReviewerPaper::getReviewer).collect(Collectors.toSet()));
+//        return Collections.unmodifiableSet(reviewers.stream().map(ReviewerPaper::getReviewer).collect(Collectors.toSet()));
+        return reviewers.stream().map(ReviewerPaper::getReviewer).collect(Collectors.toSet());
     }
 
     public void addReviewer(Reviewer reviewer){
         ReviewerPaper reviewerPaper = new ReviewerPaper();
         reviewerPaper.setReviewerPaper(this);
         reviewerPaper.setReviewer(reviewer);
+        reviewers.add(reviewerPaper);
+    }
+
+    public void updateReviewer(Reviewer reviewer, int grade){
+        ReviewerPaper reviewerPaper = new ReviewerPaper();
+        reviewerPaper.setReviewerPaper(this);
+        reviewerPaper.setReviewer(reviewer);
+        reviewerPaper.setGrade(grade);
+        for(ReviewerPaper reviewerPaper1: reviewers){
+            if(reviewerPaper1.getReviewer().getId().equals(reviewer.getId())){
+                reviewers.remove(reviewerPaper1);
+                break;
+            }
+        }
         reviewers.add(reviewerPaper);
     }
 

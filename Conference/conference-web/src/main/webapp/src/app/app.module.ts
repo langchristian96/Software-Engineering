@@ -40,6 +40,7 @@ import {GlobalApp} from "./helpers/global";
 // }
 import {PersonNewComponent} from "./persons/person-new/person-new.component";
 import {CallbackPipe} from "./sessions/callback.pipe";
+import {PaperGradeComponent} from "./papers/paper-grade/paper-grade.component";
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {CallbackPipe} from "./sessions/callback.pipe";
     PersonsComponent,
     PersonNewComponent,
     PaperDetailComponent,
+    PaperGradeComponent,
     PaperListComponent,
     PapersComponent,
     PaperNewComponent,
