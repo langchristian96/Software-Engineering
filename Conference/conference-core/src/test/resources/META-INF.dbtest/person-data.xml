@@ -1,0 +1,7 @@
+<dataset>
+    <person id="11" usern="john" password="111" name="JWick" affiliation="aaaa" email="john@wick.com" user_role="NORMAL"/>
+    <person id="2" usern="Klang" password="123" name="Lang" affiliation="aaaa" email="lang@wick.com" user_role="NORMAL"/>
+    <person id="3" usern="Marin" password="444" name="Marinius" affiliation="aaaa" email="marinius@wick.com" user_role="NORMAL"/>
+    <person id="4" usern="Anca22" password="000" name="Anca" affiliation="aaaa" email="masi@wick.com" user_role="NORMAL"/>
+
+</dataset>
