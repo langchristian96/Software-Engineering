@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {Person} from "../shared/person.model";
 import {Router} from "@angular/router";
 import {PersonService} from "../shared/person.service";
+import {GlobalApp} from "../../helpers/global";
 
 @Component({
   moduleId: module.id,
@@ -15,10 +16,12 @@ export class PersonListComponent implements OnInit {
   persons: Person[];
   selectedPerson: Person;
   newUrl: string;
+  app:GlobalApp;
 
   constructor(private personService: PersonService,
               private router: Router) {
-    this.newUrl = router.url
+    this.newUrl = router.url;
+    this.app=new GlobalApp();
   }
 
   ngOnInit(): void {

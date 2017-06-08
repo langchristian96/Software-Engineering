@@ -41,15 +41,15 @@
         <td>{{ conference.endDate }}</td>
         <td>{{ conference.callDate }}</td>
         <td>{{ conference.papersDeadline }}</td>
-        <td><a (click)="delete(conference.id)" class="btn btn-raised btn-danger">Delete</a></td>
-        <td><a (click)="getSessionsById(conference.id)" class="btn btn-raised">View</a></td>
+        <td *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin')"><a  (click)="delete(conference.id)" class="btn btn-raised btn-danger">Delete</a></td>
+        <td><a *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin'||app.getLocalStorageItem('userClass')=='listener'||app.getLocalStorageItem('userClass')=='reviewer'||app.getLocalStorageItem('userClass')=='person')" (click)="getSessionsById(conference.id)" class="btn btn-raised">View</a></td>
       </tr>
       </tbody>
 
 
     </table>
   </div>
-  <a (click)="addNewConference()" class="btn btn-fab btn-danger">
+  <a *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin'||app.getLocalStorageItem('userClass')=='person')" (click)="addNewConference()" class="btn btn-fab btn-danger">
     <i class="material-icons">add</i>
     <div class="ripple-container"></div>
   </a>
@@ -76,7 +76,7 @@
         <td>{{ session.date }}</td>
         <td>{{ session.conferenceId }}</td>
         <td>{{ session.sessionChairId }}</td>
-        <td><a (click)="getPapersById(session.id)" class="btn btn-raised btn-danger">View</a></td>
+        <td  ><a   (click)="getPapersById(session.id)" class="btn btn-raised btn-danger">View</a></td>
       </tr>
       </tbody>
 
@@ -109,7 +109,7 @@
           <td>{{ paper.keywords }}</td>
           <td>{{ paper.topics }}</td>
           <td>{{ paper.sessionId }}</td>
-          <td><a (click)="getAuthorsById(paper.id)" class="btn btn-raised btn-danger">View</a></td>
+          <td><a  (click)="getAuthorsById(paper.id)" class="btn btn-raised btn-danger">View</a></td>
         </tr>
         </tbody>
 

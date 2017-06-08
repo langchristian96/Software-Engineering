@@ -12,6 +12,7 @@ import {Observable} from "rxjs/Observable";
 import {PaperService} from "../../papers/shared/paper.service";
 import {Paper} from "../../papers/shared/paper.model";
 
+import {GlobalApp} from "../../helpers/global";
 @Component({
   moduleId: module.id,
   selector: 'app-conference-list',
@@ -24,11 +25,13 @@ export class ConferenceListComponent implements OnInit {
   selectedConference: Conference;
   sessions: Session[];
   papers: Paper[];
+  app:GlobalApp;
 
   constructor(private conferenceService: ConferenceService,
               private sessionService: SessionService,
               private paperService: PaperService,
               private router: Router) {
+    this.app=new GlobalApp();
   }
 
   ngOnInit(): void {

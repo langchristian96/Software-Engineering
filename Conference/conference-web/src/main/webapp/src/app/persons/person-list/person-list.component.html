@@ -35,13 +35,13 @@
         <td>{{ person.usern }}</td>
         <td>{{ person.affiliation }}</td>
         <td>{{ person.email }}</td>
-        <td><a (click)="editPerson(person.id)" class="btn btn-raised btn-success">Edit</a></td>
-        <td><a (click)="deletePerson(person.id)" class="btn btn-raised btn-danger">Delete</a></td>
+        <td *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin')"><a (click)="editPerson(person.id)" class="btn btn-raised btn-success">Edit</a></td>
+        <td *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin')"><a (click)="deletePerson(person.id)" class="btn btn-raised btn-danger">Delete</a></td>
       </tr>
       </tbody>
     </table>
   </div>
-  <a (click)="addNewPerson()" class="btn btn-fab btn-danger">
+  <a *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin')" (click)="addNewPerson()" class="btn btn-fab btn-danger">
     <i class="material-icons">add</i>
     <div class="ripple-container"></div>
   </a>

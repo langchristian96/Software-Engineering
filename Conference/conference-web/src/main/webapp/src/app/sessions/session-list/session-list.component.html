@@ -18,13 +18,13 @@
         <td>{{ session.date }}</td>
         <td>{{ session.conferenceId }}</td>
         <td>{{ session.sessionChairId }}</td>
-        <td><a (click)="editSession(session.id)" class="btn btn-raised btn-success">Edit</a></td>
-        <td><a (click)="eraseSession(session.id)" class="btn btn-raised btn-danger">Delete</a></td>
+        <td *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin' || app.getLocalStorageItem('userClass')=='person' )"><a (click)="editSession(session.id)" class="btn btn-raised btn-success">Edit</a></td>
+        <td *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin' || app.getLocalStorageItem('userClass')=='person' )"><a (click)="eraseSession(session.id)" class="btn btn-raised btn-danger">Delete</a></td>
       </tr>
       </tbody>
     </table>
   </div>
-  <a (click)="addNewSession()" class="btn btn-fab btn-danger">
+  <a *ngIf="app && app.localStorageItem('currentUser') && (app.getLocalStorageItem('userClass')=='admin' || app.getLocalStorageItem('userClass')=='person' )" (click)="addNewSession()" class="btn btn-fab btn-danger">
     <i class="material-icons">add</i>
     <div class="ripple-container"></div>
   </a>

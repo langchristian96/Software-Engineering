@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import {Paper} from "../shared/paper.model";
 import {Router} from "@angular/router";
 import {PaperService} from "../shared/paper.service";
+import {GlobalApp} from "../../helpers/global";
 
 
 @Component({
@@ -17,11 +18,13 @@ export class PaperListComponent implements OnInit {
   errorMessage: string;
   papers: Paper[];
   newUrl: string;
+  app:GlobalApp;
   // selectedPaper: Paper;
 
   constructor(private paperService: PaperService,
               private router: Router) {
     this.newUrl = router.url;
+    this.app=new GlobalApp();
   }
 
   ngOnInit(): void {

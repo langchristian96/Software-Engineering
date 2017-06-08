@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Session} from "../shared/session.model";
 import {SessionService} from "../shared/session.service";
 import {Router} from "@angular/router";
+import {GlobalApp} from "../../helpers/global";
 
 
 @Component({
@@ -14,10 +15,13 @@ import {Router} from "@angular/router";
 export class SessionListComponent implements OnInit{
   errorMessage: string;
   sessions: Session[];
+  app:GlobalApp;
   // selectedClient: Client;
 
   constructor(private sessionService: SessionService,
-              private router: Router){}
+              private router: Router){
+    this.app=new GlobalApp();
+  }
 
   ngOnInit(): void{
     this.getSessions();
