@@ -45,7 +45,7 @@ public class JPAConfigIT {
         return dataSource;
     }
 
-   @Bean
+    @Bean
     public EntityManagerFactory entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setDatabase(Database.H2);

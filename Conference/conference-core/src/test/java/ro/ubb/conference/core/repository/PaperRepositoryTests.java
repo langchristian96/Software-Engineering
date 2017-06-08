@@ -12,61 +12,54 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import ro.ubb.conference.core.ITConfig;
-import ro.ubb.conference.core.domain.Person;
+import ro.ubb.conference.core.domain.Paper;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by paul on 6/6/2017.
+ * Created by Adriana on 6/6/2017.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ITConfig.class})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class})
-@DatabaseSetup("/META-INF.dbtest/db-data.xml")
-public class PersonRepositoryTests {
+@DatabaseSetup("/META-INF.dbtest/db-data2.xml")
+public class PaperRepositoryTests {
     @Autowired
-    private PersonRepository personRepository;
+    private PaperRepository paperRepository;
 
     @Test
     public void findAll() throws Exception {
-        List<Person> authors = personRepository.findAll();
+        List<Paper> papers = paperRepository.findAll();
         //nu stiu cate elemente sunt in baza de date
-        assertEquals("there should be four authors", 4, authors.size());
+        assertEquals("there should be four papers", 4, papers.size());
+    }
+
+    @Test
+    public void createPaper() throws Exception {
+
+        Paper c=new Paper("Titlepaper","aaaaaaa","aaaaaaa", "aaaaa", "aaaaa");
+        paperRepository.save(c);
+        //nu stiu cate elemente sunt in baza de date
+        assertEquals("Paper ",5l,(long)paperRepository.findAll().size());
 
     }
+
+    @Test
+    public void deletePaper() throws Exception {
+
+        paperRepository.delete(4l);
+        assertEquals("Paper with id 4 should be removed",3,paperRepository.findAll().size());
+
+    }
+
     @Test
     public void findOne() throws Exception{
-        Long personId = 4l;
-        Person person=(Person) personRepository.findOne(personId);
+        Long paperId = 4l;
+        Paper paper=(Paper) paperRepository.findOne(paperId);
 
-        assertEquals("This person does not exist",personId, person.getId());
+        assertEquals("This paper does not exist",paperId, paper.getId());
     }
-    @Test
-    public void createPerson() throws Exception {
-
-        Person c=new Person("aaaaa","aaaaaaa","Adriana", "afiliation1", "email@gmail.com");
-        personRepository.save(c);
-        //nu stiu cate elemente sunt in baza de date
-        assertEquals("Author ",5l,(long)personRepository.findAll().size());
-
-    }
-
-    @Test
-    public void deleteAuthor() throws Exception {
-
-        personRepository.delete(4l);
-        assertEquals("Person with id 4 should be removed",3,personRepository.findAll().size());
-
-    }
-
-    @Test
-    public void getUserByUserName() throws Exception {
-        String userName = "Klang";
-        Person p = personRepository.getUserByUserName(userName);
-        assertEquals("This person does not exist", userName, p.getUsern());
-    }
-
 }
