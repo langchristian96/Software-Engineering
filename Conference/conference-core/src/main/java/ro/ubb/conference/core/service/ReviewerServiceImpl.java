@@ -5,14 +5,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ro.ubb.conference.core.domain.*;
+import ro.ubb.conference.core.domain.Author;
+import ro.ubb.conference.core.domain.Paper;
+import ro.ubb.conference.core.domain.Reviewer;
 import ro.ubb.conference.core.repository.AuthorRepository;
 import ro.ubb.conference.core.repository.PaperRepository;
 import ro.ubb.conference.core.repository.ReviewerRepository;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Created by langchristian96 on 5/18/2017.

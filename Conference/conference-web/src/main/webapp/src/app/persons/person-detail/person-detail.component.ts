@@ -8,6 +8,7 @@ import {PersonService} from "../shared/person.service";
 import {Person} from "../shared/person.model";
 import {Author} from "../shared/author.model";
 import {Reviewer} from "../shared/reviewer.model";
+import {Listener} from "../shared/listener.model";
 
 
 @Component({
@@ -29,7 +30,8 @@ export class PersonDetailComponent implements OnInit {
               private location: Location,
               private router: Router) {
     this.newUrl = router.url;
-    if(this.newUrl.includes("person")){
+    let crt=this.newUrl.split("/")[1];
+    if(this.newUrl.substring(1, this.newUrl.length - 9) == "person"){
       this.personType = "Person";
       this.inputs = [
         { type: 'number', value: '-1', name: ''},
@@ -45,7 +47,7 @@ export class PersonDetailComponent implements OnInit {
         this.inputs[i].name = array[i];
       }
     }
-    if(this.newUrl.includes("author")){
+    if(this.newUrl.substring(1, this.newUrl.length - 9) == "author"){
       this.personType = "Author";
       this.inputs = [
         { type: 'number', value: '-1', name: ''},
@@ -62,6 +64,27 @@ export class PersonDetailComponent implements OnInit {
         this.inputs[i].name = array[i];
       }
     }
+
+
+    if(crt == "listener"){
+      this.personType = "Listener";
+      this.inputs = [
+        { type: 'number', value: '-1', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'password', value: '', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'text', value: '', name: ''},
+        { type: 'text', value: '', name: ''}
+      ];
+      let a = new Listener(-1, "", "", "", "", "", []);
+      let array = Object.getOwnPropertyNames(a);
+      for(var i = 0; i < array.length; i++){
+        this.inputs[i].name = array[i];
+      }
+    }
+
+
     if(this.newUrl.includes("reviewer")){
       this.personType = "Reviewer";
       this.inputs = [
@@ -84,6 +107,7 @@ export class PersonDetailComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.newUrl.substring(1, this.newUrl.length - 9));
     var ur = this.newUrl.substring(1, this.newUrl.length);
+    let crt=this.newUrl.split("/")[1];
     this.route.params
       .switchMap((params: Params) => this.personService.getPerson(+params['id'], this.newUrl.substring(0, ur.indexOf('/') + 1) + 's'))
       .subscribe(person => {
@@ -100,6 +124,10 @@ export class PersonDetailComponent implements OnInit {
           var newPersRev = <Reviewer> person;
           newPerson = new Reviewer(person.id, person.usern, person.password, person.name, person.affiliation, person.email, newPersRev.papers)
         }
+        else if(crt == "listener"){
+          var newPers2 =<Listener> person;
+          newPerson = new Listener(person.id, person.usern, person.password, person.name, person.affiliation, person.email, newPers2.sessions)
+        }
         for (var i = 0; i < this.inputs.length; i++) {
           var str = this.inputs[i].name;
           this.inputs[i].value = newPerson[str];
@@ -113,6 +141,7 @@ export class PersonDetailComponent implements OnInit {
 
   updatePersonDetail(myForm): void {
     var ur = this.newUrl.substring(1, this.newUrl.length);
+    let crt=this.newUrl.split("/")[1];
     if (this.newUrl.includes("person")) {
       let usern = myForm.form.value.inputss.usern;
       let id = myForm.form.value.inputss.id;
@@ -121,6 +150,7 @@ export class PersonDetailComponent implements OnInit {
       let affiliation = myForm.form.value.inputss.affiliation;
       let email = myForm.form.value.inputss.email;
       let person = {id, usern, password, name, affiliation, email};
+
       this.personService.updatePerson(this.newUrl.substring(0, ur.indexOf('/') + 1) + 's', person)
         .subscribe(_ => this.cancel());
     } else if (this.newUrl.includes("author")) {
@@ -145,6 +175,18 @@ export class PersonDetailComponent implements OnInit {
       let email = myForm.form.value.inputss.email;
       let reviewer = {id, usern, password, name, affiliation, email, papers};
       this.personService.updatePerson(this.newUrl.substring(0, ur.indexOf('/') + 1) + 's', reviewer)
+      this.personService.updatePerson("/"+crt + 's', author)
+        .subscribe(_ => this.cancel());
+    } else if (this.newUrl.includes("listener")) {
+      let sessions = myForm.form.value.inputss.sessions;
+      let id = myForm.form.value.inputss.id;
+      let usern = myForm.form.value.inputss.usern;
+      let password = myForm.form.value.inputss.password;
+      let name = myForm.form.value.inputss.name;
+      let affiliation = myForm.form.value.inputss.affiliation;
+      let email = myForm.form.value.inputss.email;
+      let listener = {id, usern, password, name, affiliation, email, sessions};
+      this.personService.updatePerson("/"+crt + 's', listener)
         .subscribe(_ => this.cancel());
     }
   }

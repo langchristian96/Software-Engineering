@@ -21,6 +21,10 @@ public class ReviewerController {
 
     private static final Logger log = LoggerFactory.getLogger(ReviewerController.class);
 
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
     private ReviewerService reviewerService;
 

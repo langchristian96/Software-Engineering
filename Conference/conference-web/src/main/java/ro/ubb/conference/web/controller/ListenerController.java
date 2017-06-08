@@ -38,6 +38,9 @@ public class ListenerController {
     private ListenerService personService;
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private ListenerConverter personConverter;
 
     @RequestMapping(value = "/listeners", method = RequestMethod.GET)

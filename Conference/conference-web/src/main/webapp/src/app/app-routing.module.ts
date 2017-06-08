@@ -25,9 +25,9 @@ import {PaperGradeComponent} from "./papers/paper-grade/paper-grade.component";
 const routes: Routes = [
 
   { path: '', redirectTo: '/', pathMatch: 'full', canActivate: [AuthGuard] },
-  { path: 'sessions', component: SessionsComponent, canActivate: [AuthGuard]},
-  { path: 'session/edit/:id', component: SessionEditComponent, canActivate: [AuthGuard]},
-  { path: 'session/new', component: SessionNewComponent, canActivate: [AuthGuard]},
+  {path: 'sessions', component: SessionsComponent, canActivate: [AuthGuard]},
+  {path: 'session/edit/:id', component: SessionEditComponent, canActivate: [AuthGuard]},
+  {path: 'session/new', component: SessionNewComponent, canActivate: [AuthGuard]},
   { path: 'conferences', component: ConferencesComponent, canActivate: [AuthGuard] },
   { path: 'conference/detail/:id', component: ConferenceDetailComponent, canActivate: [AuthGuard]},
   { path: 'conference/new', component: ConferenceNewComponent, canActivate: [AuthGuard]},
@@ -41,6 +41,9 @@ const routes: Routes = [
   { path: 'reviewer/new', component: PersonNewComponent, canActivate: [AuthGuard]},
   { path: 'papers/reviewer', component: PapersComponent, canActivate: [AuthGuard] },
   { path: 'paper/reviewer/grade/:id', component: PaperGradeComponent, canActivate: [AuthGuard] },
+  { path: 'listeners', component: PersonsComponent, canActivate: [AuthGuard] },
+  { path: 'listener/detail/:id', component: PersonDetailComponent, canActivate: [AuthGuard]},
+  { path: 'listener/new', component: PersonNewComponent, canActivate: [AuthGuard]},
   { path: 'papers', component: PapersComponent, canActivate: [AuthGuard] },
   { path: 'paper/detail/:id', component: PaperDetailComponent, canActivate: [AuthGuard]},
   { path: 'paper/new', component: PaperNewComponent, canActivate: [AuthGuard]},
