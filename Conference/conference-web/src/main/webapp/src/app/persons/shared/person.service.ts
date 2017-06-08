@@ -118,7 +118,9 @@ export class PersonService {
     }
     else if(urlNew.includes("listener")){
       m = JSON.stringify({"listener": person});
-
+    }
+    else if(urlNew.includes("reviewer")){
+      m = JSON.stringify({"reviewer": person});
     }
     const url = `${this.personsUrl+urlNew}/${person.id}`;
     return this.http

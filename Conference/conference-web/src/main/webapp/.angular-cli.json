@@ -21,7 +21,7 @@
       "styles": [
         "styles.css"
       ],
-      "scripts": ["dist/js/arrive.js" ,"dist/js/material.js", "dist/js/ripples.js", "dist/js/main.js"],
+      "scripts": ["dist/js/arrive.js" ,"dist/js/material.js", "dist/js/ripples.js", "dist/js/main.js", "dist/js/FileSaver.min.js"],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

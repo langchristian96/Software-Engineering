@@ -2,11 +2,12 @@
  * Created by Adriana on 5/4/2017.
  */
 import {Injectable} from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from "@angular/http";
+import {Http, Response, Headers, RequestOptions, ResponseContentType} from "@angular/http";
 
 import {Observable} from "rxjs";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 import {Paper} from "./paper.model";
 
@@ -37,6 +38,20 @@ export class PaperService {
       .map(this.extractData)
       .catch(this.handleError);
   }
+
+  downloadPaper(paperId): Observable<any>{
+    let headers = new Headers({'Content-Type': 'application/json'});
+    return this.http.get(`${this.papersUrl}/download//${paperId}`, {withCredentials: true, headers: headers, responseType: ResponseContentType.Blob})
+      .map((res:Response) => res.blob())
+      .catch(this.handleError);
+  }
+
+  private extractDocument(res: any) {
+    var blob = new Blob([res._body], { type: 'application/pdf' });
+    var url=window.URL.createObjectURL(blob);
+    window.open(url);
+  }
+
 
   getPapers(): Observable<Paper[]> {
     return this.http.get(this.papersUrl,{withCredentials: true})

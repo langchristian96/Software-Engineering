@@ -4,11 +4,13 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {ActivatedRoute, Params} from "@angular/router";
 import {Location} from '@angular/common';
+import 'rxjs/Rx' ;
 
 import 'rxjs/add/operator/switchMap';
 
 import {PaperService} from "../shared/paper.service";
 import {Paper} from "../shared/paper.model";
+import * as FileSaver from 'file-saver';
 
 
 @Component({
@@ -40,6 +42,26 @@ export class PaperGradeComponent implements OnInit {
     this.location.back();
   };
 
+  downloadPaper() {
+    this.paperService.downloadPaper(this.paper.id).subscribe(
+      data => {
+        console.log(data);
+        var blob = new Blob([data], {type: 'application/pdf'});
+        console.log(blob);
+        FileSaver.saveAs(blob, "testData.pdf");
+      },
+      err => console.error(err),
+      () => console.log('done')
+    );
+  }
+
+  download(res){
+    var link = document.createElement("a");
+    link.download = "a";
+    link.href = res.link;
+    document.body.appendChild(link);
+    link.click();
+  }
 }
 
 
