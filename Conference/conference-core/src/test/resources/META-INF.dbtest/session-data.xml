@@ -1,6 +1,3 @@
 <dataset>
-    <session id="11" date="16-10-2010" sessionChair="3" conferenceId="1"/>
-    <session id="2" date="17-10-2010" sessionChair="1" conferenceId="2"/>
-    <session id="3" date="18-10-2010" sessionChair="3" conferenceId="3"/>
-    <session id="4" date="19-10-2010" sessionChair="1" conferenceId="4"/>
+    <session id="11" date="16-10-2010" sessionChair="3"/>
 </dataset>

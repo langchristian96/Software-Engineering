@@ -1,4 +1,4 @@
-package ro.ubb.conference.core.server;
+package ro.ubb.conference.core.service;
 
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;

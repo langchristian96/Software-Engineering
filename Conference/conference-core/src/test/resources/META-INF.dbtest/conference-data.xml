@@ -1,6 +1,6 @@
 <dataset>
-    <conference id="-1" name="conference1" edition="3" startDate="10-10-2010" endDate="20-10-2010"  callDate="15-10-2010" papersDeadline="01-10-2010"/>
-    <conference id="-2" name="conference2" edition="2" startDate="10-10-2010" endDate="20-10-2010"  callDate="15-10-2010" papersDeadline="01-10-2010"/>
-    <conference id="-3" name="conference3" edition="7" startDate="10-10-2010" endDate="20-10-2010"  callDate="15-10-2010" papersDeadline="01-10-2010"/>
-    <conference id="-4" name="conference4" edition="3" startDate="10-10-2010" endDate="20-10-2010"  callDate="15-10-2010" papersDeadline="01-10-2010"/>
+    <conference id="11" name="conference1" edition="3" startDate="10-10-2010" endDate="20-10-2010"  callDate="15-10-2010" papersDeadline="01-10-2010"/>
+    <conference id="2" name="conference2" edition="2" startDate="10-10-2010" endDate="20-10-2010"  callDate="15-10-2010" papersDeadline="01-10-2010"/>
+    <conference id="3" name="conference3" edition="7" startDate="10-10-2010" endDate="20-10-2010"  callDate="15-10-2010" papersDeadline="01-10-2010"/>
+    <conference id="4" name="conference4" edition="3" startDate="10-10-2010" endDate="20-10-2010"  callDate="15-10-2010" papersDeadline="01-10-2010"/>
 </dataset>

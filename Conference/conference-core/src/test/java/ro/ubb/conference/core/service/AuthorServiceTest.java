@@ -1,4 +1,4 @@
-package ro.ubb.conference.core.server;
+package ro.ubb.conference.core.service;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -14,7 +14,6 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import ro.ubb.conference.core.ITConfig;
 import ro.ubb.conference.core.domain.Author;
 import ro.ubb.conference.core.domain.Paper;
-import ro.ubb.conference.core.service.AuthorService;
 
 import java.util.HashSet;
 import java.util.List;

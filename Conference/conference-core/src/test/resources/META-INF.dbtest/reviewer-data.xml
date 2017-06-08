@@ -1,6 +1,3 @@
 <dataset>
-    <reviewer id="1" username="reviewer1" password="password" name="Mike Shinoda" affiliation="corporation1"  email="mike@gmail.com"/>
-    <reviewer id="2" username="reviewer2" password="password" name="Prince Charles" affiliation="corporation1"  email="charlie_the_fluffy_unicorn@gmail.com"/>
-    <reviewer id="3" username="reviewer3" password="password" name="Saint Theresa" affiliation="corporation1"  email="theresa@yahoo.com"/>
-    <reviewer id="4" username="reviewer4" password="password" name="Bill Gates" affiliation="corporation1"  email="billie.willie@gmail.com"/>
+    <reviewer id="-5"/>
 </dataset>
