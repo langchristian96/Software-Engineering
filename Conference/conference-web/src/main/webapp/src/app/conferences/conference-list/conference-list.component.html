@@ -76,7 +76,7 @@
         <td>{{ session.date }}</td>
         <td>{{ session.conferenceId }}</td>
         <td>{{ session.sessionChairId }}</td>
-        <td><a (click)="getPapersById(session.id)" class="btn btn-raised btn-danger">View</a></td>
+        <td><a (click)="getPapersById(session.id)" class="btn btn-raised">View</a></td>
       </tr>
       </tbody>
 
@@ -109,7 +109,7 @@
           <td>{{ paper.keywords }}</td>
           <td>{{ paper.topics }}</td>
           <td>{{ paper.sessionId }}</td>
-          <td><a (click)="getAuthorsById(paper.id)" class="btn btn-raised btn-danger">View</a></td>
+          <td><a (click)="getAuthorsById(paper.id)" class="btn btn-raised">View</a></td>
         </tr>
         </tbody>
 

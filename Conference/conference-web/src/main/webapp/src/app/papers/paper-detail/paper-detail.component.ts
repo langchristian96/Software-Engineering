@@ -42,6 +42,14 @@ export class PaperDetailComponent implements OnInit {
     this.fileList = e.target.files;
   }
 
+  updatePaperSessionId(sessionId: string): void {
+    if (Number(sessionId))
+    {
+      this.paper.sessionId = Number(sessionId);
+      this.paperService.updatePaper(this.paper).subscribe(_ => this.cancel());
+    }
+  }
+
   addPaperWithFile(): void {
     if (this.fileList.length > 0) {
       let file: File = this.fileList[0];
