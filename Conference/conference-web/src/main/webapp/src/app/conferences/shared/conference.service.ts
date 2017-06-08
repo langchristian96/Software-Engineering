@@ -66,8 +66,11 @@ export class ConferenceService {
 
   create(name: string, edition: number, startDate: string, endDate: string, callDate: string, papersDeadline: string/*, committee: string, sections: string*/): Observable<Conference> {
     let conference = {name, edition, startDate, endDate, callDate, papersDeadline/*, committee, sections*/};
+    let uid=localStorage.getItem('userId');
+    let url='http://localhost:8080/api/conferences/';
+    console.log(url+uid);
     return this.http
-      .post(this.conferencesUrl, JSON.stringify({"conference": conference}), {withCredentials: true,headers: this.headers})
+      .post(url+uid, JSON.stringify({"conference": conference}), {withCredentials: true,headers: this.headers})
       .map(this.extractData)
       .catch(this.handleError);
   }

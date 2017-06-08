@@ -83,6 +83,23 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     @Override
+    @Transactional
+    public Conference updateConferenceChair(Long id,Long chairID){
+        log.trace("updateConferenceChair: id={}, chairId={}", id, chairID);
+
+        Conference conference = (Conference) conferenceRepository.findOne(id);
+
+        conference.setChairID(chairID);
+//        conference.setCommittee(commitee);
+//        conference.setSections(sections);
+
+        log.trace("updateConferenceChair: conference={}", conference);
+
+        return conference;
+    }
+
+
+    @Override
     public void deleteConference(Long id) {
         log.trace("deleteConference: id={}", id);
 

@@ -25,5 +25,8 @@ public interface ConferenceService {
 
     Conference createConference(String name, int edition, String startDate, String endDate, String callDate, String papersDeadline);
 
+
+    Conference updateConferenceChair(Long id,Long chairID);
+
     void deleteConference(Long id);
 }

@@ -95,6 +95,25 @@ public class ConferenceController {
     }
 
 
+    @RequestMapping(value = "/conferences/{chairId}", method = RequestMethod.POST)
+    public Map<String, ConferenceDto> createConferenceChair(
+            @PathVariable final Long chairId,
+            @RequestBody final Map<String, ConferenceDto> conferenceDtoMap) {
+        log.trace("createConferenceChair: conferenceDtoMap={}", conferenceDtoMap);
+
+        ConferenceDto conferenceDto = conferenceDtoMap.get("conference");
+        Conference conference = conferenceService.createConference(
+                conferenceDto.getName(), conferenceDto.getEdition(), conferenceDto.getStartDate(), conferenceDto.getEndDate(), conferenceDto.getCallDate(), conferenceDto.getPapersDeadline());
+
+        Map<String, ConferenceDto> result = new HashMap<>();
+        result.put("conference", conferenceConverter.convertModelToDto(conference));
+        conferenceService.updateConferenceChair(conference.getId(),chairId);
+        log.trace("createConferenceChair: result={}", result);
+
+        return result;
+    }
+
+
     @RequestMapping(value = "conferences/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteConference(@PathVariable final Long id) {
         log.trace("deleteConference: id={}", id);

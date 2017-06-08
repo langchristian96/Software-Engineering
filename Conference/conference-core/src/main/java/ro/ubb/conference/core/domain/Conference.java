@@ -40,6 +40,19 @@ public class Conference extends BaseEntity<Long> {
     @Column(name = "PapersDeadline", nullable = false)
     private String papersDeadline;
 
+    @Column(name="ChairID")
+    private Long chairID;
+
+    public Conference(String name, int edition, String startDate, String endDate, String callDate, String papersDeadline, Set<Session> sessions) {
+        this.name = name;
+        this.edition = edition;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.callDate = callDate;
+        this.papersDeadline = papersDeadline;
+        this.sessions = sessions;
+    }
+
     @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Session> sessions = new HashSet<>();
 
