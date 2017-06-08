@@ -31,7 +31,7 @@ export class PersonDetailComponent implements OnInit {
               private router: Router) {
     this.newUrl = router.url;
     let crt=this.newUrl.split("/")[1];
-    if(this.newUrl.substring(1, this.newUrl.length - 9) == "person"){
+    if(crt == "person"){
       this.personType = "Person";
       this.inputs = [
         { type: 'number', value: '-1', name: ''},
@@ -47,7 +47,7 @@ export class PersonDetailComponent implements OnInit {
         this.inputs[i].name = array[i];
       }
     }
-    if(this.newUrl.substring(1, this.newUrl.length - 9) == "author"){
+    if(crt == "author"){
       this.personType = "Author";
       this.inputs = [
         { type: 'number', value: '-1', name: ''},
@@ -175,7 +175,7 @@ export class PersonDetailComponent implements OnInit {
       let email = myForm.form.value.inputss.email;
       let reviewer = {id, usern, password, name, affiliation, email, papers};
       this.personService.updatePerson(this.newUrl.substring(0, ur.indexOf('/') + 1) + 's', reviewer)
-      this.personService.updatePerson("/"+crt + 's', author)
+
         .subscribe(_ => this.cancel());
     } else if (this.newUrl.includes("listener")) {
       let sessions = myForm.form.value.inputss.sessions;

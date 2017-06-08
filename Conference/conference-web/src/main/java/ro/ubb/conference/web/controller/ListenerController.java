@@ -31,8 +31,6 @@ public class ListenerController {
 
     private static final Logger log = LoggerFactory.getLogger(ListenerController.class);
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private ListenerService personService;

@@ -41,6 +41,7 @@ export class PersonListComponent implements OnInit {
   }
 
   editPerson(personId: number): void {
+    let crt=this.newUrl.split("/")[1];
     this.router.navigate([this.newUrl.substring(0, this.newUrl.length - 1) + '/detail/', personId]);
   }
 
@@ -48,6 +49,7 @@ export class PersonListComponent implements OnInit {
       this.personService.deletePerson(this.newUrl, personId).subscribe(_ => this.getPersons());
   }
   addNewPerson(): void{
+    let crt=this.newUrl.split("/")[1];
     this.router.navigate([this.newUrl.substring(0, this.newUrl.length - 1)+'/new']);
   }
 

@@ -26,7 +26,7 @@ public class ListenerServiceImpl implements ListenerService {
     private static final Logger log = LoggerFactory.getLogger(ListenerServiceImpl.class);
 
     @Autowired
-    private ListenerRepository listenerRepository;
+    private ListenerRepository personRepository;
 
     @Autowired
     private SessionRepository sessionRepository;
@@ -35,7 +35,7 @@ public class ListenerServiceImpl implements ListenerService {
     public List<Listener> findAll() {
         log.trace("findAll");
 
-        List<Listener> persons = listenerRepository.findAll();
+        List<Listener> persons = personRepository.findAll();
 
         log.trace("findAll: persons={}", persons);
 
@@ -66,7 +66,7 @@ public class ListenerServiceImpl implements ListenerService {
         log.trace("updatePerson: personId={}, password={}, name={}, affiliation={}, email={}",
                 personId, password, name, affiliation, email);
 
-        Listener person = (Listener) listenerRepository.findOne(personId);
+        Listener person = (Listener) personRepository.findOne(personId);
         person.setPassword(password);
         person.setName(name);
         person.setAffiliation(affiliation);
@@ -103,7 +103,7 @@ public class ListenerServiceImpl implements ListenerService {
         person.setPassword(password);
         person.setName(name);
 
-        person = (Listener) listenerRepository.save(person);
+        person = (Listener) personRepository.save(person);
 
         log.trace("createListener: Listener={}", person);
 
@@ -114,7 +114,7 @@ public class ListenerServiceImpl implements ListenerService {
     public void deleteListener(Long personId) {
         log.trace("deleteListener: personId={}", personId);
 
-        listenerRepository.delete(personId);
+        personRepository.delete(personId);
 
         log.trace("deleteListener - method end");
     }

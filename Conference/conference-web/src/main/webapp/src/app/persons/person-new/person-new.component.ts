@@ -145,7 +145,7 @@ export class PersonNewComponent implements OnInit{
       let affiliation = myForm.form.value.inputss.affiliation;
       let email = myForm.form.value.inputss.email;
       let reviewer = {usern, password, name, affiliation, email, papers};
-      this.personService.createPerson(this.newUrl.substring(0, this.newUrl.length - 4) + 's', reviewer).subscribe(_ => this.cancel());
+      this.personService.createPerson("/"+crt + 's', reviewer).subscribe(_ => this.cancel());
     }
   }
 }
