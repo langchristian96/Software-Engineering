@@ -35,7 +35,7 @@
       </tbody>
     </table>
   </div>
-  <a (click)="addNewPaper()" class="btn btn-fab btn-danger">
+  <a *ngIf="!newUrl.includes('reviewer')" (click)="addNewPaper()" class="btn btn-fab btn-danger">
     <i class="material-icons">add</i>
     <div class="ripple-container"></div>
   </a>
