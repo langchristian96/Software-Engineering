@@ -75,7 +75,7 @@ export class SessionService{
   }
 
   updateSession(session): Observable<Session>{
-    let updateUrl = this.sessionUrl + 'update/' +session.id;
+    let updateUrl = this.sessionUrl + '/' +session.id;
     let bodyString = JSON.stringify({"session":session}); // Stringify payload
     let headers = new Headers();
     console.log(bodyString);

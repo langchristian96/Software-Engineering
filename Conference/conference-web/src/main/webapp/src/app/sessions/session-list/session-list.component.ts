@@ -28,7 +28,14 @@ export class SessionListComponent implements OnInit{
   }
 
   getSessions(){
+
+    if(localStorage.getItem('userClass')=='person')
     this.sessionService.getSessionsForChair()
+      .subscribe(
+        session => this.sessions = session,
+        error => this.errorMessage = <any>error
+      );
+    else this.sessionService.getSessions()
       .subscribe(
         session => this.sessions = session,
         error => this.errorMessage = <any>error
