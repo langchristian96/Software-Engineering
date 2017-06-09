@@ -27,6 +27,7 @@
         <td>{{ paper.authorsUsername }}</td>
         <td>{{ paper.sessionId }}</td>
         <td>{{ paper.conferenceId }}</td>
+        <td *ngIf="!(paper.grade > 0)"> - </td>
         <td *ngIf="paper.grade > 0"> {{paper.grade}} </td>
         <td><a *ngIf="!newUrl.includes('reviewer') || app.getLocalStorageItem('userClass')=='admin'" (click)="editPaper(paper.id)" class="btn btn-raised btn-success">Edit</a></td>
         <td><a *ngIf="!newUrl.includes('reviewer') || app.getLocalStorageItem('userClass')=='admin'" (click)="erasePaper(paper.id)" class="btn btn-raised btn-danger">Delete</a></td>
