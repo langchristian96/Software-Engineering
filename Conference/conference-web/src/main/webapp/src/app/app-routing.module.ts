@@ -33,6 +33,7 @@ const routes: Routes = [
   { path: 'conference/new', component: ConferenceNewComponent, canActivate: [AuthGuard]},
   { path: 'persons', component: PersonsComponent, canActivate: [AuthGuard] },
   { path: 'person/detail/:id', component: PersonDetailComponent, canActivate: [AuthGuard]},
+  { path: 'person/new', component: PersonNewComponent, canActivate: [AuthGuard]},
   { path: 'authors', component: PersonsComponent, canActivate: [AuthGuard] },
   { path: 'author/detail/:id', component: PersonDetailComponent, canActivate: [AuthGuard]},
   { path: 'author/new', component: PersonNewComponent, canActivate: [AuthGuard]},
