@@ -102,6 +102,26 @@ public class PaperServiceImpl implements PaperService {
         return paperSet;
     }
 
+
+
+
+    @Override
+    public Set<Paper> findAllPapersOfChair(Long chairId){
+        log.trace("findAllPapersOfChair");
+
+        List<Paper> papers = paperRepository.findAll();
+
+
+
+        Set<Paper> paperSet = papers.stream()
+                .filter(e -> {Conference c=e.getConference();if(c==null)return false;return c.getChairID()==chairId;})
+                .collect(Collectors.toSet());
+
+        log.trace("findAllPapersOfChair: Papers={}", paperSet);
+
+        return paperSet;
+    }
+
     @Override
     public Set<Paper> findAllPapersByTitle(Set<String> papersTitle) {
         log.trace("findAllPapersByTitle");

@@ -32,8 +32,14 @@ export class PaperListComponent implements OnInit {
     if(this.newUrl.includes("reviewer")){
       this.getPapersWithReviewerId();
     }else
-    if(localStorage.getItem('userClass')!='admin'){
+    if(localStorage.getItem('userClass')=='reviewer'){
       this.getPapersWithAuthorId();
+    }
+    else
+
+    if(localStorage.getItem('userClass')=='person'){
+      console.log("test");
+      this.getPapersWithChairId();
     }
     else
     {
@@ -59,6 +65,15 @@ export class PaperListComponent implements OnInit {
 
   getPapersWithAuthorId(){
     this.paperService.getPapersByAuthorId()
+      .subscribe(
+        papers => this.papers = papers,
+        error => this.errorMessage = <any>error
+      );
+  }
+
+
+  getPapersWithChairId(){
+    this.paperService.getPapersByChairId()
       .subscribe(
         papers => this.papers = papers,
         error => this.errorMessage = <any>error

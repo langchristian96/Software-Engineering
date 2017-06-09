@@ -20,6 +20,10 @@ public interface PaperService {
     Set<Paper> findAllPapersOfReviewer(Long reviewerId);
     Set<Paper> findAllPapersOfAuthor(Long authorId);
 
+
+    Set<Paper> findAllPapersOfChair(Long chairId);
+
+
     Set<Paper> findAllPapersByTitle(Set<String> papersTitle);
 
     Paper updatePaper(Long paperId, String title, String abstractText, String contentPath, String keywords, String topics, Set<Author> authors, Set<Reviewer> reviewers, Long sessionId);

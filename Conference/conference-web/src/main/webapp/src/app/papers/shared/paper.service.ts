@@ -39,6 +39,17 @@ export class PaperService {
       .catch(this.handleError);
   }
 
+
+  getPapersByChairId(): Observable<Paper[]>{
+    let user = localStorage.getItem('userId');
+
+    let url='http://localhost:8080/api/papersOfChair/'
+    return this.http.get(url+user, {withCredentials: true, headers: this.headers})
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+
   gradePaper(paperId, reviewerId, grade): Observable<void> {
     const url = `http://localhost:8080/api/reviewerpapers/${paperId}/${reviewerId}`;
     var data = JSON.stringify({"data": grade});
