@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ro.ubb.conference.core.domain.Author;
 import ro.ubb.conference.core.domain.Paper;
-import ro.ubb.conference.core.service.AuthorService;
-import ro.ubb.conference.core.service.PaperService;
-import ro.ubb.conference.core.service.ReviewerService;
-import ro.ubb.conference.core.service.SessionService;
+import ro.ubb.conference.core.service.*;
 import ro.ubb.conference.web.converter.PaperConverter;
 import ro.ubb.conference.web.dto.EmptyJsonResponse;
 import ro.ubb.conference.web.dto.PaperDto;
@@ -49,6 +46,9 @@ public class PaperController {
 
     @Autowired
     private AuthorService authorService;
+
+    @Autowired
+    private ConferenceService conferenceService;
 
     @Autowired
     private PaperConverter paperConverter;
@@ -143,7 +143,7 @@ public class PaperController {
 
         PaperDto paperDto = paperDtoMap.get("paper");
         Paper paper = paperService.updatePaper(paperId, paperDto.getTitle(),
-                paperDto.getAbstractText(), paperDto.getContentPath(), paperDto.getKeywords(), paperDto.getTopics(), authorService.findAllAuthorsByUsernames(paperDto.getAuthorsUsername()), reviewerService.findAllReviewersByUsernames(paperDto.getReviewersUsername()), null);
+                paperDto.getAbstractText(), paperDto.getContentPath(), paperDto.getKeywords(), paperDto.getTopics(), authorService.findAllAuthorsByUsernames(paperDto.getAuthorsUsername()), reviewerService.findAllReviewersByUsernames(paperDto.getReviewersUsername()), paperDto.getSessionId());
 
         Map<String, PaperDto> result = new HashMap<>();
         result.put("paper", paperConverter.convertModelToDto(paper));
@@ -176,7 +176,7 @@ public class PaperController {
 
                 paperDto.setContentPath(serverFile.getName());
                 paperService.updatePaper(paperDto.getId(), paperDto.getTitle(), paperDto.getAbstractText(),
-                        paperDto.getContentPath(), paperDto.getKeywords(), paperDto.getTopics(), authorService.findAllAuthorsByUsernames(paperDto.getAuthorsUsername()), reviewerService.findAllReviewersByUsernames(paperDto.getReviewersUsername()), null);
+                        paperDto.getContentPath(), paperDto.getKeywords(), paperDto.getTopics(), authorService.findAllAuthorsByUsernames(paperDto.getAuthorsUsername()), reviewerService.findAllReviewersByUsernames(paperDto.getReviewersUsername()), paperDto.getSessionId());
                 BufferedOutputStream stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);
@@ -201,7 +201,7 @@ public class PaperController {
         PaperDto paperDto = paperDtoMap.get("paper");
 
         Paper paper = paperService.createPaper(
-                paperDto.getTitle(), paperDto.getAbstractText(), paperDto.getContentPath(), paperDto.getKeywords(), paperDto.getTopics());
+                paperDto.getTitle(), paperDto.getAbstractText(), paperDto.getContentPath(), paperDto.getKeywords(), paperDto.getTopics(), conferenceService.findOne(paperDto.getConferenceId()));
 
         paper = paperService.updatePaperAuthors(paper.getId(), authorService.findAllAuthorsByUsernames(paperDto.getAuthorsUsername()));
 

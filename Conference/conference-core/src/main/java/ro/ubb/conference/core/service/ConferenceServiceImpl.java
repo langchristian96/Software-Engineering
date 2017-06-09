@@ -73,7 +73,7 @@ public class ConferenceServiceImpl implements ConferenceService {
     public Conference createConference(String name, int edition, String startDate, String endDate, String callDate, String papersDeadline) {
         log.trace("createConference: name={}, edition={}, startDate={}, endDate={}, callDate={}, papersDeadline={}, committee={}, sections={}");
 
-        Conference conference = new Conference(name, edition, startDate, endDate, callDate, papersDeadline, new HashSet<>());
+        Conference conference = new Conference(name, edition, startDate, endDate, callDate, papersDeadline, new HashSet<>(), new HashSet<>());
         conference = (Conference) conferenceRepository.save(conference);
 
 

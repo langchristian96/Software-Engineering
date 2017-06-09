@@ -11,6 +11,8 @@
         <th style="min-width: 80px;">Topics</th>
         <th style="min-width: 80px;">Author(s)</th>
         <th style="min-width: 80px;">SessionId</th>
+        <th style="min-width: 80px;">ConferenceId</th>
+        <th style="min-width: 80px;">Grade</th>
         <th style="width:20px;"> </th>
         <th style="width:20px;"> </th>
       </tr>
@@ -24,6 +26,8 @@
         <td>{{ paper.topics }}</td>
         <td>{{ paper.authorsUsername }}</td>
         <td>{{ paper.sessionId }}</td>
+        <td>{{ paper.conferenceId }}</td>
+        <td *ngIf="paper.grade > 0"> {{paper.grade}} </td>
         <td><a *ngIf="!newUrl.includes('reviewer') || app.getLocalStorageItem('userClass')=='admin'" (click)="editPaper(paper.id)" class="btn btn-raised btn-success">Edit</a></td>
         <td><a *ngIf="!newUrl.includes('reviewer') || app.getLocalStorageItem('userClass')=='admin'" (click)="erasePaper(paper.id)" class="btn btn-raised btn-danger">Delete</a></td>
         <td><a *ngIf="newUrl.includes('reviewer')" (click)="gradePaper(paper.id)" class="btn btn-raised btn-success">Grade</a></td>

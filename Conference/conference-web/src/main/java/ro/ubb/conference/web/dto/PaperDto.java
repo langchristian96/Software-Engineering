@@ -22,6 +22,8 @@ public class PaperDto extends BaseEntityDto {
     private Set<String> authorsUsername;
     private Set<String> reviewersUsername;
     private Long sessionId;
+    private Long conferenceId;
+    private float grade;
 
     @Override
     public String toString() {
@@ -32,8 +34,10 @@ public class PaperDto extends BaseEntityDto {
                 ", keywords='" + keywords + '\'' +
                 ", topics='" + topics + '\'' +
                 ", authorsUsername=" + authorsUsername +
-                ", reviewers=" + reviewersUsername +
+                ", reviewersUsername=" + reviewersUsername +
                 ", sessionId=" + sessionId +
+                ", conferenceId=" + conferenceId +
+                ", grade=" + grade +
                 '}';
     }
 }

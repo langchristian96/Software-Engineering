@@ -7,10 +7,7 @@ import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -49,6 +46,18 @@ public class Paper extends BaseEntity<Long> {
     @JoinColumn(name = "SessionId")
     private Session paperSession;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ConferenceId")
+    private Conference paperConference;
+
+    public Conference getConference() {
+        return this.paperConference;
+    }
+
+    public void setConference(Conference paperConference) {
+        this.paperConference = paperConference;
+    }
+
     public Session getSession() {
         return this.paperSession;
     }
@@ -63,10 +72,19 @@ public class Paper extends BaseEntity<Long> {
     }
 
     public void addReviewer(Reviewer reviewer){
-        ReviewerPaper reviewerPaper = new ReviewerPaper();
-        reviewerPaper.setReviewerPaper(this);
-        reviewerPaper.setReviewer(reviewer);
-        reviewers.add(reviewerPaper);
+        boolean isAdded = false;
+        for(ReviewerPaper reviewerPaper: reviewers){
+            if(reviewerPaper.getReviewer().getId().equals(reviewer.getId())){
+                isAdded = true;
+                break;
+            }
+        }
+        if(!isAdded) {
+            ReviewerPaper reviewerPaper = new ReviewerPaper();
+            reviewerPaper.setReviewerPaper(this);
+            reviewerPaper.setReviewer(reviewer);
+            reviewers.add(reviewerPaper);
+        }
     }
 
     public void updateReviewer(Reviewer reviewer, int grade){
@@ -81,6 +99,15 @@ public class Paper extends BaseEntity<Long> {
             }
         }
         reviewers.add(reviewerPaper);
+    }
+
+    public float getGrade(){
+        int sum = 0;
+        List<Integer> grades = reviewers.stream().map(ReviewerPaper::getGrade).collect(Collectors.toList());
+        for(int grade: grades){
+            sum+=grade;
+        }
+        return (float)sum/grades.size();
     }
 
     public void addReviewers(Set<Reviewer> reviewers){

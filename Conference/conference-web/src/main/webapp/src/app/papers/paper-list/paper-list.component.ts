@@ -52,7 +52,7 @@ export class PaperListComponent implements OnInit {
   getPapersWithReviewerId(){
     this.paperService.getPapersByReviewerId()
       .subscribe(
-        papers => this.papers = papers,
+        papers => {this.papers = papers; console.log(papers);},
         error => this.errorMessage = <any>error
       );
   }

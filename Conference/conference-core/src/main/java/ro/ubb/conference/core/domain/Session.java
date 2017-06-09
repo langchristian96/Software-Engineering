@@ -69,6 +69,19 @@ public class Session extends BaseEntity<Long> {
         sessionListeners.add(sessionListener);
     }
 
+    public void addPaper(Paper paper){
+        boolean isAdded = false;
+        for(Paper paper1: papers){
+            if(paper1.getId().equals(paper.getId())){
+                isAdded = true;
+                break;
+            }
+        }
+        if(!isAdded) {
+            papers.add(paper);
+        }
+    }
+
     public void addListeners(Set<Listener> listeners){
         listeners.forEach(this::addListener);
     }

@@ -43,7 +43,7 @@ public class Conference extends BaseEntity<Long> {
     @Column(name="ChairID")
     private Long chairID;
 
-    public Conference(String name, int edition, String startDate, String endDate, String callDate, String papersDeadline, Set<Session> sessions) {
+    public Conference(String name, int edition, String startDate, String endDate, String callDate, String papersDeadline, Set<Session> sessions, Set<Paper> papers) {
         this.name = name;
         this.edition = edition;
         this.startDate = startDate;
@@ -51,10 +51,14 @@ public class Conference extends BaseEntity<Long> {
         this.callDate = callDate;
         this.papersDeadline = papersDeadline;
         this.sessions = sessions;
+        this.papers = papers;
     }
 
     @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Session> sessions = new HashSet<>();
+
+    @OneToMany(mappedBy = "paperConference", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    Set<Paper> papers = new HashSet<>();
 
     public Set<Session> getSessions() {
         return this.sessions;
@@ -64,17 +68,26 @@ public class Conference extends BaseEntity<Long> {
         sessions.add(session);
     }
 
-//    // Committee - list of names of people being part of the commitee
-//    @Column(name = "committee", nullable = false)
-//    private ArrayList<String> committee;
+    public Set<Paper> getPapers(){
+        return this.papers;
+    }
 
-//    // Conference program
-//    @Column(name = "program")
-//    private String program;
+    public void setPapers(){
+        this.papers = papers;
+    }
 
-//    Conference sections
-//    @Column(name = "sections", nullable = false)
-//    private ArrayList<String> sections;
+    public void addPaper(Paper paper){
+        boolean isAdded = false;
+        for(Paper paper1: papers){
+            if(paper1.getId().equals(paper.getId())){
+                isAdded = true;
+                break;
+            }
+        }
+        if(!isAdded) {
+            papers.add(paper);
+        }
+    }
 
 
     @Override

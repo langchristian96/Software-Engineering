@@ -5,13 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ro.ubb.conference.core.domain.Author;
-import ro.ubb.conference.core.domain.Paper;
-import ro.ubb.conference.core.domain.Reviewer;
-import ro.ubb.conference.core.domain.Session;
+import ro.ubb.conference.core.domain.*;
 import ro.ubb.conference.core.repository.AuthorRepository;
 import ro.ubb.conference.core.repository.PaperRepository;
 import ro.ubb.conference.core.repository.ReviewerRepository;
+import ro.ubb.conference.core.repository.SessionRepository;
 
 import java.util.List;
 import java.util.Set;
@@ -33,6 +31,9 @@ public class PaperServiceImpl implements PaperService {
 
     @Autowired
     private ReviewerRepository reviewerRepository;
+
+    @Autowired
+    private SessionRepository sessionRepository;
 
     @Override
     public List<Paper> findAll() {
@@ -118,17 +119,18 @@ public class PaperServiceImpl implements PaperService {
 
     @Override
     @Transactional
-    public Paper updatePaper(Long paperId, String title, String abstractText, String contentPath, String keywords, String topics, Set<Author> authors, Set<Reviewer> reviewers, Session sessionId) {
+    public Paper updatePaper(Long paperId, String title, String abstractText, String contentPath, String keywords, String topics, Set<Author> authors, Set<Reviewer> reviewers, Long sessionId) {
         log.trace("updatePaper: paperId={}, title={}, author={}, contentPath={}",
                 paperId, title, keywords, topics, authors, contentPath);
 
+        Session session = (Session) sessionRepository.findOne(sessionId);
         Paper paper = (Paper) paperRepository.findOne(paperId);
         paper.setTitle(title);
         paper.setAbstractText(abstractText);
         paper.setContentPath(contentPath);
         paper.setKeywords(keywords);
         paper.setTopics(topics);
-        paper.setSession(sessionId);
+        paper.setSession(session);
         List<Author> authorList = authorRepository.findAll(authors.stream().map(author -> author.getId()).collect(Collectors.toSet()));
         authorList.forEach(author -> paper.addAuthor(author));
 
@@ -151,10 +153,12 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
-    public Paper createPaper(String title, String abstractText,String contentPath, String keywords, String topics) {
+    public Paper createPaper(String title, String abstractText,String contentPath, String keywords, String topics, Conference conference) {
         log.trace("createPaper: title={}, author={}, contentPath={}",
                title, contentPath, keywords, topics);
         Paper paper = new Paper(title, abstractText,contentPath, keywords, topics);
+        paper.setConference(conference);
+        conference.addPaper(paper);
         paper = (Paper) paperRepository.save(paper);
         log.trace("createPaper: paper={}", paper);
 

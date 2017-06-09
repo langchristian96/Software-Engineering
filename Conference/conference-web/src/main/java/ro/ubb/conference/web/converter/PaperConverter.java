@@ -22,6 +22,9 @@ public class PaperConverter extends BaseConverter<Paper, PaperDto> {
                 .keywords(paper.getKeywords())
                 .topics(paper.getTopics())
                 .build();
+        if(paper.getConference() != null){
+            paperDto.setConferenceId(paper.getConference().getId());
+        }
         if(paper.getContentPath() != null){
             paperDto.setContentPath(paper.getContentPath());
         }
@@ -32,6 +35,11 @@ public class PaperConverter extends BaseConverter<Paper, PaperDto> {
         paperDto.setAuthorsUsername(paper.getAuthors().stream()
                 .map(Person::getUsern).collect(Collectors.toSet())
         );
+        if(paper.getGrade() != 0){
+            paperDto.setGrade(paper.getGrade());
+        }else{
+            paperDto.setGrade(0);
+        }
         paperDto.setReviewersUsername(paper.getReviewers().stream().map(Person::getUsern).collect(Collectors.toSet()));
         return paperDto;
     }

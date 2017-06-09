@@ -25,10 +25,10 @@ export class PaperNewComponent  {
     this.location.back();
   };
 
-  addPaper(title, abstractText, keywords, topics, authors, sessionId): void{
-    var authorsUsername = authors.split(', ');
+  addPaper(title, abstractText, keywords, topics, authors, conferenceId): void{
+    var authorsUsername = authors.split(',');
     var contentPath = "mumu";
-    let paper = {title, abstractText, contentPath, keywords, topics, authorsUsername, sessionId};
+    let paper = {title, abstractText, contentPath, keywords, topics, authorsUsername, conferenceId};
     this.paperService.createPaper(paper).subscribe(_ => this.cancel());
   }
 

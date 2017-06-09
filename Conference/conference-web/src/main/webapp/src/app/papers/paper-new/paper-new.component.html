@@ -21,14 +21,15 @@
     <div class="form-group label-floating">
       <label class="control-label" for="inputPaperAuthors">Paper Author:</label>
       <input class="form-control" type="text" id="inputPaperAuthors" name="authors" #authors/>
-    </div> <div class="form-group label-floating">
-    <label class="control-label" for="inputPaperAuthors">SessionId:</label>
-    <input class="form-control" type="text" id="inputPaperSessionId" name="sessionId" #sessionId/>
-  </div>
+    </div>
+    <div class="form-group label-floating">
+      <label class="control-label" for="inputPaperConferenceId">Paper ConferenceId:</label>
+      <input class="form-control" type="text" id="inputPaperConferenceId" name="conferenceId" #conferenceId/>
+    </div>
     <div class="form-group">
       <a (click)="cancel()" class="btn btn-raised btn-danger">cancel</a>
 
-      <a (click)="addPaper(title.value, abstractText.value, keywords.value, topics.value, authors.value, sessionId.value)" class="btn btn-raised btn-info">create new paper</a>
+      <a (click)="addPaper(title.value, abstractText.value, keywords.value, topics.value, authors.value, conferenceId.value)" class="btn btn-raised btn-info">create new paper</a>
     </div>
   </form>
 </div>
