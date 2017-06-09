@@ -19,6 +19,14 @@ export class SessionService{
       .catch(this.handleError);
   }
 
+  getSessionsForChair(): Observable<Session[]>{
+    let url='http://localhost:8080/api/sessionsForChair/';
+    let uid=localStorage.getItem('userId');
+    return this.http.get(url+uid,{withCredentials: true})
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   getSessionById(id:number): Observable<Session[]> {
     return this.getSessions()
        .map(sessions => sessions.filter(session => session.conferenceId === id))

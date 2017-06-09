@@ -83,6 +83,24 @@ public class PaperServiceImpl implements PaperService {
         return paperSet;
     }
 
+
+    @Override
+    public Set<Paper> findAllPapersOfAuthor(Long authorId){
+        log.trace("findAllPapersOfAuthor");
+
+        List<Paper> papers = paperRepository.findAll();
+
+        Author author = authorRepository.findOne(authorId);
+
+        Set<Paper> paperSet = papers.stream()
+                .filter(e -> e.getAuthors().contains(author))
+                .collect(Collectors.toSet());
+
+        log.trace("findAllPapersOfAuthor: Papers={}", paperSet);
+
+        return paperSet;
+    }
+
     @Override
     public Set<Paper> findAllPapersByTitle(Set<String> papersTitle) {
         log.trace("findAllPapersByTitle");

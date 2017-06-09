@@ -28,7 +28,7 @@ export class SessionListComponent implements OnInit{
   }
 
   getSessions(){
-    this.sessionService.getSessions()
+    this.sessionService.getSessionsForChair()
       .subscribe(
         session => this.sessions = session,
         error => this.errorMessage = <any>error

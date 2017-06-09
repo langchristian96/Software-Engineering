@@ -18,6 +18,7 @@ import ro.ubb.conference.web.dto.SessionsDto;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by Budu.
@@ -49,6 +50,22 @@ public class SessionController {
 
         return new SessionsDto(sessionConverter.convertModelsToDtos(sessions));
     }
+
+    @RequestMapping(value = "/sessionsForChair/{chairID}", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:4200")
+    public SessionsDto getSessionsForChair(@PathVariable final Long chairID) {
+        log.trace("getSessionsForChair");
+
+        List<Session> sessions = sessionService.findAll();
+        List<Session> sess;
+        sess=sessions.stream().filter(s->{return s.getConference().getChairID()==chairID;}).collect(Collectors.toList());
+
+        log.trace("getSessionsForChair: sessions={}", sess);
+
+        return new SessionsDto(sessionConverter.convertModelsToDtos(sess));
+    }
+
+
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/sessions/{id}", method = RequestMethod.GET)

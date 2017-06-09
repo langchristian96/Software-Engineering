@@ -19,6 +19,7 @@ export class PaperListComponent implements OnInit {
   papers: Paper[];
   newUrl: string;
   app:GlobalApp;
+
   // selectedPaper: Paper;
 
   constructor(private paperService: PaperService,
@@ -30,7 +31,12 @@ export class PaperListComponent implements OnInit {
   ngOnInit(): void {
     if(this.newUrl.includes("reviewer")){
       this.getPapersWithReviewerId();
-    }else{
+    }else
+    if(localStorage.getItem('userClass')!='admin'){
+      this.getPapersWithAuthorId();
+    }
+    else
+    {
       this.getPapers();
     }
   }
@@ -45,6 +51,14 @@ export class PaperListComponent implements OnInit {
 
   getPapersWithReviewerId(){
     this.paperService.getPapersByReviewerId()
+      .subscribe(
+        papers => this.papers = papers,
+        error => this.errorMessage = <any>error
+      );
+  }
+
+  getPapersWithAuthorId(){
+    this.paperService.getPapersByAuthorId()
       .subscribe(
         papers => this.papers = papers,
         error => this.errorMessage = <any>error

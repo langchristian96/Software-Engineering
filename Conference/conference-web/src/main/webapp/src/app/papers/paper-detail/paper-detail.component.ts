@@ -34,8 +34,8 @@ export class PaperDetailComponent implements OnInit {
   }
 
   updatePaperDetail(authors: string, reviewers: string): void {
-    this.paper.authorsUsername = authors.split(', ');
-    this.paper.reviewersUsername = reviewers.split(', ');
+    this.paper.authorsUsername = authors.split(',');
+    this.paper.reviewersUsername = reviewers.split(',');
     if(this.paper.reviewersUsername.length < 2 || this.paper.reviewersUsername.length > 4){
       alert("must be at least 2 reviewers for the papers and at most 4");
     }else {

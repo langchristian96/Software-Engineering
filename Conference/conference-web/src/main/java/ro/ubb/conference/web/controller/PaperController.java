@@ -78,6 +78,18 @@ public class PaperController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "/papersOfAuthor/{authorId}", method = RequestMethod.GET)
+    public PapersDto getPapersOfAuthor(@PathVariable final Long authorId) {
+        log.trace("getPapersOfAuthor");
+
+        Set<Paper> papers = paperService.findAllPapersOfAuthor(authorId);
+
+        log.trace("getPapersOfAuthor: papers={}", papers);
+
+        return new PapersDto(paperConverter.convertModelsToDtos(papers));
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value="/papers/download/{paperId}", method = RequestMethod.GET)
     public void downloadFile(final HttpServletResponse response, @PathVariable("paperId") Long paperId) throws IOException {
         String fileName = paperService.findPaper(paperId).getContentPath();

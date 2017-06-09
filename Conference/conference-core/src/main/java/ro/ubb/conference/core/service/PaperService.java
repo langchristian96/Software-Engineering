@@ -21,6 +21,7 @@ public interface PaperService {
     Paper findPaper(Long paperId);
 
     Set<Paper> findAllPapersOfReviewer(Long reviewerId);
+    Set<Paper> findAllPapersOfAuthor(Long authorId);
 
     Set<Paper> findAllPapersByTitle(Set<String> papersTitle);
 
