@@ -1,7 +1,2 @@
 <dataset>
-    <listener id="11" Username="john" Password="111" Name="JWick" Affiliation="aaaa" Email="john@wick.com" />
-    <listener id="2" Username="Klang" Password="123" Name="Lang" Affiliation="aaaa" Email="lang@wick.com" />
-    <listener id="3" Username="Marin" Password="134" Name="Marinius" Affiliation="aaaa" Email="marinius@wick.com" />
-    <listener id="4" Username="Anca22" Password="000" Name="Anca" Affiliation="aaaa" Email="masi@wick.com" />
-
 </dataset>

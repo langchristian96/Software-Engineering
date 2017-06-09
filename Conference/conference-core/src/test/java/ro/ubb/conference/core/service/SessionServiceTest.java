@@ -2,6 +2,7 @@ package ro.ubb.conference.core.service;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import ro.ubb.conference.core.ITConfig;
-import ro.ubb.conference.core.domain.Author;
-import ro.ubb.conference.core.domain.Paper;
-import ro.ubb.conference.core.service.PaperService;
+import ro.ubb.conference.core.domain.Session;
 
 import java.util.HashSet;
 import java.util.List;
@@ -27,45 +26,51 @@ import static org.junit.Assert.assertEquals;
 @ContextConfiguration(classes = {ITConfig.class})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class})
-@DatabaseSetup("/META-INF.dbtest/paper-data.xml")
-public class PaperServiceTest {
+@DatabaseSetup("/META-INF.dbtest/session-data.xml")
+public class SessionServiceTest {
 
     @Autowired
-    private PaperService paperService;
+    private SessionService sessionService;
 
     @Test
     public void findAll() throws Exception {
-        List<Paper> papers = paperService.findAll();
-        assertEquals("there should be four papers", 4, papers.size());
-    }
-
-
-    @Test
-    public void updatePaper() throws Exception {
-
-
-        Paper p=paperService.findAll().get(0);
-        p.setTitle("testPaper");
-        paperService.updatePaper(p.getId(), p.getTitle(), p.getAbstractText(), p.getContentPath(), p.getKeywords(), p.getTopics(), p.getAuthors(), p.getSession());
-        assertEquals("Paper should be updated","testPaper",paperService.findAll().get(0).getTitle());
-
+        List<Session> sessions = sessionService.findAll();
+        assertEquals("there should be one session", 1, sessions.size());
     }
 
     @Test
-    public void createPaper() throws Exception {
 
-        paperService.createPaper("Teoria punctelor fixe", "This is a random text", "random", "puncte", "mathematics" );
-        assertEquals("Paper should be added ",5l,(long)paperService.findAll().size());
+    public void deleteSession() throws Exception {
+
+        sessionService.deleteSession(-11l);
+        assertEquals("Session should be deleted ",1,sessionService.findAll().size());
+
 
     }
+    @Test
+    public void updateSession() throws Exception {
 
+        /*
+        Session s=sessionService.findAll().get(0);
+        s.setDate("dateSession");
+        Set<Long> lis = new HashSet<>();
+        sessionService.updateSession(s.getId(), s.getDate(), s.getSessionChairId(), s.getConference().getId(), s.getPapers(), lis);
+        assertEquals("Session should be updated","dateSession",sessionService.findAll().get(0).getDate());
+        */
+    }
 
     @Test
-    public void deletePaper() throws Exception {
-
-        paperService.deletePaper(-1l);
-        assertEquals("Paper should be deleted ",3,paperService.findAll().size());
-
+    public void createSession() throws Exception {
+        /*
+        sessionService.createSession("10-10-2010", 3l, 11l);
+        assertEquals("Session should be added ",2l,(long)sessionService.findAll().size());
+        */
     }
+
+
+
+
+
+
 
 }

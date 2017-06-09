@@ -49,7 +49,6 @@ public class PersonRepositoryTests {
 
         Person c=new Person("aaaaa","aaaaaaa","Adriana", "afiliation1", "email@gmail.com");
         personRepository.save(c);
-        //nu stiu cate elemente sunt in baza de date
         assertEquals("Author ",5l,(long)personRepository.findAll().size());
 
     }

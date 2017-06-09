@@ -49,9 +49,8 @@ public class AuthorRepositoryTests {
 
         Author c=new Author("aaaaa","aaaaaaa","Adriana", "afiliation1", "email@gmail.com");
         authorRepository.save(c);
-        //nu stiu cate elemente sunt in baza de date
         assertEquals("Author ",1,(long)authorRepository.findAll().size());
-        //authorRepository.delete(1l);
+        authorRepository.delete(c.getId());
     }
 
     @Test

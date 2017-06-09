@@ -52,7 +52,6 @@ public class ConferenceRepositoryTests {
 
         Conference c=new Conference("Confname", 1,"11102017","15102017","10092017", "15092017", new HashSet<>());
         conferenceRepository.save(c);
-        //nu stiu cate elemente sunt in baza de date
         assertEquals("Conference ",1l,(long)conferenceRepository.findAll().size());
         Long id = c.getId();
         conferenceRepository.delete(id);
@@ -60,7 +59,7 @@ public class ConferenceRepositoryTests {
 
     @Test
     public void deleteAuthor() throws Exception {
-        Conference c=new Conference("Confname", 1,"11102017","15102017","10092017", "15092017", new HashSet<>());
+        Conference c=new Conference("Confname4", 1,"11102017","15102017","10092017", "15092017", new HashSet<>());
         conferenceRepository.save(c);
         Long id = c.getId();
         conferenceRepository.delete(id);
